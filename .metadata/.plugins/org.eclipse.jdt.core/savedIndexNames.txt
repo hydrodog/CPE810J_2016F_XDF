@@ -1,0 +1,19 @@
+INDEX VERSION 1.129+/Users/HaoyueBai/Git/CPE810J_2016F_XDF/.metadata/.plugins/org.eclipse.jdt.core
+1271342938.index
+2557735091.index
+711401471.index
+3782676943.index
+1465443250.index
+3941105200.index
+2953867736.index
+3904120207.index
+1732019476.index
+3115564420.index
+3201157021.index
+2048576420.index
+1176453598.index
+3907999517.index
+2574815864.index
+1790574510.index
+1536384791.index
+2223494458.index
