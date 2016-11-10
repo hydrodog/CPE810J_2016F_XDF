@@ -1,5 +1,5 @@
 #XDF: FRAME Team
-_Author: Lei Tang, Chintan Patel, Sihan Wang, Jinyu Tan, Jingting Zhang
+Author: Lei Tang, Chintan Patel, Sihan Wang, Jinyu Tan, Jingting Zhang
 
 ##Tasks: design the frame of XDF
 
