@@ -2,6 +2,7 @@ package edu.stevens.XDF._2dGraphics;
 import java.awt.*;
 import java.awt.Graphics2D;
 /*
+ *@author Jiahui Zhang
  * Define attributes of shapes
  */
 public abstract class Shape {
