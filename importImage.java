@@ -1,4 +1,4 @@
-package FirstWeek;
+package edu.stevens;
 /*
  * @ Explanation: 
  *   1. Install PDFbox liabrary
