@@ -16,5 +16,5 @@ In last week we changed our class method. since we should not convert Pdf to Ps,
 To replace of convert part, we added two methods: convertTxt2Ps, convertImg2Ps. The first method is to convert string to ps format.
 The second is to convert image to ps. And we may add a layout control method to put string and image on right place.
 We finished the setup Gui and printer service part but there is still a problem we should delivery the setup information to service part.
-we will fix it later. Next weed our group will work individually I had assigned our task, one for convert string to ps,
+we will fix it later. Next weed our group will work individually I had assigned our task, one for convert string to ps, 
 one for convert image to ps, the last one make a layout control. In addition, I will fix the connection of setup gui and service.
