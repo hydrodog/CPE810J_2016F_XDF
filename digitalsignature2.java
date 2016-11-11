@@ -1,5 +1,8 @@
 package Project;
-
+/*
+*Author: Xincan Wang
+*This class reads private key from dat file and digitally signs a string "My signature" 
+*/
 import java.io.*;
 import java.security.*;
 
