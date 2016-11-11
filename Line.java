@@ -3,7 +3,8 @@ package edu.stevens.XDF._2dGraphics;
 import java.awt.*;
 import java.awt.geom.*;
 /*
- * Draw line
+ *@author Jiahui Zhang
+ *Draw line
  */
 public class Line extends Shape {
 	private double LastX,LastY;
