@@ -1,4 +1,4 @@
-package TextWindow; // Student - Chintan Patel
+package TextWindow; // Student Name - Chintan Patel
 
 import javax.swing.*; 
 import java.awt.*;
