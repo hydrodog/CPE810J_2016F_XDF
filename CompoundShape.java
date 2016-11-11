@@ -12,7 +12,7 @@ public class CompoundShape {
 	public CompoundShape(){
 		Compound = new ArrayList<Shape>();
 		//add all SVG shapes into the array list 
-	    //Compound.add();	
+	        //Compound.add();	
 	}
 	public void paint(Graphics g){
 		for(Shape s: Compound){
