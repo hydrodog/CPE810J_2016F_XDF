@@ -1,6 +1,7 @@
 package edu.stevens.XDF._2dGraphics;
 import java.awt.*;
 /*
+ *@author Jiahui Zhang
  * Draw ellipse
  */
 import java.awt.geom.*;
