@@ -1,7 +1,7 @@
 package edu.stevens;
 /*
  * @ Explanation: 
- *   1. Install PDFbox liabrary
+ *   1. Install PDFbox library
  *   2. Read the file
  */
 import java.io.File;
