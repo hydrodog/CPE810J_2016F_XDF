@@ -23,16 +23,15 @@ public static void main(String[] args) {
 
     final JComboBox<String> cb = new JComboBox<String>(choices);
 
-    cb.setMaximumSize(cb.getPreferredSize()); // added code
-    cb.setAlignmentX(Component.CENTER_ALIGNMENT);// added code
-    //cb.setVisible(true); // Not needed
+    cb.setMaximumSize(cb.getPreferredSize()); 
+    cb.setAlignmentX(Component.CENTER_ALIGNMENT);
+    cb.setVisible(true);
     panel.add(cb);
 
     JButton btn = new JButton("OK");
-    btn.setAlignmentX(Component.CENTER_ALIGNMENT); // added code
+    btn.setAlignmentX(Component.CENTER_ALIGNMENT); 
     panel.add(btn);
 
-    frame.setVisible(true); // added code
-
+    frame.setVisible(true); 
     }
 }
