@@ -10,7 +10,5 @@ public class Rect extends Shape {
 		this.height = height;
 	}
 	
-	public void paint(Graphics g) {
-		g.drawRect((int)x, (int)y, (int)width, (int)height);
-	}
+	
 }
