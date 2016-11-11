@@ -3,6 +3,7 @@ package edu.stevens.XDF._2dGraphics;
 import java.awt.*;
 import java.util.*;
 /*
+  @Author Yujie Ren
  * According to shape information of JSON file, compound and save all shapes into array list. Draw the compound shapes..
  * TODO: create more shape class
  */
