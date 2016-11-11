@@ -1,4 +1,4 @@
-package GroupProject;
+package edu.stevens;
 
 import java.awt.*;  
 import java.awt.event.*;  
@@ -9,7 +9,7 @@ import javax.swing.*;
 public class BackGround extends JFrame {  
    JRadioButtonMenuItem items[];  
    Color[] colors={Color.getHSBColor(244,121,131),Color.pink,Color.getHSBColor(238,238,238),
-		   			Color.getHSBColor(202,86,99),Color.getHSBColor(200,155,64),Color.getHSBColor(243,249,241)}; //color array
+		   Color.getHSBColor(202,86,99),Color.getHSBColor(200,155,64),Color.getHSBColor(243,249,241)}; //color array
    JPopupMenu popupMenu;  
   
    public BackGround()  
