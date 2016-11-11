@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
+准备起飞
 public class Calculator {
 	public Calculator() {
 		JButton b;
