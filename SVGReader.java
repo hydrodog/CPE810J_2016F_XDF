@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 /*
+ * @Author: Bonan Chen
  * Read in SVG file, compact xml and convert xml to JSON file. JSON file includes all information of SVG file 
  * such as lines, rectangles and paths.
  * //TODO: Create an analyze class, and analyze what kinds of shapes are in SVG.
