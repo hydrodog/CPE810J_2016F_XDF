@@ -1,9 +1,8 @@
 package edu.stevens.xpdf.xframe;
 /*
 @Author SihanWang
-Create a interface that user can setup page style;
-this class is to setup page in screen
-Have 2 styles: 1: single page; 2: double page in hole screen
+Create a frame that user can setup page style;
+Have 2 page styles: 1: single page; 2: double page in hole screen
 */
 import java.awt.*;
 import java.awt.Container;
