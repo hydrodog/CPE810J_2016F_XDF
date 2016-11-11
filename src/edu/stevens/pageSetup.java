@@ -5,7 +5,7 @@ Create a interface that user can setup page style;
 this class is to setup page in screen
 Have 2 styles: 1: single page; 2: double page in hole screen
 */
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +28,7 @@ public class pageSetup extends JFrame {
 		super("PAGE SETUP");
 		setSize(100, 100);
 		Container c = getContentPane();
-		Jpanel p = new JPanel();
+		JPanel p = new JPanel();
 		p.setLayout(new GridLayout(1,2));
 		JButton singlep = new JButton("singlePage");
 		JButton doublep = new JButton("doublePage");
