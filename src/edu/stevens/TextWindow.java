@@ -1,12 +1,7 @@
 package TextWindow; // Student - Chintan Patel
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.BoxLayout; // added code
-import java.awt.Component; // added code
+import javax.swing.*; 
+import java.awt.*;
 
 public class TextWindow {
 
@@ -15,16 +10,16 @@ public static void main(String[] args) {
     JFrame frame = new JFrame("XFrame");
     frame.setVisible(true);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setSize(500, 500);
-    frame.setLocation(430, 100);
+    frame.setSize(1000, 1000);
+    frame.setLocation(500, 200);
 
     JPanel panel = new JPanel();
-    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); // added code
+    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); 
 
     frame.add(panel);
 
-    String[] choices = { "CHOICE 1", "CHOICE 2", "CHOICE 3", "CHOICE 4",
-                         "CHOICE 5", "CHOICE 6" };
+    String[] choices = { "Option 1", "Option 2", "Option 3", "Option 4",
+                         "Option 5", "Option 6" };
 
     final JComboBox<String> cb = new JComboBox<String>(choices);
 
