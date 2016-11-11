@@ -10,7 +10,7 @@ public class myPrintSetup {
 		//private MenuItem convertPdg2Ps = new MenuItem("Convert");
 		//private MenuItem printSetup = new MenuItem("Print Setup");
 		
-		// method part
+		// method part.
 		public myPrintSetup(){
 			
 		}
