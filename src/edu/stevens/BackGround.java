@@ -1,11 +1,18 @@
 package edu.stevens;
 
+/*
+  @Author Jingting Zhang
+  this class is to set the apperence of the window
+*/
+
 import java.awt.*;  
 import java.awt.event.*;  
 import javax.swing.*;  
   
-//click right-hand button to change the background color 
-  
+//to click the right-hand button to change the background color
+//TODO:add buttons to change colors of the titlebar
+//TODO:add buttons to change images of the background
+
 public class BackGround extends JFrame {  
    JRadioButtonMenuItem items[];  
    Color[] colors={Color.getHSBColor(244,121,131),Color.pink,Color.getHSBColor(238,238,238),
@@ -15,7 +22,6 @@ public class BackGround extends JFrame {
    public BackGround()  
    {  
       super( "" ); 
-  
       ChangeColorAction action = new ChangeColorAction();  
       String[] str = {"Lemon Yellow","Candy Pink","Grass Green","Silver Gary","Sunny Orange","Tambac Brown"}; //name of the color button  
       ButtonGroup colorGroup=new ButtonGroup();  
