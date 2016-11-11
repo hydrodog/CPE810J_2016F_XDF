@@ -28,10 +28,13 @@ public class pageSetup extends JFrame {
 		super("PAGE SETUP");
 		setSize(100, 100);
 		Container c = getContentPane();
+		Jpanel p = new JPanel();
+		p.setLayout(new GridLayout(1,2));
 		JButton singlep = new JButton("singlePage");
 		JButton doublep = new JButton("doublePage");
-		c.add(singlep);
-		c.add(doublep);
+		p.add(singlep);
+		p.add(doublep);
+		c.add(p, BorderLayout.CENTER);
 		singlep.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				pageSetupSingle(k, t) ;
