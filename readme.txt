@@ -1,1 +1,2 @@
-this is a read file
+XDF: FRAME Team
+Author:Bonan Chen, Yujie Ren, Jiahui Zhang
