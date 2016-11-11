@@ -16,6 +16,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeBitmapFontData;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
 
@@ -30,7 +31,7 @@ public class MyGdxGame implements ApplicationListener{
     public void create() {
         // TODO Auto-generated method stub
         batch = new SpriteBatch();
-        font = new BitmapFont[3];
+        font = new BitmapFont[4];
         FreeTypeFontParameter par = new FreeTypeFontParameter(); 
         par.size = 30;
         Color[] colors = { Color.RED, Color.BLUE, Color.GREEN };
@@ -38,10 +39,16 @@ public class MyGdxGame implements ApplicationListener{
             generator = new FreeTypeFontGenerator( Gdx.files.internal( "data" + (i+1) + ".ttf" ) );
             font[i] = generator.generateFont( par );
             font[i].setColor( colors[i] );
-            generator.dispose();
+            //generator.dispose();
         }
+        //HeiTi
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("SIMHEI.TTF"));
+        FreeTypeBitmapFontData data = generator.generateData(25);
+		font[3] = new BitmapFont(Gdx.files.internal("SIMHEI.TTF"),false) ;
+        font[3].setColor(Color.BLACK);
+        generator.dispose();
 
-        //fontData = generator.generateData( 25, FreeTypeFontGenerator.DEFAULT_CHARS+"½ñÌìÊÇ¸öºÃÈÕ×Ó£¬´ó¼ÒÐÄÇé¶¼ºÜ", false );
+        //fontData = generator.generateData( 25, FreeTypeFontGenerator.DEFAULT_CHARS+"ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é¶¼ï¿½ï¿½", false );
     }
 
     @Override
@@ -61,6 +68,8 @@ public class MyGdxGame implements ApplicationListener{
         for( int i=0; i<3; ++i ){
             font[i].draw( batch, "It is Very Good! 20140521!!", 120, 100*(3-i) );
         }
+        font[3].draw(batch, "ä½ å¥½å•Šhello", 120, 400);
+        
         batch.end();
     }
 
