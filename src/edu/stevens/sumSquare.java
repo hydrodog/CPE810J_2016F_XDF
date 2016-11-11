@@ -1,5 +1,5 @@
 
 public class sumSquare {
-	public int
+	System.out.println("ok");
 
 }
