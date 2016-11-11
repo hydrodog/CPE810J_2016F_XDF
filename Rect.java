@@ -1,6 +1,7 @@
 package edu.stevens.XDF._2dGraphics;
 import java.awt.*;
 /*
+ *@author Jiahui Zhang
  * Draw rectangle
  */
 import java.awt.geom.*;
