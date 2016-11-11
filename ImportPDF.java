@@ -1,19 +1,56 @@
+package edu.stevens;
+
 import java.io.File; 
 import java.io.IOException;
 
-/*
- * This class is responsible for Parsing through a PDF file and provide the following output:
- * 1. Information of text such as font-size, font-style and color.
- * 2. Information of Image such as what form, size and positioning of the image.
- */
+import java.io.IOException;
+import org.apache.pdfbox.cos.COSDocument;
+import org.apache.pdfbox.io.RandomAccessFile;
+import org.apache.pdfbox.pdfparser.PDFParser;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
+ // This class contains the to Text method which will extract the text from the PDF file.
 public class ImportPDF {
-	
-	public ImportPDF(){
-		
-	}
-	//getText method will parse through the PDF file and return the text.
-	public String getText() {
-		return("Import PDF"); // Right now just returning a default text.
-	}
-	
+    
+   private PDFParser parser; // Parser for reading the file
+   private PDFTextStripper pdfStripper; // Extraction of text.
+   private PDDocument pdDoc ; // Set the no of pages to parse through.
+   private COSDocument cosDoc ; // Combining the parser along with the document.
+   
+   private String Text ;
+   private String filePath;
+   private File file;
+
+    public ImportPDF() {
+        
+    }
+   public String ToText() throws IOException{ // THis method returns a String.
+	   
+       this.pdfStripper = null;
+       this.pdDoc = null;
+       this.cosDoc = null;
+       
+       file = new File(filePath);
+       parser = new PDFParser(new RandomAccessFile(file,"r"));// Opening the file for reading.
+       
+       parser.parse();
+       cosDoc = parser.getDocument(); // Get the document.
+       pdfStripper = new PDFTextStripper(); 
+       pdDoc = new PDDocument(cosDoc);
+       int n = pdDoc.getNumberOfPages();
+       System.out.println(n);
+       pdfStripper.setStartPage(1); //Setting the start page
+       pdfStripper.setEndPage(5); // Setting the end page
+       
+       // if you want to get text from full pdf file use this code
+       // pdfStripper.setEndPage(pdDoc.getNumberOfPages());
+       
+       Text = pdfStripper.getText(pdDoc); // Extracting Text and converting into a string.
+       return Text;
+   }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath; //Getting the file path from your desktop.
+    }
+   
 }
