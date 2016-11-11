@@ -9,3 +9,7 @@ Responsibilities:
 
 Google doc:
 https://docs.google.com/document/d/179vrcB70IQ0TEsmw5ytlIfXFNVNaG5fc8qRVNTtpm_g/edit?ts=581bcf8f#
+
+Downloading PDFBox library jar file:
+
+http://mirrors.gigenet.com/apache/pdfbox/2.0.3/pdfbox-app-2.0.3.jar
