@@ -14,7 +14,7 @@ Downloading PDFBox library jar file:
 
 http://mirrors.gigenet.com/apache/pdfbox/2.0.3/pdfbox-app-2.0.3.jar
 
-Information of add this library to your code:
+Information to add this library to your code:
 1. Right Click on your project Folder in Eclipse.
 2. Select "Properties".
 3. On the left pane select "Java Build Path"
