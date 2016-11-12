@@ -17,11 +17,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.sun.javafx.scene.traversal.Hueristic2D;
 
 
 public class MyGdxGame implements ApplicationListener{
 
     BitmapFont[] font;
+    BitmapFont HeiTi;
     //FreeTypeBitmapFontData fontData;
     FreeTypeFontGenerator generator;    
     SpriteBatch batch;
@@ -40,6 +42,9 @@ public class MyGdxGame implements ApplicationListener{
             font[i].setColor( colors[i] );
             generator.dispose();
         }
+        //HeiTi
+        HeiTi = new BitmapFont(Gdx.files.internal("Heiti.fnt"),Gdx.files.internal("Heiti.png"), false);
+        HeiTi.setColor(Color.BLACK);
 
         //fontData = generator.generateData( 25, FreeTypeFontGenerator.DEFAULT_CHARS+"今天是个好日子，大家心情都很", false );
     }
@@ -61,6 +66,7 @@ public class MyGdxGame implements ApplicationListener{
         for( int i=0; i<3; ++i ){
             font[i].draw( batch, "It is Very Good! 20140521!!", 120, 100*(3-i) );
         }
+        HeiTi.draw(batch, "你好啊hello", 120, 400);
         batch.end();
     }
 
