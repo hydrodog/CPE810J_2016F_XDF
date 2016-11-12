@@ -6,11 +6,13 @@ import java.awt.geom.*;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
-/*This class is to zoom in and zoom out what is on the JPanel 
+/** @Author Jinyu Tan
+ * This class is to zoom in and zoom out what is on the JPanel 
   we can load a picture by type of Showpage and zoom in and zoom out it.
+  My teammate's works are Realization of basic functions, set the window's Color,set window's Style, 
+  set the Boundary of text, Beautify user interface
   
-  
-  next week I will try to load  text by showpage and realize zoom in 
+  Next week I will try to load  text by showpage and realize zoom in 
   and zoom out fuction.
 */
 
@@ -18,7 +20,7 @@ public class zoom extends JFrame {
 
     Showpage page;
 
-    public zoom() throws Exception {
+    public zoom() throws Exception { // add a picture to Content pane
         super();
         Container container = getContentPane();
         page = new Showpage(
@@ -28,14 +30,14 @@ public class zoom extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String arg[]) throws Exception {
+    public static void main(String arg[]) throws Exception {// create a object zoom
         new zoom();
     }
 
 }
 
 @SuppressWarnings("serial")
-final class Showpage extends JPanel {
+final class Showpage extends JPanel { //set up the original scale of the image 
 
     int imageX = 0, imageY = 0;
     int lastMouseX = 0, lastMouseY = 0;
@@ -68,7 +70,7 @@ final class Showpage extends JPanel {
         return new Dimension((int) (image.getWidth()), (int) (image.getHeight()));
     }
 
-    protected BufferedImage getScaledInstance() {
+    protected BufferedImage getScaledInstance() {  
         if (scaled == null) {
             int width = (int) (image.getWidth() * scaleFactor);
             int height = (int) (image.getHeight() * scaleFactor);
@@ -83,7 +85,7 @@ final class Showpage extends JPanel {
         return scaled;
     }
 
-    public Dimension getVirtualSize() {
+    public Dimension getVirtualSize() {  
         return new Dimension(
                         (int)(getWidth() * scaleFactor), 
                         (int)(getHeight() * scaleFactor));
@@ -95,7 +97,7 @@ final class Showpage extends JPanel {
                         (int)(y * scaleFactor));
     }
 
-    public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {  
         super.paintComponent(g);
 
         Dimension vitualSize = getVirtualSize();
@@ -118,15 +120,15 @@ final class Showpage extends JPanel {
         g2D.dispose();
     }
 
-    class MouseMotionHandler extends MouseMotionAdapter implements
+    class MouseMotionHandler extends MouseMotionAdapter implements //set up Mosemotion 
                     MouseListener, MouseWheelListener {
 
-        public void mousePressed(MouseEvent e) {
+        public void mousePressed(MouseEvent e) { // mousePress
             lastMouseX = e.getX();
             lastMouseY = e.getY();
         }
 
-        public void mouseDragged(MouseEvent e) {
+        public void mouseDragged(MouseEvent e) {  // mouseDrag
             int xDiff = e.getX() - lastMouseX;
             int yDiff = e.getY() - lastMouseY;
             imageX = imageX + xDiff;
@@ -136,7 +138,7 @@ final class Showpage extends JPanel {
             repaint();
         }
 
-        public void mouseWheelMoved(MouseWheelEvent e) {
+        public void mouseWheelMoved(MouseWheelEvent e) { // mousewheelmove
             scaled = null;
             int notches = e.getWheelRotation();
 
