@@ -319,7 +319,36 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 	}//end of constructor
 	
 	//Set menu item availability: cut, copy, paste, delete function 
-	public void checkMenuItemEnabled(){}
+	public void checkMenuItemEnabled()
+	{
+		String selectText=editArea.getSelectedText();
+		if(selectText==null)
+		{	editMenu_Cut.setEnabled(false);
+			popupMenu_Cut.setEnabled(false);
+			editMenu_Copy.setEnabled(false);
+			popupMenu_Copy.setEnabled(false);
+			editMenu_Delete.setEnabled(false);
+			popupMenu_Delete.setEnabled(false);
+		}
+		else
+		{	editMenu_Cut.setEnabled(true);
+			popupMenu_Cut.setEnabled(true); 
+			editMenu_Copy.setEnabled(true);
+			popupMenu_Copy.setEnabled(true);
+			editMenu_Delete.setEnabled(true);
+			popupMenu_Delete.setEnabled(true);
+		}
+		//paste function availability judgment 
+		Transferable contents=clipBoard.getContents(this);
+		if(contents==null)
+		{	editMenu_Paste.setEnabled(false);
+			popupMenu_Paste.setEnabled(false);
+		}
+		else
+		{	editMenu_Paste.setEnabled(true);
+			popupMenu_Paste.setEnabled(true);	
+		}
+	}
 
 	//Call when closing the window
 	public void exitWindowChoose(){}
