@@ -351,7 +351,82 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 	}
 
 	//Call when closing the window
-	public void exitWindowChoose(){}
+	public void exitWindowChoose()
+	{
+		editArea.requestFocus();
+		String currentValue=editArea.getText();
+		if(currentValue.equals(oldValue)==true)
+		{	System.exit(0);
+		}
+		else
+		{	int exitChoose=JOptionPane.showConfirmDialog(this,"Your file has not been saved. Do you want to save it? ","Exit Alert",JOptionPane.YES_NO_CANCEL_OPTION);
+			if(exitChoose==JOptionPane.YES_OPTION)
+			{	//boolean isSave=false;
+				if(isNewFile)
+				{	
+					String str=null;
+					JFileChooser fileChooser=new JFileChooser();
+					fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+					fileChooser.setApproveButtonText("Confirm");
+					fileChooser.setDialogTitle("Save As");
+					
+					int result=fileChooser.showSaveDialog(this);
+					
+					if(result==JFileChooser.CANCEL_OPTION)
+					{	statusLabel.setText("You did not save the file!");
+						return;
+					}					
+	
+					File saveFileName=fileChooser.getSelectedFile();
+				
+					if(saveFileName==null||saveFileName.getName().equals(""))
+					{	JOptionPane.showMessageDialog(this,"Illegal file name!","Illegal file name!",JOptionPane.ERROR_MESSAGE);
+					}
+					else 
+					{	try
+						{	FileWriter fw=new FileWriter(saveFileName);
+							BufferedWriter bfw=new BufferedWriter(fw);
+							bfw.write(editArea.getText(),0,editArea.getText().length());
+							bfw.flush();
+							fw.close();
+							
+							isNewFile=false;
+							currentFile=saveFileName;
+							oldValue=editArea.getText();
+							
+							this.setTitle(saveFileName.getName()+"  - File");
+							statusLabel.setText("Open current file"+saveFileName.getAbsoluteFile());
+							//isSave=true;
+						}							
+						catch(IOException ioException){					
+						}				
+					}
+				}
+				else
+				{
+					try
+					{	FileWriter fw=new FileWriter(currentFile);
+						BufferedWriter bfw=new BufferedWriter(fw);
+						bfw.write(editArea.getText(),0,editArea.getText().length());
+						bfw.flush();
+						fw.close();
+						//isSave=true;
+					}							
+					catch(IOException ioException){					
+					}
+				}
+				System.exit(0);
+				//if(isSave)System.exit(0);
+				//else return;
+			}
+			else if(exitChoose==JOptionPane.NO_OPTION)
+			{	System.exit(0);
+			}
+			else
+			{	return;
+			}
+		}
+	}
 
 	//method of find word
 	public void find(){}
