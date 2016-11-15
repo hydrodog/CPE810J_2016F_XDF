@@ -1,12 +1,12 @@
 package edu.stevens;
 /*
- * @author: Ashutosh Gajankush
+ * @author: Ashutosh Gajankush 
  * Before running this file make sure you have the PDFBox library included in you project.
  * Got to Readme file for more Information.
 */
 
 
-import java.io.File; 
+import java.io.File;  
 import java.io.IOException;
 
 import java.io.IOException;
