@@ -39,7 +39,8 @@ public class FontExtraction {
 	       pdfStripper = new PDFTextStripper(); 
 	       pdDoc = new PDDocument(cosDoc);
 	       //Here will be the logic of extracting and printing the fonts in a page of Document
-	       
+	       //PDPage page = ((page) pdDoc).getAllPage(); // Error in calling getAllPages method working on it.
+	       //PDResources res = page.getResources(); //Calling resources on pages.
 		   System.out.println("Font type");// 
 	   }
 
