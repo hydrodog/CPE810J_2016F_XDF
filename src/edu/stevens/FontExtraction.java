@@ -43,7 +43,7 @@ public class FontExtraction {
 	       //Since we cannot access all pages at once we will try to go through every page using loop.
 	       for(int i=0; i<pdDoc.getNumberOfPages();i++){
 	    	   //In this loop we will try to find to parse through every single page and extract font from every page. 
-	    	   
+	    	   PDPage page = pdDoc.getPage(i);
 	       }
 		   System.out.println("Font type");// 
 	   }
