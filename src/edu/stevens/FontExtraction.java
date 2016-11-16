@@ -41,7 +41,10 @@ public class FontExtraction {
 	       //PDPage page = ((page) pdDoc).getAllPage(); // Error in calling getAllPages method working on it.
 	       //PDResources res = page.getResources(); //Calling resources on pages.
 	       //Since we cannot access all pages at once we will try to go through every page using loop.
-	       
+	       for(int i=0; i<pdDoc.getNumberOfPages();i++){
+	    	   //In this loop we will try to find to parse through every single page and extract font from every page. 
+	    	   
+	       }
 		   System.out.println("Font type");// 
 	   }
 
