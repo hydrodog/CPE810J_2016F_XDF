@@ -1,6 +1,6 @@
 package edu.stevens;
 /*
- * @author: Ashutosh Gajankush
+ * @author: Ashutosh Gajankush 
  * This File is responsible for Font Extraction.
 */
 import java.io.File;
@@ -43,7 +43,7 @@ public class FontExtraction {
 	       //Since we cannot access all pages at once we will try to go through every page using loop.
 	       for(int i=0; i<pdDoc.getNumberOfPages();i++){
 	    	   //In this loop we will try to find to parse through every single page and extract font from every page. 
-	    	   PDPage page = pdDoc.getPage(i);
+	    	   PDPage page = pdDoc.getPage(i); // Accessing each page.
 	       }
 		   System.out.println("Font type");// 
 	   }
