@@ -1,12 +1,12 @@
 package edu.stevens;
 /*
- * @author: Ashutosh Gajankush
+ * @author: Ashutosh Gajankush 
  * Before running this file make sure you have the PDFBox library included in you project.
  * Got to Readme file for more Information.
 */
 
 
-import java.io.File; 
+import java.io.File;   
 import java.io.IOException;
 
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class ImportPDF {
        this.pdDoc = null;
        this.cosDoc = null;
        
-       file = new File(filePath);
+       file = new File("file.pdf");
        parser = new PDFParser(new RandomAccessFile(file,"r"));// Opening the file for reading.
        
        parser.parse();
@@ -55,8 +55,5 @@ public class ImportPDF {
        return Text;
    }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath; //Getting the file path from your desktop.
-    }
    
 }
