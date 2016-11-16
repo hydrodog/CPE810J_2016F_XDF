@@ -29,6 +29,13 @@ public class FontExtraction {
 	       this.pdDoc = null;
 	       this.cosDoc = null;
 	       file = new File("file.pdf");//Loading file
+	       parser = new PDFParser(new RandomAccessFile(file,"r"));// Opening the file for reading.
+	       
+	       parser.parse();
+	       cosDoc = parser.getDocument(); // Get the document.
+	       pdfStripper = new PDFTextStripper(); 
+	       pdDoc = new PDDocument(cosDoc);
+	       //Here will be the logic of extracting and printing the fonts in a page of Document
 	       
 		   System.out.println("Font type");// 
 	   }
