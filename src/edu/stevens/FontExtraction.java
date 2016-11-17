@@ -45,8 +45,13 @@ public class FontExtraction {
 	    	   //In this loop we will try to find to parse through every single page and extract font from every page. 
 	    	   PDPage page = pdDoc.getPage(i); // Accessing each page.
 	    	   PDResources res = page.getResources(); //Getting the resources.
+	    	   for (COSName fontName : res.getFontNames())
+		    	{
+		        	PDFont font = res.getFont(fontName);
+		        	System.out.println(font);
+		    	}
 	       }
-		   System.out.println("Font type");// 
+		   //System.out.println("Font type"); 
 	   }
 
 }
