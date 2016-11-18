@@ -1,0 +1,54 @@
+/*
+ * @author Yifan Lou
+ * This can be used to implement the function of read, crop and scale JPEG image.
+ */
+ 
+import java.awt.*;
+import javax.swing.*;
+import java.io.*;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+
+
+public class LoadImage_Jpeg extends JPanel{
+	private BufferedImage img;
+	public static void main(String[] args){
+		JFrame f = new JFrame();
+		f.add(new LoadImage_Jpeg());
+		f.setSize(600, 600);
+		f.setVisible(true);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		try {
+			BufferedImage OriImg = ImageIO.read(new File("abc.jpg"));
+			System.out.println("Original Image Dimension: "+OriImg.getWidth()+"x"+OriImg.getHeight());
+
+			BufferedImage SubImgage = OriImg.getSubimage(0, 0, 200, 200);
+			System.out.println("Cropped Image Dimension: "+SubImgage.getWidth()+"x"+SubImgage.getHeight());
+
+			File outputfile = new File("abc_new.jpg");
+			ImageIO.write(SubImgage, "jpg", outputfile);
+
+			System.out.println("Image cropped successfully: "+outputfile.getPath());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void paintComponent(Graphics g){
+		img = LoadImage("abc.jpg");//Use LoadImage to read image file.
+		g.drawImage(img, 0, 0, null);	
+	}
+
+	
+	//Method to load the image
+	BufferedImage LoadImage(String Filename){
+		BufferedImage img = null;
+		try{
+			img = ImageIO.read(new File(Filename));
+		}catch(IOException e){
+			
+		}		
+		return img;
+	}
+}
