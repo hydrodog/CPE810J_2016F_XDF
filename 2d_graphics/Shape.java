@@ -1,20 +1,21 @@
 package edu.stevens.XDF._2dGraphics;
-import java.awt.*;
-import java.awt.Graphics2D;
+
 /*
- *@author Jiahui Zhang
- * Define attributes of shapes
+ * @author:Jiahui Zhang
+ * Create more shapes(such as circle, line, rectangle...)
+ * TODO: create linear class, text class...
  */
+import org.w3c.dom.Element;
+import org.w3c.dom.svg.SVGDocument;
+
 public abstract class Shape {
-	protected double x,y;
-	protected Color c;
-	public Shape(double x,double y,Color c){
+    protected String x,y,color;
+    protected SVGDocument doc;
+	public Shape(String x,String y,String color,SVGDocument doc){
 		this.x = x;
 		this.y = y;
-		this.c = c;
-		
+		this.color = color;
+		this.doc = doc;    
 	}
-	
-	public abstract void paint(Graphics g);
-
+	public abstract Element paint();
 }
