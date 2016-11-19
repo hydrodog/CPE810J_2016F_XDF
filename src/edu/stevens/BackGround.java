@@ -7,7 +7,8 @@ package edu.stevens;
 
 import java.awt.*;  
 import java.awt.event.*;  
-import javax.swing.*;  
+import javax.swing.*; 
+import java.awt.Container;
   
 //to show the background color and image of the frame
 //to click the right-hand button to change the background color
