@@ -20,6 +20,7 @@ we will fix it later. Next weed our group will work individually I had assigned 
 one for convert image to ps, the last one make a layout control. In addition, I will fix the connection of setup gui and service.
 
 @author Zhe Wang
-
-Did a print test to make sure that the file could be printed out and could choose printer. Convert the image to
-Ps is the next to do.
+11/11/2016
+Did a print test to make sure that the file could be printed out and could choose printer. Convert the image to Ps is the next to do.
+11/18/2016
+Make the image formats convert to eps format.
