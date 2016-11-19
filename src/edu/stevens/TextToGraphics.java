@@ -1,3 +1,8 @@
+ /*
+        @ Jinyu Tan
+          This code is to convert text to graphics. Next week I will combine the code in last two weeks to realize
+          the function of zoom in and zoom out text in praphics form.
+         */
 package jframe;
 import java.awt.Color;
 import java.awt.Font;
@@ -13,12 +18,6 @@ public class TextToGraphics {
 
     public static void main(String[] args) {
         String text = "Hello";
-
-        /*
-           Because font metrics is based on a graphics context, we need to create
-           a small, temporary image so we can ascertain the width and height
-           of the final image
-         */
         BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = img.createGraphics();
         Font font = new Font("Arial", Font.PLAIN, 48);
