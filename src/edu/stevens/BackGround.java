@@ -9,9 +9,9 @@ import java.awt.*;
 import java.awt.event.*;  
 import javax.swing.*;  
   
+//to show the background color and image of the frame
 //to click the right-hand button to change the background color
 //TODO:add buttons to change colors of the titlebar
-//TODO:add buttons to change images of the background
 
 public class BackGround extends JFrame {  
    JRadioButtonMenuItem items[];  
@@ -48,11 +48,21 @@ public class BackGround extends JFrame {
               popupMenu.show(event.getComponent(),event.getX(),event.getY());   
         }  
     });   
-  
-    getContentPane().setBackground(Color.white); //set white as the default background color 
+    
+    ImageIcon img = new ImageIcon("2.jpg");//set the default background image
+    JLabel imgLabel = new JLabel(img);
+    imgLabel.setBounds(0,0,img.getIconWidth(), img.getIconHeight());
+    Container cp = getContentPane();
+    ((JPanel)cp).setOpaque(true); 
+    getLayeredPane().setLayout(null);
+    getLayeredPane().add(imgLabel, new Integer(Integer.MIN_VALUE));
+    
+    getContentPane().setBackground(Color.white); //set white as the default background color
     setSize(400,400); 
-    setVisible(true);  
+    setVisible(true);
+    setResizable(false);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE ); 
+   }  
    }  
   
    class ChangeColorAction implements ActionListener { 
