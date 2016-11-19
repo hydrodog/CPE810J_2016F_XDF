@@ -1,5 +1,4 @@
- /*
-        @ Jinyu Tan
+ /* @ Jinyu Tan
           This code is to convert text to graphics. Next week I will combine the code in last two weeks to realize
           the function of zoom in and zoom out text in praphics form.
          */
