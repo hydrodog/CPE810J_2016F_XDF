@@ -12,7 +12,9 @@ https://docs.google.com/document/d/179vrcB70IQ0TEsmw5ytlIfXFNVNaG5fc8qRVNTtpm_g/
 
 Downloading PDFBox library jar file:
 
-http://mirrors.gigenet.com/apache/pdfbox/2.0.3/pdfbox-app-2.0.3.jar
+http://mirrors.gigenet.com/apache/pdfbox/2.0.3/pdfbox-app-2.0.3.jar(pdfbox)
+http://www.java2s.com/Code/Jar/p/Downloadpdfbox131jar.htm(PDFobjectImage)
+https://pdfbox.apache.org/download.cgi(pdfbox tools)
 
 Information to add this library to your code:
 1. Right Click on your project Folder in Eclipse.
