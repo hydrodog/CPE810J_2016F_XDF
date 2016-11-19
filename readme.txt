@@ -1,6 +1,6 @@
 Import PDF Group:
 
-Author:	Ashutosh Gajankush, Xiaolu Wang and Yue Fang
+Author:Ashutosh Gajankush, Xiaolu Wang and Yue Fang
 
 Responsibilities:
 
