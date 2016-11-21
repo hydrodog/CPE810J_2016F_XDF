@@ -700,7 +700,167 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 				}				
 			}
 		}//finish save as function
+		//page setup
+				else if(e.getSource()==fileMenu_PageSetUp)
+				{	editArea.requestFocus();
+					JOptionPane.showMessageDialog(this,"Sorry, this feature is not yet implemented! ","hint",JOptionPane.WARNING_MESSAGE);
+				}//finish page setup
+				
+				//print function begin
+				else if(e.getSource()==fileMenu_Print)
+				{	editArea.requestFocus();
+					JOptionPane.showMessageDialog(this,"Sorry, this feature is not yet implemented! ","hint",JOptionPane.WARNING_MESSAGE);
+				}//finish print function
+				
+				//exit function begin
+				else if(e.getSource()==fileMenu_Exit)
+				{	int exitChoose=JOptionPane.showConfirmDialog(this,"Are you exit? ( shuts down )","exit alert",JOptionPane.OK_CANCEL_OPTION);
+					if(exitChoose==JOptionPane.OK_OPTION)
+					{	System.exit(0);
+					}
+					else
+					{	return;
+					}
+				}//finish exit function
+				
+				//undo function begin
+				else if(e.getSource()==editMenu_Undo || e.getSource()==popupMenu_Undo)
+				{	editArea.requestFocus();
+					if(undo.canUndo())
+					{	try
+						{	undo.undo();
+						}
+						catch (CannotUndoException ex)
+						{	System.out.println("Unable to undo:" + ex);
+							//ex.printStackTrace();
+						}
+					}
+					if(!undo.canUndo())
+						{	editMenu_Undo.setEnabled(false);
+						}
+				}//finish undo function
+				
+				//cut function
+				else if(e.getSource()==editMenu_Cut || e.getSource()==popupMenu_Cut)
+				{	editArea.requestFocus();
+					String text=editArea.getSelectedText();
+					StringSelection selection=new StringSelection(text);
+					clipBoard.setContents(selection,null);
+					editArea.replaceRange("",editArea.getSelectionStart(),editArea.getSelectionEnd());
+					checkMenuItemEnabled();//Set the availability of cut, copy, paste, and delete functions. 
+				}//finish cut function
+				
+		//copy function begin
+				else if(e.getSource()==editMenu_Copy || e.getSource()==popupMenu_Copy)
+				{	editArea.requestFocus();
+					String text=editArea.getSelectedText();
+					StringSelection selection=new StringSelection(text);
+					clipBoard.setContents(selection,null);
+					checkMenuItemEnabled();//Set the availability of cut, copy, paste, and delete functions. 
+				}//finish copy function
 		
+				//paste function begin
+				else if(e.getSource()==editMenu_Paste || e.getSource()==popupMenu_Paste)
+				{	editArea.requestFocus();
+					Transferable contents=clipBoard.getContents(this);
+					if(contents==null)return;
+					String text="";
+					try
+					{	text=(String)contents.getTransferData(DataFlavor.stringFlavor);
+					}
+					catch (Exception exception)
+					{
+					}
+					editArea.replaceRange(text,editArea.getSelectionStart(),editArea.getSelectionEnd());
+					checkMenuItemEnabled();
+				}//finish paste function
+		
+				//delete function begin 
+				else if(e.getSource()==editMenu_Delete || e.getSource()==popupMenu_Delete)
+				{	editArea.requestFocus();
+					editArea.replaceRange("",editArea.getSelectionStart(),editArea.getSelectionEnd());
+					checkMenuItemEnabled();	//Set the availability of cut, copy, paste, and delete functions. 
+				}//finish delete function
+		
+				//find function
+				else if(e.getSource()==editMenu_Find)
+				{	editArea.requestFocus();
+					find();
+				}//finish find function
+		
+				//findnext function
+				else if(e.getSource()==editMenu_FindNext)
+				{	editArea.requestFocus();
+					find();
+				}//finish findnext function
+		
+				//replace function
+				else if(e.getSource()==editMenu_Replace)
+				{	editArea.requestFocus();
+					replace();
+				}//finish replace function
+		
+				//goto function
+				else if(e.getSource()==editMenu_GoTo)
+				{	editArea.requestFocus();
+					JOptionPane.showMessageDialog(this,"Sorry, this feature is not yet implemented! ","hint",JOptionPane.WARNING_MESSAGE);
+				}//not implemented
+		
+				//time and date
+				else if(e.getSource()==editMenu_TimeDate)
+				{	editArea.requestFocus();
+					//SimpleDateFormat currentDateTime=new SimpleDateFormat("HH:mmyyyy-MM-dd");
+					//editArea.insert(currentDateTime.format(new Date()),editArea.getCaretPosition());
+					Calendar rightNow=Calendar.getInstance();
+					Date date=rightNow.getTime();
+					editArea.insert(date.toString(),editArea.getCaretPosition());
+				}//finish timedate
+		
+				//select all function
+				else if(e.getSource()==editMenu_SelectAll || e.getSource()==popupMenu_SelectAll)
+				{	editArea.selectAll();
+				}//finish select all function
+		
+				//word Wrap (have set)
+				else if(e.getSource()==formatMenu_LineWrap)
+				{	if(formatMenu_LineWrap.getState())
+						editArea.setLineWrap(true);
+					else 
+						editArea.setLineWrap(false);
+
+				}
+				//font set
+				else if(e.getSource()==formatMenu_Font)
+				{	editArea.requestFocus();
+					font();
+				}//finish font set
+		
+				//Set status bar visibility 
+				else if(e.getSource()==viewMenu_Status)
+				{	if(viewMenu_Status.getState())
+						statusLabel.setVisible(true);
+					else 
+						statusLabel.setVisible(false);
+				}//Set status bar visibility 
+				
+				//help menu
+				else if(e.getSource()==helpMenu_HelpTopics)
+				{	editArea.requestFocus();
+					JOptionPane.showMessageDialog(this,"If you like something, say something!","help menu",JOptionPane.INFORMATION_MESSAGE);
+				}
+				//about
+				else if(e.getSource()==helpMenu_AboutXFrame)
+				{	editArea.requestFocus();
+					JOptionPane.showMessageDialog(this,
+						"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n"+
+						" Author: XFrame team "+
+						" Version: 1.0                          \n"+
+						" Release time: 2016 fall                            \n"+
+						" Description: basic functions and framework                \n"+
+						" Development cycle : one month \n"+
+						"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n",
+						"XDF",JOptionPane.INFORMATION_MESSAGE);
+				}
 		
 
 	}
