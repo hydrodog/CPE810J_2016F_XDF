@@ -16,7 +16,9 @@ package edu.stevens;
  import java.util.*;
  import java.io.*;
  import javax.swing.undo.*;
- import javax.swing.border.*;
+
+
+import javax.swing.border.*;
  import javax.swing.*;
  import javax.swing.text.*;
  import javax.swing.event.*;
@@ -302,7 +304,61 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		//Create and add status bar 
 		statusLabel=new JLabel("　Get help information pressing F1!");
 		this.add(statusLabel,BorderLayout.SOUTH);//Add status bar tab to window 
-
+		
+		//Create and add Toolbar
+		JToolBar jToolBar1 = new JToolBar();
+	    JButton jButton1 = new JButton();
+	    JButton jButton2 = new JButton();
+		JButton jButton3 = new JButton();
+		JButton jButton4 = new JButton();
+		JButton jButton5 = new JButton();
+		
+		ImageIcon imageIcon1;
+		ImageIcon imageIcon2;
+		ImageIcon imageIcon3;
+		ImageIcon imageIcon4;
+		ImageIcon imageIcon5;
+		  
+		
+		this.add(jToolBar1, BorderLayout.NORTH);
+		
+		jToolBar1.add(jButton1, null);
+	    jToolBar1.add(jButton2, null);
+	    jToolBar1.add(jButton3, null);
+	    jToolBar1.add(jButton4, null);
+	    jToolBar1.add(jButton5, null);
+		
+		imageIcon1 = new ImageIcon(XFrame.class.getResource("new.gif"));
+	    imageIcon2 = new ImageIcon(XFrame.class.getResource("open.gif"));
+	    imageIcon3 = new ImageIcon(XFrame.class.getResource("save.gif"));
+	    imageIcon4 = new ImageIcon(XFrame.class.getResource("saveAs.gif"));
+	    imageIcon5 = new ImageIcon(XFrame.class.getResource("undo.gif"));
+		 
+	    jButton1.setToolTipText("new file");
+	    jButton1.setIcon(null);
+	    jButton1.setSelectedIcon(null);
+	    jButton1.setText("");
+	    jButton1.addActionListener(new Button1_actionAdapter(this));
+	    jButton2.setToolTipText("open file");
+	    jButton2.setVerifyInputWhenFocusTarget(true);
+	    jButton2.setText("");
+	    jButton2.addActionListener(new Button2_actionAdapter(this));
+	    jButton3.setToolTipText("save");
+	    jButton3.setText("");
+	    jButton3.addActionListener(new Button3_actionAdapter(this));
+	    jButton4.setToolTipText("save as");
+	    jButton4.setText("");
+	    jButton4.addActionListener(new Button4_actionAdapter(this));
+	    jButton5.setToolTipText("undo");
+	    jButton5.setText("");
+	    jButton5.addActionListener(new Button5_actionAdapter(this));
+	    
+	    jButton1.setIcon(imageIcon1);
+	    jButton2.setIcon(imageIcon2);
+	    jButton3.setIcon(imageIcon3);
+	    jButton4.setIcon(imageIcon4);
+	    jButton5.setIcon(imageIcon5);
+		
 		//Set the location, size, and visibility of the window on the screen. 
 		this.setLocation(200,50);
 		this.setSize(1050,650);
@@ -316,7 +372,90 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 
 		checkMenuItemEnabled();
 		editArea.requestFocus();
+		
+		
 	}//end of constructor
+	
+class Button1_actionAdapter implements ActionListener {
+	  XFrame adaptee;
+
+	  Button1_actionAdapter(XFrame adaptee) {
+	    this.adaptee = adaptee;
+	  }
+
+	  public void actionPerformed(ActionEvent e) {
+	    adaptee.jButton1_actionPerformed(e);
+	  }
+	}
+
+class Button2_actionAdapter implements ActionListener {
+	  XFrame adaptee;
+
+	  Button2_actionAdapter(XFrame adaptee) {
+	    this.adaptee = adaptee;
+	  }
+
+	  public void actionPerformed(ActionEvent e) {
+	    adaptee.jButton2_actionPerformed(e);
+	  }
+	}
+
+class Button3_actionAdapter implements ActionListener {
+	  XFrame adaptee;
+
+	  Button3_actionAdapter(XFrame adaptee) {
+	    this.adaptee = adaptee;
+	  }
+
+	  public void actionPerformed(ActionEvent e) {
+	    adaptee.jButton3_actionPerformed(e);
+	  }
+	}
+
+class Button4_actionAdapter implements ActionListener {
+	  XFrame adaptee;
+
+	  Button4_actionAdapter(XFrame adaptee) {
+	    this.adaptee = adaptee;
+	  }
+
+	  public void actionPerformed(ActionEvent e) {
+	    adaptee.jButton4_actionPerformed(e);
+	  }
+	}
+
+class Button5_actionAdapter implements ActionListener {
+	  XFrame adaptee;
+
+	  Button5_actionAdapter(XFrame adaptee) {
+	    this.adaptee = adaptee;
+	  }
+
+	  public void actionPerformed(ActionEvent e) {
+	    adaptee.jButton5_actionPerformed(e);
+	  }
+	}
+	
+	void jButton1_actionPerformed(ActionEvent e) {
+	    newFile();
+	  }
+
+	void jButton2_actionPerformed(ActionEvent e) {
+	    open();
+	  }
+
+	void jButton3_actionPerformed(ActionEvent e) {
+	    save();
+	  }
+
+	void jButton4_actionPerformed(ActionEvent e) {
+	    saveas();
+	  }
+	
+	void jButton5_actionPerformed(ActionEvent e) {
+	    undo();
+	  }
+		
 	
 	//Set menu item availability: cut, copy, paste, delete function 
 	public void checkMenuItemEnabled()
@@ -441,314 +580,74 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource()==fileMenu_New)
-		{	editArea.requestFocus();
-			String currentValue=editArea.getText();
-			boolean isTextChange=(currentValue.equals(oldValue))?false:true;
-			if(isTextChange)
-			{	int saveChoose=JOptionPane.showConfirmDialog(this,"Your file has not been saved. Do you want to save it? ","hint",JOptionPane.YES_NO_CANCEL_OPTION);
-				if(saveChoose==JOptionPane.YES_OPTION)
-				{	String str=null;
-					JFileChooser fileChooser=new JFileChooser();
-					fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-				
-					fileChooser.setDialogTitle("save as");
-					int result=fileChooser.showSaveDialog(this);
-					if(result==JFileChooser.CANCEL_OPTION)
-					{	statusLabel.setText("select no file");
-						return;
-					}
-					File saveFileName=fileChooser.getSelectedFile();
-					if(saveFileName==null || saveFileName.getName().equals(""))
-					{	JOptionPane.showMessageDialog(this,"Illegal file name","Illegal file name",JOptionPane.ERROR_MESSAGE);
-					}
-					else 
-					{	try
-						{	FileWriter fw=new FileWriter(saveFileName);
-							BufferedWriter bfw=new BufferedWriter(fw);
-							bfw.write(editArea.getText(),0,editArea.getText().length());
-							bfw.flush();//flushing the buffer
-							bfw.close();
-							isNewFile=false;
-							currentFile=saveFileName;
-							oldValue=editArea.getText();
-							this.setTitle(saveFileName.getName()+" - XDF");
-							statusLabel.setText("Current opened file："+saveFileName.getAbsoluteFile());
-						}
-						catch (IOException ioException)
-						{
-						}
-					}
-				}
-				else if(saveChoose==JOptionPane.NO_OPTION)
-				{	editArea.replaceRange("",0,editArea.getText().length());
-					statusLabel.setText(" create new file");
-					this.setTitle("no title - XDF");
-					isNewFile=true;
-					undo.discardAllEdits();	//discard all Undo operate
-					editMenu_Undo.setEnabled(false);
-					oldValue=editArea.getText();
-				}
-				else if(saveChoose==JOptionPane.CANCEL_OPTION)
-				{	return;
-				}
-			}
-			else
-			{	editArea.replaceRange("",0,editArea.getText().length());
-				statusLabel.setText(" create new file");
-				this.setTitle("no title - XDF");
-				isNewFile=true;
-				undo.discardAllEdits();//discard all Undo operate
-				editMenu_Undo.setEnabled(false);
-				oldValue=editArea.getText();
-			}
-		}//finish new function
-		//Open function
-		else if(e.getSource()==fileMenu_Open)
-		{	editArea.requestFocus();
-			String currentValue=editArea.getText();
-			boolean isTextChange=(currentValue.equals(oldValue))?false:true;
-			if(isTextChange)
-			{	int saveChoose=JOptionPane.showConfirmDialog(this,"Your file has not been saved. Do you want to save it? ","hint",JOptionPane.YES_NO_CANCEL_OPTION);
-				if(saveChoose==JOptionPane.YES_OPTION)
-				{	String str=null;
-					JFileChooser fileChooser=new JFileChooser();
-					fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-					
-					fileChooser.setDialogTitle("save as");
-					int result=fileChooser.showSaveDialog(this);
-					if(result==JFileChooser.CANCEL_OPTION)
-					{	statusLabel.setText("select no file");
-						return;
-					}
-					File saveFileName=fileChooser.getSelectedFile();
-					if(saveFileName==null || saveFileName.getName().equals(""))
-					{	JOptionPane.showMessageDialog(this,"Illegal file name","Illegal file name",JOptionPane.ERROR_MESSAGE);
-					}
-					else 
-					{	try
-						{	FileWriter fw=new FileWriter(saveFileName);
-							BufferedWriter bfw=new BufferedWriter(fw);
-							bfw.write(editArea.getText(),0,editArea.getText().length());
-							bfw.flush();//flushing the buffer
-							bfw.close();
-							isNewFile=false;
-							currentFile=saveFileName;
-							oldValue=editArea.getText();
-							this.setTitle(saveFileName.getName()+" - XDF");
-							statusLabel.setText("Current opened file："+saveFileName.getAbsoluteFile());
-						}
-						catch (IOException ioException)
-						{
-						}
-					}
-				}
-				else if(saveChoose==JOptionPane.NO_OPTION)
-				{	String str=null;
-					JFileChooser fileChooser=new JFileChooser();
-					fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-					
-					fileChooser.setDialogTitle("Open file");
-					int result=fileChooser.showOpenDialog(this);
-					if(result==JFileChooser.CANCEL_OPTION)
-					{	statusLabel.setText("select no file");
-						return;
-					}
-					File fileName=fileChooser.getSelectedFile();
-					if(fileName==null || fileName.getName().equals(""))
-					{	JOptionPane.showMessageDialog(this,"Illegal file name","Illegal file name",JOptionPane.ERROR_MESSAGE);
-					}
-					else
-					{	try
-						{	FileReader fr=new FileReader(fileName);
-							BufferedReader bfr=new BufferedReader(fr);
-							editArea.setText("");
-							while((str=bfr.readLine())!=null)
-							{	editArea.append(str);
-							}
-							this.setTitle(fileName.getName()+" - XDF");
-							statusLabel.setText(" Current opened file："+fileName.getAbsoluteFile());
-							fr.close();
-							isNewFile=false;
-							currentFile=fileName;
-							oldValue=editArea.getText();
-						}
-						catch (IOException ioException)
-						{
-						}
-					}
-				}
-				else
-				{	return;
-				}
-			}
-			else
-			{	String str=null;
-				JFileChooser fileChooser=new JFileChooser();
-				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-				
-				fileChooser.setDialogTitle("Open file");
-				int result=fileChooser.showOpenDialog(this);
-				if(result==JFileChooser.CANCEL_OPTION)
-				{	statusLabel.setText(" select no file ");
-					return;
-				}
-				File fileName=fileChooser.getSelectedFile();
-				if(fileName==null || fileName.getName().equals(""))
-				{	JOptionPane.showMessageDialog(this,"Illegal file name","Illegal file name",JOptionPane.ERROR_MESSAGE);
-				}
-				else
-				{	try
-					{	FileReader fr=new FileReader(fileName);
-						BufferedReader bfr=new BufferedReader(fr);
-						editArea.setText("");
-						while((str=bfr.readLine())!=null)
-						{	editArea.append(str);
-						}
-						this.setTitle(fileName.getName()+" - XDF");
-						statusLabel.setText(" Current opened file："+fileName.getAbsoluteFile());
-						fr.close();
-						isNewFile=false;
-						currentFile=fileName;
-						oldValue=editArea.getText();
-					}
-					catch (IOException ioException)
-					{
-					}
-				}
-			}
-		}//finish open function
-		//save funtion begin
-		else if(e.getSource()==fileMenu_Save)
-		{	editArea.requestFocus();
-			if(isNewFile)
-			{	String str=null;
-				JFileChooser fileChooser=new JFileChooser();
-				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-				
-				fileChooser.setDialogTitle("save");
-				int result=fileChooser.showSaveDialog(this);
-				if(result==JFileChooser.CANCEL_OPTION)
-				{	statusLabel.setText("select no file");
-					return;
-				}
-				File saveFileName=fileChooser.getSelectedFile();
-				if(saveFileName==null || saveFileName.getName().equals(""))
-				{	JOptionPane.showMessageDialog(this,"Illegal file name","Illegal file name",JOptionPane.ERROR_MESSAGE);
-				}
-				else 
-				{	try
-					{	FileWriter fw=new FileWriter(saveFileName);
-						BufferedWriter bfw=new BufferedWriter(fw);
-						bfw.write(editArea.getText(),0,editArea.getText().length());
-						bfw.flush();//flushing the buffer
-						bfw.close();
-						isNewFile=false;
-						currentFile=saveFileName;
-						oldValue=editArea.getText();
-						this.setTitle(saveFileName.getName()+" - XDF");
-						statusLabel.setText("Current opened file："+saveFileName.getAbsoluteFile());
-					}
-					catch (IOException ioException)
-					{
-					}
-				}
-			}
-			else
-			{	try
-				{	FileWriter fw=new FileWriter(currentFile);
-					BufferedWriter bfw=new BufferedWriter(fw);
-					bfw.write(editArea.getText(),0,editArea.getText().length());
-					bfw.flush();
-					fw.close();
-				}							
-				catch(IOException ioException)
-				{					
-				}
-			}
-		}//finish the save function
+		{	
+			newFile();
+		}
 		
-		//save as function begin
+		else if(e.getSource()==fileMenu_Open)
+		{	
+			open();
+		}
+		
+		else if(e.getSource()==fileMenu_Save)
+		{	
+			save();
+		}
+		
 		else if(e.getSource()==fileMenu_SaveAs)
-		{	editArea.requestFocus();
-			String str=null;
-			JFileChooser fileChooser=new JFileChooser();
-			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			
-			fileChooser.setDialogTitle("save as");
-			int result=fileChooser.showSaveDialog(this);
-			if(result==JFileChooser.CANCEL_OPTION)
-			{	statusLabel.setText("　select no file");
-				return;
-			}				
-			File saveFileName=fileChooser.getSelectedFile();
-			if(saveFileName==null||saveFileName.getName().equals(""))
-			{	JOptionPane.showMessageDialog(this,"Illegal file name","Illegal file name",JOptionPane.ERROR_MESSAGE);
-			}	
-			else 
-			{	try
-				{	FileWriter fw=new FileWriter(saveFileName);
-					BufferedWriter bfw=new BufferedWriter(fw);
-					bfw.write(editArea.getText(),0,editArea.getText().length());
-					bfw.flush();
-					fw.close();
-					oldValue=editArea.getText();
-					this.setTitle(saveFileName.getName()+"  - XDF");
-					statusLabel.setText("　Current opened file:"+saveFileName.getAbsoluteFile());
-				}						
-				catch(IOException ioException)
-				{					
-				}				
-			}
-		}//finish save as function
+		{	
+			saveas();
+		}
+		
 		//page setup
-				else if(e.getSource()==fileMenu_PageSetUp)
-				{	editArea.requestFocus();
-					JOptionPane.showMessageDialog(this,"Sorry, this feature is not yet implemented! ","hint",JOptionPane.WARNING_MESSAGE);
-				}//finish page setup
-				
-				//print function begin
-				else if(e.getSource()==fileMenu_Print)
-				{	editArea.requestFocus();
-					JOptionPane.showMessageDialog(this,"Sorry, this feature is not yet implemented! ","hint",JOptionPane.WARNING_MESSAGE);
-				}//finish print function
-				
-				//exit function begin
-				else if(e.getSource()==fileMenu_Exit)
-				{	int exitChoose=JOptionPane.showConfirmDialog(this,"Are you exit? ( shuts down )","exit alert",JOptionPane.OK_CANCEL_OPTION);
-					if(exitChoose==JOptionPane.OK_OPTION)
-					{	System.exit(0);
-					}
-					else
-					{	return;
-					}
-				}//finish exit function
-				
-				//undo function begin
-				else if(e.getSource()==editMenu_Undo || e.getSource()==popupMenu_Undo)
-				{	editArea.requestFocus();
-					if(undo.canUndo())
-					{	try
-						{	undo.undo();
-						}
-						catch (CannotUndoException ex)
-						{	System.out.println("Unable to undo:" + ex);
-							//ex.printStackTrace();
-						}
-					}
-					if(!undo.canUndo())
-						{	editMenu_Undo.setEnabled(false);
-						}
-				}//finish undo function
-				
-				//cut function
-				else if(e.getSource()==editMenu_Cut || e.getSource()==popupMenu_Cut)
-				{	editArea.requestFocus();
-					String text=editArea.getSelectedText();
-					StringSelection selection=new StringSelection(text);
-					clipBoard.setContents(selection,null);
-					editArea.replaceRange("",editArea.getSelectionStart(),editArea.getSelectionEnd());
-					checkMenuItemEnabled();//Set the availability of cut, copy, paste, and delete functions. 
-				}//finish cut function
+		else if(e.getSource()==fileMenu_PageSetUp)
+		{	editArea.requestFocus();
+			JOptionPane.showMessageDialog(this,"Sorry, this feature is not yet implemented! ","hint",JOptionPane.WARNING_MESSAGE);
+		}//finish page setup
+		
+		//print function begin
+		else if(e.getSource()==fileMenu_Print)
+		{	editArea.requestFocus();
+			JOptionPane.showMessageDialog(this,"Sorry, this feature is not yet implemented! ","hint",JOptionPane.WARNING_MESSAGE);
+		}//finish print function
+		
+		//exit function begin
+		else if(e.getSource()==fileMenu_Exit)
+		{	int exitChoose=JOptionPane.showConfirmDialog(this,"Are you exit? ( shuts down )","exit alert",JOptionPane.OK_CANCEL_OPTION);
+			if(exitChoose==JOptionPane.OK_OPTION)
+			{	System.exit(0);
+			}
+			else
+			{	return;
+			}
+		}//finish exit function
+		
+		//undo function begin
+		else if(e.getSource()==editMenu_Undo || e.getSource()==popupMenu_Undo)
+		{	/*editArea.requestFocus();
+			if(undo.canUndo())
+			{	try
+				{	undo.undo();
+				}
+				catch (CannotUndoException ex)
+				{	System.out.println("Unable to undo:" + ex);
+					//ex.printStackTrace();
+				}
+			}
+			if(!undo.canUndo())
+				{	editMenu_Undo.setEnabled(false);
+				}*/undo();
+		}//finish undo function
+		
+		//cut function
+		else if(e.getSource()==editMenu_Cut || e.getSource()==popupMenu_Cut)
+		{	editArea.requestFocus();
+			String text=editArea.getSelectedText();
+			StringSelection selection=new StringSelection(text);
+			clipBoard.setContents(selection,null);
+			editArea.replaceRange("",editArea.getSelectionStart(),editArea.getSelectionEnd());
+			checkMenuItemEnabled();//Set the availability of cut, copy, paste, and delete functions. 
+		}//finish cut function				
 				
 		//copy function begin
 				else if(e.getSource()==editMenu_Copy || e.getSource()==popupMenu_Copy)
@@ -852,27 +751,324 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 				else if(e.getSource()==helpMenu_AboutXFrame)
 				{	editArea.requestFocus();
 					JOptionPane.showMessageDialog(this,
-						"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n"+
+						"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n"+
 						" Author: XFrame team "+
 						" Version: 1.0                          \n"+
 						" Release time: 2016 fall                            \n"+
 						" Description: basic functions and framework                \n"+
 						" Development cycle : one month \n"+
-						"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n",
+						"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n",
 						"XDF",JOptionPane.INFORMATION_MESSAGE);
 				}
 		
 
 	}
+	//newFile function begin
+	public void newFile()
+	{
+		editArea.requestFocus();
+		String currentValue=editArea.getText();
+		boolean isTextChange=(currentValue.equals(oldValue))?false:true;
+		if(isTextChange)
+		{	int saveChoose=JOptionPane.showConfirmDialog(this,"Your file has not been saved. Do you want to save it? ","hint",JOptionPane.YES_NO_CANCEL_OPTION);
+			if(saveChoose==JOptionPane.YES_OPTION)
+			{	String str=null;
+				JFileChooser fileChooser=new JFileChooser();
+				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			
+				fileChooser.setDialogTitle("save as");
+				int result=fileChooser.showSaveDialog(this);
+				if(result==JFileChooser.CANCEL_OPTION)
+				{	statusLabel.setText("select no file");
+					return;
+				}
+				File saveFileName=fileChooser.getSelectedFile();
+				if(saveFileName==null || saveFileName.getName().equals(""))
+				{	JOptionPane.showMessageDialog(this,"Illegal file name","Illegal file name",JOptionPane.ERROR_MESSAGE);
+				}
+				else 
+				{	try
+					{	FileWriter fw=new FileWriter(saveFileName);
+						BufferedWriter bfw=new BufferedWriter(fw);
+						bfw.write(editArea.getText(),0,editArea.getText().length());
+						bfw.flush();//flushing the buffer
+						bfw.close();
+						isNewFile=false;
+						currentFile=saveFileName;
+						oldValue=editArea.getText();
+						this.setTitle(saveFileName.getName()+" - XDF");
+						statusLabel.setText("Current opened file："+saveFileName.getAbsoluteFile());
+					}
+					catch (IOException ioException)
+					{
+					}
+				}
+			}
+			else if(saveChoose==JOptionPane.NO_OPTION)
+			{	editArea.replaceRange("",0,editArea.getText().length());
+				statusLabel.setText(" create new file");
+				this.setTitle("no title - XDF");
+				isNewFile=true;
+				undo.discardAllEdits();	//discard all Undo operate
+				editMenu_Undo.setEnabled(false);
+				oldValue=editArea.getText();
+			}
+			else if(saveChoose==JOptionPane.CANCEL_OPTION)
+			{	return;
+			}
+		}
+		else
+		{	editArea.replaceRange("",0,editArea.getText().length());
+			statusLabel.setText(" create new file");
+			this.setTitle("no title - XDF");
+			isNewFile=true;
+			undo.discardAllEdits();//discard all Undo operate
+			editMenu_Undo.setEnabled(false);
+			oldValue=editArea.getText();
+		}
+	}//finish new function
+	
 
+	//Open function
+	public void open()
+	{
+		editArea.requestFocus();
+		String currentValue=editArea.getText();
+		boolean isTextChange=(currentValue.equals(oldValue))?false:true;
+		if(isTextChange)
+		{	int saveChoose=JOptionPane.showConfirmDialog(this,"Your file has not been saved. Do you want to save it? ","hint",JOptionPane.YES_NO_CANCEL_OPTION);
+			if(saveChoose==JOptionPane.YES_OPTION)
+			{	String str=null;
+				JFileChooser fileChooser=new JFileChooser();
+				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				
+				fileChooser.setDialogTitle("save as");
+				int result=fileChooser.showSaveDialog(this);
+				if(result==JFileChooser.CANCEL_OPTION)
+				{	statusLabel.setText("select no file");
+					return;
+				}
+				File saveFileName=fileChooser.getSelectedFile();
+				if(saveFileName==null || saveFileName.getName().equals(""))
+				{	JOptionPane.showMessageDialog(this,"Illegal file name","Illegal file name",JOptionPane.ERROR_MESSAGE);
+				}
+				else 
+				{	try
+					{	FileWriter fw=new FileWriter(saveFileName);
+						BufferedWriter bfw=new BufferedWriter(fw);
+						bfw.write(editArea.getText(),0,editArea.getText().length());
+						bfw.flush();//flushing the buffer
+						bfw.close();
+						isNewFile=false;
+						currentFile=saveFileName;
+						oldValue=editArea.getText();
+						this.setTitle(saveFileName.getName()+" - XDF");
+						statusLabel.setText("Current opened file："+saveFileName.getAbsoluteFile());
+					}
+					catch (IOException ioException)
+					{
+					}
+				}
+			}
+			else if(saveChoose==JOptionPane.NO_OPTION)
+			{	String str=null;
+				JFileChooser fileChooser=new JFileChooser();
+				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				
+				fileChooser.setDialogTitle("Open file");
+				int result=fileChooser.showOpenDialog(this);
+				if(result==JFileChooser.CANCEL_OPTION)
+				{	statusLabel.setText("select no file");
+					return;
+				}
+				File fileName=fileChooser.getSelectedFile();
+				if(fileName==null || fileName.getName().equals(""))
+				{	JOptionPane.showMessageDialog(this,"Illegal file name","Illegal file name",JOptionPane.ERROR_MESSAGE);
+				}
+				else
+				{	try
+					{	FileReader fr=new FileReader(fileName);
+						BufferedReader bfr=new BufferedReader(fr);
+						editArea.setText("");
+						while((str=bfr.readLine())!=null)
+						{	editArea.append(str);
+						}
+						this.setTitle(fileName.getName()+" - XDF");
+						statusLabel.setText(" Current opened file："+fileName.getAbsoluteFile());
+						fr.close();
+						isNewFile=false;
+						currentFile=fileName;
+						oldValue=editArea.getText();
+					}
+					catch (IOException ioException)
+					{
+					}
+				}
+			}
+			else
+			{	return;
+			}
+		}
+		else
+		{	String str=null;
+			JFileChooser fileChooser=new JFileChooser();
+			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			
+			fileChooser.setDialogTitle("Open file");
+			int result=fileChooser.showOpenDialog(this);
+			if(result==JFileChooser.CANCEL_OPTION)
+			{	statusLabel.setText(" select no file ");
+				return;
+			}
+			File fileName=fileChooser.getSelectedFile();
+			if(fileName==null || fileName.getName().equals(""))
+			{	JOptionPane.showMessageDialog(this,"Illegal file name","Illegal file name",JOptionPane.ERROR_MESSAGE);
+			}
+			else
+			{	try
+				{	FileReader fr=new FileReader(fileName);
+					BufferedReader bfr=new BufferedReader(fr);
+					editArea.setText("");
+					while((str=bfr.readLine())!=null)
+					{	editArea.append(str);
+					}
+					this.setTitle(fileName.getName()+" - XDF");
+					statusLabel.setText(" Current opened file："+fileName.getAbsoluteFile());
+					fr.close();
+					isNewFile=false;
+					currentFile=fileName;
+					oldValue=editArea.getText();
+				}
+				catch (IOException ioException)
+				{
+				}
+			}
+		}
+	}//finish open function
+	//save function begin
+	public void save()
+	{
+		editArea.requestFocus();
+		if(isNewFile)
+		{	String str=null;
+			JFileChooser fileChooser=new JFileChooser();
+			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			
+			fileChooser.setDialogTitle("save");
+			int result=fileChooser.showSaveDialog(this);
+			if(result==JFileChooser.CANCEL_OPTION)
+			{	statusLabel.setText("select no file");
+				return;
+			}
+			File saveFileName=fileChooser.getSelectedFile();
+			if(saveFileName==null || saveFileName.getName().equals(""))
+			{	JOptionPane.showMessageDialog(this,"Illegal file name","Illegal file name",JOptionPane.ERROR_MESSAGE);
+			}
+			else 
+			{	try
+				{	FileWriter fw=new FileWriter(saveFileName);
+					BufferedWriter bfw=new BufferedWriter(fw);
+					bfw.write(editArea.getText(),0,editArea.getText().length());
+					bfw.flush();//flushing the buffer
+					bfw.close();
+					isNewFile=false;
+					currentFile=saveFileName;
+					oldValue=editArea.getText();
+					this.setTitle(saveFileName.getName()+" - XDF");
+					statusLabel.setText("Current opened file："+saveFileName.getAbsoluteFile());
+				}
+				catch (IOException ioException)
+				{
+				}
+			}
+		}
+		else
+		{	try
+			{	FileWriter fw=new FileWriter(currentFile);
+				BufferedWriter bfw=new BufferedWriter(fw);
+				bfw.write(editArea.getText(),0,editArea.getText().length());
+				bfw.flush();
+				fw.close();
+			}							
+			catch(IOException ioException)
+			{					
+			}
+		}
+	}//finish the save function
+
+	//save as function begin
+	public void saveas()
+	{
+		editArea.requestFocus();
+		String str=null;
+		JFileChooser fileChooser=new JFileChooser();
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		
+		fileChooser.setDialogTitle("save as");
+		int result=fileChooser.showSaveDialog(this);
+		if(result==JFileChooser.CANCEL_OPTION)
+		{	statusLabel.setText("　select no file");
+			return;
+		}				
+		File saveFileName=fileChooser.getSelectedFile();
+		if(saveFileName==null||saveFileName.getName().equals(""))
+		{	JOptionPane.showMessageDialog(this,"Illegal file name","Illegal file name",JOptionPane.ERROR_MESSAGE);
+		}	
+		else 
+		{	try
+			{	FileWriter fw=new FileWriter(saveFileName);
+				BufferedWriter bfw=new BufferedWriter(fw);
+				bfw.write(editArea.getText(),0,editArea.getText().length());
+				bfw.flush();
+				fw.close();
+				oldValue=editArea.getText();
+				this.setTitle(saveFileName.getName()+"  - XDF");
+				statusLabel.setText("　Current opened file:"+saveFileName.getAbsoluteFile());
+			}						
+			catch(IOException ioException)
+			{					
+			}				
+		}
+	}//finish saveas function
+	
+	//undo function begin
+	public void undo()
+	{
+		editArea.requestFocus();
+		if(undo.canUndo())
+		{	try
+			{	undo.undo();
+			}
+			catch (CannotUndoException ex)
+			{	System.out.println("Unable to undo:" + ex);
+				//ex.printStackTrace();
+			}
+		}
+		if(!undo.canUndo())
+			{	editMenu_Undo.setEnabled(false);
+			}
+	}//undo function finished
+	
 	//Method to implement the "documentlistener" interface (related to undo operation) 
-	public void removeUpdate(DocumentEvent e){}
-	public void insertUpdate(DocumentEvent e){}
-	public void changedUpdate(DocumentEvent e){}
+	public void removeUpdate(DocumentEvent e)
+	{
+		editMenu_Undo.setEnabled(true);
+	}
+	public void insertUpdate(DocumentEvent e)
+	{
+		editMenu_Undo.setEnabled(true);
+	}
+	public void changedUpdate(DocumentEvent e)
+	{
+		editMenu_Undo.setEnabled(true);
+	}
 
 	//Implementation of the interface undoableeditlistener class undohandler (related to undo operation)
 	class UndoHandler implements UndoableEditListener
-	{	public void undoableEditHappened(UndoableEditEvent uee){}
+	{	public void undoableEditHappened(UndoableEditEvent uee)
+	{
+		undo.addEdit(uee.getEdit());
+	}
 	}
 
 }
