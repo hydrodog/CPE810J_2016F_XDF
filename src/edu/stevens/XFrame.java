@@ -328,11 +328,11 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 	    jToolBar1.add(jButton4, null);
 	    jToolBar1.add(jButton5, null);
 		
-		imageIcon1 = new ImageIcon(XFrame.class.getResource("new.gif"));
-	    imageIcon2 = new ImageIcon(XFrame.class.getResource("open.gif"));
-	    imageIcon3 = new ImageIcon(XFrame.class.getResource("save.gif"));
-	    imageIcon4 = new ImageIcon(XFrame.class.getResource("saveAs.gif"));
-	    imageIcon5 = new ImageIcon(XFrame.class.getResource("undo.gif"));
+		imageIcon1 = new ImageIcon(XFrame.class.getResource("new.png"));
+	    imageIcon2 = new ImageIcon(XFrame.class.getResource("open.png"));
+	    imageIcon3 = new ImageIcon(XFrame.class.getResource("save.png"));
+	    imageIcon4 = new ImageIcon(XFrame.class.getResource("saveAs.png"));
+	    imageIcon5 = new ImageIcon(XFrame.class.getResource("undo.png"));
 		 
 	    jButton1.setToolTipText("new file");
 	    jButton1.setIcon(null);
