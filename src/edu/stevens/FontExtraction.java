@@ -51,8 +51,7 @@ public class FontExtraction {
 		        	PDFont font = res.getFont(fontName); // Obtaining specific Font Name written in the PDF File.
 		        	System.out.println(font);
 		    	}
-	       }
-		   //System.out.println("Font type"); 
+	       } 
 	   }
 
 }
