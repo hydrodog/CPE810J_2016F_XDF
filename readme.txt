@@ -23,3 +23,7 @@ Information to add this library to your code:
 4. Go to "Libraries" pane and select "Add External JARS.."
 5. Locate the downloaded Library.
 6. Click "Apply" and "OK" you are good to go.
+
+
+We successfully extarcted text and image from the PDF file, but the output is text in bulk and images in bulk. Now we are trying to extarct the extract all the contents for a pdf file.
+ConvertToByteArray class converts the Image extarcted into a byte array, further we will try to convert the whole pdf file into byte array.
