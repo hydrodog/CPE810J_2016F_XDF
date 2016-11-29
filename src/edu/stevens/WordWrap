@@ -3,3 +3,5 @@
 // the name object below should be replaced with the actual object name used in JText.
 
 object.setLineWrap(true);
+object.setWrapStyleWord(true);
+
