@@ -1,4 +1,5 @@
 // one liner that will set the text in the window area. Irrespective of the window size.
 
+// the name object below should be replaced with the actual object name used in JText.
 
 object.setLineWrap(true);
