@@ -1,22 +1,19 @@
 package edu.stevens.XDF._2dGraphics;
 
 /*
- * @author:Jiahui Zhang
+ *@author Jiahui Zhang
  * Draw SVG ellipse
  */
 
 import org.w3c.dom.Element;
 import org.w3c.dom.svg.SVGDocument;
-
 public class Ellipse extends Shape{
-	private String rx,ry,stroke,strokeWidth,color;
+	private String rx,ry;
 	private SVGDocument doc;
-	public Ellipse(String cx,String cy,String rx,String ry,String color,String stroke, String strokeWidth,SVGDocument doc){
-		super(cx,cy,color,doc);
+	public Ellipse(String cx,String cy,String rx,String ry,String color,String stroke, String strokeWidth,String fillOpacity,String strokeOpacity,String opacity,SVGDocument doc){
+		super(cx,cy,color,stroke,strokeWidth,opacity,strokeOpacity,fillOpacity,doc);
 		this.rx = rx;
 		this.ry = ry;
-		this.stroke = stroke;
-		this.strokeWidth = strokeWidth;
 	}	
 	public Element paint() {
 		// Create the ellipse
@@ -27,6 +24,9 @@ public class Ellipse extends Shape{
 		ellipse.setAttributeNS(null, "ry", ry);
 		ellipse.setAttributeNS(null, "stroke", stroke);
 		ellipse.setAttributeNS(null, "stroke-width", strokeWidth);
+		ellipse.setAttributeNS(null, "stroke-opacity", strokeOpacity);
+		ellipse.setAttributeNS(null, "fill-opacity", fillOpacity);
+		ellipse.setAttributeNS(null, "opacity", opacity);
 		ellipse.setAttributeNS(null, "fill", color);
 		return ellipse;	
 	}

@@ -1,0 +1,72 @@
+package edu.stevens.XDF._2dGraphics;
+
+/*
+ *@author Jiahui Zhang
+ * extract attribute of circle with regex
+ */
+import java.util.regex.*;
+
+public class parseCircle {
+	private String Line;
+	private String cx="0",cy="0",fillOpacity="1",opacity = "1",strokeOpacity="1",r="0",fill="black",stroke="none",strokeWidth = "0";
+	public parseCircle(String Line){
+		this.Line = Line;
+	}
+	public void parse(){
+		Pattern p1 = Pattern.compile("[Ss][Tt][Rr][Oo][Kk][Ee] *= *\"([A-Za-z]+) *[;\"]|[Ss][Tt][Rr][Oo][Kk][Ee] *= *\"([Rr][Gg][Bb]\\( *[0-9]* *, *[0-9]* *, *[0-9]* *\\))");
+		Pattern p2 = Pattern.compile("[Ff][Ii][Ll][Ll] *= *\"([Rr][Gg][Bb]\\( *[0-9]* *, *[0-9]* *, *[0-9]* *\\))|[Ff][Ii][Ll][Ll] *= *\"([A-Za-z]+) *[;\"]");
+		Pattern p3 = Pattern.compile("[Ss][Tt][Rr][Oo][Kk][Ee]-[Ww][Ii][Dd][Tt][Hh] *= *\"([0-9]*\\.?[0-9]*)");
+		Pattern p4 = Pattern.compile("cx *= *\"([0-9]*\\.?[0-9]*)\"");
+		Pattern p5 = Pattern.compile("cy *= *\"([0-9]*\\.?[0-9]*)\"");
+		Pattern p6 = Pattern.compile("[^-][Oo][Pp][Aa][Cc][Ii][Tt][Yy] *= *\"([0-9]*\\.?[0-9]*)");
+		Pattern p7 = Pattern.compile("[Ff][Ii][Ll][Ll]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy] *= *\"([0-9]*\\.?[0-9]*)");
+		Pattern p8 = Pattern.compile("[Ss][Tt][Rr][Oo][Kk][Ee]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy] *= *\"([0-9]*\\.?[0-9]*)");
+		Pattern p9 = Pattern.compile("r *= *\"([0-9]*\\.?[0-9]*)\"");
+		Matcher m1 = p1.matcher(Line);
+		Matcher m2 = p2.matcher(Line);
+		Matcher m3 = p3.matcher(Line);
+		Matcher m4 = p4.matcher(Line);
+		Matcher m5 = p5.matcher(Line);
+		Matcher m6 = p6.matcher(Line);
+		Matcher m7 = p7.matcher(Line);
+		Matcher m8 = p8.matcher(Line);
+		Matcher m9 = p9.matcher(Line);
+		if(m1.find()){
+			if(m1.group(1)!=null&&m1.group(2)!=null){
+				stroke = "black";
+				
+			}
+			else if(m1.group(1)!=null){
+				System.out.println("asdasdasdada");
+				stroke = m1.group(1);
+			}
+			else if(m1.group(2)!=null)
+				stroke = m1.group(2);
+		}
+		if(m2.find()){
+			if(m2.group(1)!=null&&m2.group(2)!=null)
+				fill = "black";
+			else if(m2.group(1)!=null)
+				fill = m2.group(1);
+			else if(m2.group(2)!=null)
+				fill = m2.group(2);
+		}
+		if(m3.find())
+			strokeWidth = m3.group(1);
+		if(m4.find())
+			cx = m4.group(1);
+		if(m5.find())
+			cy = m5.group(1);
+		if(m6.find())
+			opacity = m6.group(1);
+		if(m7.find())
+			fillOpacity = m7.group(1);
+		if(m8.find())
+			strokeOpacity = m8.group(1);
+		if(m9.find())
+			r = m9.group(1);
+	}
+	public String toString(){
+		return cx+" "+cy+" "+opacity+" "+fillOpacity+" "+strokeOpacity+" "+r+" "+fill+" "+stroke+" "+strokeWidth+" ";
+	}
+}
