@@ -49,3 +49,19 @@ public class digitalSignature {
 		
 	}
 }
+class Message{
+	private byte [] body;
+	private byte [] signature;
+	Message(byte data[]){
+		body=data;
+	}
+	byte[] getBody(){
+		return body;
+	}
+	byte[] getSignature(){
+		return signature;
+	}
+	void setSignature(byte data[]){
+		signature=data;
+	}
+}
