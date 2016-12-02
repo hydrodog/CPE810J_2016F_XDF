@@ -1,5 +1,5 @@
 /**
- * @author: Lei Tang
+ * @author: Lei Tang, Jingting Zhang
  * 
  * add Menu to realize basic functions CREATE, OPEN, SAVE, EXIT. 
  * add Button to realize the basic functions above. 
@@ -27,7 +27,7 @@ import javax.swing.border.*;
 //define the external features of XDF(window/frame/UI)
 public class XFrame extends JFrame implements ActionListener,DocumentListener
 {	//define menu bar
-	JMenu fileMenu,editMenu,formatMenu,viewMenu,helpMenu;
+	JMenu fileMenu,editMenu,formatMenu,viewMenu,helpMenu,setMenu;
 	//Right click item 
 	JPopupMenu popupMenu;
 	JMenuItem popupMenu_Undo,popupMenu_Cut,popupMenu_Copy,popupMenu_Paste,popupMenu_Delete,popupMenu_SelectAll;
@@ -42,6 +42,8 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 	JCheckBoxMenuItem viewMenu_Status;
 	//item of HELP
 	JMenuItem helpMenu_HelpTopics,helpMenu_AboutXFrame;
+	//item of SET	
+	JMenuItem C1,C2,C3,C4,C5,C6,I1,I2,I3,I4,I5,I6;
 	//text area
 	JTextArea editArea;
 	//status label
@@ -193,6 +195,46 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 
 		helpMenu_AboutXFrame = new JMenuItem("ABOUT"); 
 		helpMenu_AboutXFrame.addActionListener(this);
+		
+		//Create a set menu and menu item and register the event listener
+		setMenu = new JMenu("SETTINGS");
+		JMenu setMenu_Color = new JMenu("BGCOLOR");
+		JMenu setMenu_Image = new JMenu("BGIMAGE");
+		setMenu_Color.addActionListener(this);
+		setMenu_Image.addActionListener(this);
+		
+		C1 = new JMenuItem("Candy Pink");
+		C1.setBackground(Color.pink);
+		C1.addActionListener(this);//Haven't finished yet,tbc
+		C2 = new JMenuItem("Sunny Orange");
+		C2.setBackground(Color.getHSBColor(200,155,64));
+		C2.addActionListener(this);
+		C3 = new JMenuItem("Lemon Yellow");
+		C3.setBackground(Color.getHSBColor(244,121,131));
+		C3.addActionListener(this);
+		C4 = new JMenuItem("Grass Green");
+		C4.setBackground(Color.getHSBColor(238,238,238));
+		C4.addActionListener(this);
+		C5 = new JMenuItem("Tambac Brown");
+		C5.setBackground(Color.getHSBColor(243,249,241));
+		C5.addActionListener(this);
+		C6 = new JMenuItem("Silver Gary");
+		C6.setBackground(Color.getHSBColor(202,86,99));
+		C6.addActionListener(this);
+		
+		//Haven't finished yet,tbc
+		I1 = new JMenuItem("Classic1",new ImageIcon("images/1.jpg"));
+		I1.addActionListener(this);
+		I2 = new JMenuItem("Classic2",new ImageIcon("images/2.jpg"));
+		I2.addActionListener(this);
+		I3 = new JMenuItem("Classic3",new ImageIcon("images/3.jpg"));
+		I3.addActionListener(this);
+		I4 = new JMenuItem("Classic4",new ImageIcon("images/4.jpg"));
+		I4.addActionListener(this);
+		I5 = new JMenuItem("Classic5",new ImageIcon("images/5.jpg"));
+		I5.addActionListener(this);
+		I6 = new JMenuItem("Classic6",new ImageIcon("images/6.jpg"));
+		I6.addActionListener(this);	
 
 		//Add the "file" menu and menu item to the menu bar 
 		menuBar.add(fileMenu); 
@@ -237,6 +279,25 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		helpMenu.add(helpMenu_HelpTopics);
 		helpMenu.addSeparator();
 		helpMenu.add(helpMenu_AboutXFrame);
+		
+		//Add the "set" menu and menu item to the menu bar
+		menuBar.add(setMenu);
+		setMenu_Color.add(C1);
+		setMenu_Color.add(C2);
+		setMenu_Color.add(C3);
+		setMenu_Color.add(C4);
+		setMenu_Color.add(C5);
+		setMenu_Color.add(C6);
+		setMenu_Image.add(I1);
+		setMenu_Image.add(I2);
+		setMenu_Image.add(I3);
+		setMenu_Image.add(I4);
+		setMenu_Image.add(I5);
+		setMenu_Image.add(I6);
+		
+		setMenu.add(setMenu_Color);
+		setMenu.addSeparator();
+		setMenu.add(setMenu_Image);
 				
 		//Add menu bar to window 				
 		this.setJMenuBar(menuBar);
