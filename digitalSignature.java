@@ -44,7 +44,7 @@ public class digitalSignature {
 		}
 	}
 	public void getSigContent(){      //get the content need to be signed 
-	}
+	} 
 	public void digSignature(){      //attached the key pair onto the content
 		
 	}
