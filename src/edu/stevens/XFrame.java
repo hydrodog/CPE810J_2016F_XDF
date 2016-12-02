@@ -555,8 +555,7 @@ class Button5_actionAdapter implements ActionListener {
 					}
 				}
 				System.exit(0);
-				//if(isSave)System.exit(0);
-				//else return;
+			
 			}
 			else if(exitChoose==JOptionPane.NO_OPTION)
 			{	System.exit(0);
@@ -624,19 +623,8 @@ class Button5_actionAdapter implements ActionListener {
 		
 		//undo function begin
 		else if(e.getSource()==editMenu_Undo || e.getSource()==popupMenu_Undo)
-		{	/*editArea.requestFocus();
-			if(undo.canUndo())
-			{	try
-				{	undo.undo();
-				}
-				catch (CannotUndoException ex)
-				{	System.out.println("Unable to undo:" + ex);
-					//ex.printStackTrace();
-				}
-			}
-			if(!undo.canUndo())
-				{	editMenu_Undo.setEnabled(false);
-				}*/undo();
+		{	
+			undo();
 		}//finish undo function
 		
 		//cut function
@@ -708,8 +696,7 @@ class Button5_actionAdapter implements ActionListener {
 				//time and date
 				else if(e.getSource()==editMenu_TimeDate)
 				{	editArea.requestFocus();
-					//SimpleDateFormat currentDateTime=new SimpleDateFormat("HH:mmyyyy-MM-dd");
-					//editArea.insert(currentDateTime.format(new Date()),editArea.getCaretPosition());
+					
 					Calendar rightNow=Calendar.getInstance();
 					Date date=rightNow.getTime();
 					editArea.insert(date.toString(),editArea.getCaretPosition());
