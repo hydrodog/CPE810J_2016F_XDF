@@ -1,6 +1,6 @@
-package test;
+package edu.stevens.XDF._2dGraphics;
 /*
- * @author:
+ * @author:Bonan Chen
  * Read in SVG file and save the file into string varible.
  * TODO: create a class to parse SVG file. Then according to the parsed information, draw SVG file.
  */

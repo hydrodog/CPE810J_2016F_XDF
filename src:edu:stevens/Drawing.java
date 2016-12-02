@@ -1,6 +1,6 @@
-package test;
+package edu.stevens.XDF._2dGraphics;
 /*
- * @author:
+ * @author:Bonan Chen
  * Create a JFrame to display shapes.
  */
 import javax.swing.*;
