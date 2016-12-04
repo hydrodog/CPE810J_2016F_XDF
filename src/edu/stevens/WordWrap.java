@@ -3,7 +3,7 @@
 	TextWrapping code.
 */
 
-package WordWrap;
+package WordWrap;  // Package name
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -14,7 +14,7 @@ public class WordWrap extends JPanel {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;   //   Auto-Generated
 
 	public WordWrap() {
         initializeUI();
@@ -26,13 +26,13 @@ public class WordWrap extends JPanel {
 
         JTextArea textArea = new JTextArea(600, 600);
         
-        textArea.setMargin( new Insets(50,50,50,50) );
+        textArea.setMargin( new Insets(50,50,50,50) );   // Insets will make gaps between text window and outer window. Top, Right, Down, Left
 
-        textArea.setOpaque(true);
+        textArea.setOpaque(true);      // Opacity is set True. So we can see the 
         textArea.setBackground(Color.white);
         textArea.setBorder(
             BorderFactory.createTitledBorder("Type Below"));
-        JTextField tfield1 = new JTextField(10);   
+        JTextField tfield1 = new JTextField(100);   
         tfield1.setBorder(
             BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED, Color.black, Color.red), "JTextField"));
                 
@@ -43,9 +43,9 @@ public class WordWrap extends JPanel {
        
         textArea.setLineWrap(true);      
         textArea.setWrapStyleWord(true);
-        JScrollPane scrollPane = new JScrollPane(textArea);
+        JScrollPane scrollPane = new JScrollPane(textArea); //  Take out this code if it is already in the Application.
 
-        this.add(scrollPane, BorderLayout.CENTER);
+        this.add(scrollPane, BorderLayout.CENTER); //  Take out this code if it is already in the Application.
     }
 
     public static void showFrame() {
