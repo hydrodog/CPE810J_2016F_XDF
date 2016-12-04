@@ -18,8 +18,10 @@ public class WordWrap extends JPanel {
         this.setPreferredSize(new Dimension(400, 200));
 
         JTextArea textArea = new JTextArea(5, 40);
+	    
+	textArea.setMargin( new Insets(20,20,20,20) );
 
-        String text = "I believe that we are who we choose to be. Nobody’s going to come and save you, you’ve got to save yourself. Nobody’s going to give you anything. You’ve got to go out and fight for it. Nobody knows what you want except for you. And nobody will be as sorry as you if you don’t get it. So don’t give up on your dreams.";
+        String text = "I believe that we are who we choose to be. Nobodyâ€™s going to come and save you, youâ€™ve got to save yourself. Nobodyâ€™s going to give you anything. Youâ€™ve got to go out and fight for it. Nobody knows what you want except for you. And nobody will be as sorry as you if you donâ€™t get it. So donâ€™t give up on your dreams.";
         
         textArea.setText(text);
         textArea.setFont(new Font("Calibri", Font.ITALIC, 18));
