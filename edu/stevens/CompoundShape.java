@@ -1,6 +1,6 @@
 package edu.stevens;
 /*
- * @author:
+ * @author:Yujie Ren
  * According to shape information of parsed SVG file, compound all shapes. 
  * Draw the compound shapes.
  */

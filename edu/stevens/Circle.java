@@ -1,7 +1,7 @@
 package edu.stevens;
 
 /*
- * @author:
+ * @author:Jiahui Zhang
  * Draw SVG circle
  */
 import org.w3c.dom.Element;

@@ -1,5 +1,6 @@
 package edu.stevens;
 /*
+ * @author:Bonan Chen
  * extract attributes of rectangle with regex
  */
 import java.util.regex.*;

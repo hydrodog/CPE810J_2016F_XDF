@@ -1,7 +1,7 @@
 package edu.stevens;
 
 /*
- * @author:
+ * @author:Jiahui Zhang
  * Draw SVG rectangle
  */
 import org.w3c.dom.Element;

@@ -1,7 +1,7 @@
 package edu.stevens;
 
 /*
- * @author:
+ * @author:Yujie Ren
  * Draw SVG polygon
  */
 import org.w3c.dom.Element;

@@ -1,5 +1,6 @@
 package edu.stevens;
 /*
+ * @author:Bonan Chen
  * extract attribute of ellipse with regex
  */
 import java.util.regex.*;

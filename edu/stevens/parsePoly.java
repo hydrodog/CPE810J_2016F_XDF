@@ -1,5 +1,6 @@
 package edu.stevens;
 /*
+ * @author:Bonan Chen
  * extract attribute of path with regex
  */
 import java.util.regex.*;

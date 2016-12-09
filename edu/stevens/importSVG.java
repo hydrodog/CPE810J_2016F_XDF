@@ -1,6 +1,6 @@
 package edu.stevens;
 /*
- * @author:
+ * @author:Yujie Ren
  * Read in SVG file and parse the attributes of SVG. The class can only parse rectangle,circle,ellipse,and path.
  * TODO: parse more shapes in SVG.
  */

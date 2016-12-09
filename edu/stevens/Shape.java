@@ -1,6 +1,6 @@
 package edu.stevens;
 /*
- * @author:
+ * @author:Jiahui Zhang
  * Create more shapes(such as circle, line, rectangle...)
  * TODO: create linear class, text class...
  */

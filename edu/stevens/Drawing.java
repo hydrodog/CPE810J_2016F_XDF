@@ -1,6 +1,6 @@
 package edu.stevens;
 /*
- * @author:
+ * @author:Yujie Ren
  * Create a JFrame to display shapes.
  */
 import javax.swing.*;
