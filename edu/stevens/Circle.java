@@ -1,6 +1,6 @@
 package edu.stevens;
 
-/* feel this shit
+/*
  * @author:
  * Draw SVG circle
  */
