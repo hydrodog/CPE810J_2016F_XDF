@@ -1,0 +1,47 @@
+
+mainmenu.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bg
+  rotate: false
+  xy: 1, 1
+  size: 422, 483
+  orig: 422, 483
+  offset: 0, 0
+  index: -1
+button3
+  rotate: false
+  xy: 425, 442
+  size: 167, 42
+  orig: 167, 42
+  offset: 0, 0
+  index: -1
+button2
+  rotate: false
+  xy: 425, 399
+  size: 167, 41
+  orig: 167, 41
+  offset: 0, 0
+  index: -1
+button4
+  rotate: false
+  xy: 594, 444
+  size: 168, 40
+  orig: 168, 40
+  offset: 0, 0
+  index: -1
+button1
+  rotate: false
+  xy: 425, 357
+  size: 167, 40
+  orig: 167, 40
+  offset: 0, 0
+  index: -1
+button5
+  rotate: false
+  xy: 594, 396
+  size: 60, 46
+  orig: 60, 46
+  offset: 0, 0
+  index: -1

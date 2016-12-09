@@ -1,0 +1,20 @@
+{
+com.badlogic.gdx.graphics.g2d.BitmapFont:{
+},
+com.badlogic.gdx.graphics.Color: {
+	green: { a: 1, b: 0, g: 1, r: 0 },
+	white: { a: 1, b: 1, g: 1, r: 1 },
+	red: { a: 1, b: 0, g: 0, r: 1 },
+	black: { a: 1, b: 0, g: 0, r: 0 }
+},
+com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+    button1: { down: button1, up: button1},
+	button2: { down: button2, up: button2},
+	button3: { down: button3, up: button3},
+	button4: { down: button4, up: button4},
+	
+	button5: { down: button5, up: button5},
+	
+}
+
+}
