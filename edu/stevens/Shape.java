@@ -1,4 +1,4 @@
-package edu.stevens;
+package edu.stevens.XDF._2dgraphics;
 /*
  * @author:
  * Create more shapes(such as circle, line, rectangle...)
@@ -8,9 +8,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.svg.SVGDocument;
 
 public abstract class Shape {
-    protected String x,y,color,fillOpacity,opacity,strokeOpacity,stroke,strokeWidth;
+    protected String x,y,color,fillOpacity,opacity,strokeOpacity,stroke,strokeWidth,style,transform;
     protected SVGDocument doc;
-	public Shape(String x,String y,String color,String stroke,String strokeWidth,String opacity,String strokeOpacity,String fillOpacity,SVGDocument doc){
+	public Shape(String x,String y,String color,String stroke,String strokeWidth,String opacity,String strokeOpacity,String fillOpacity,String style,String transform,SVGDocument doc){
 		this.x = x;
 		this.y = y;
 		this.color = color;
@@ -20,6 +20,8 @@ public abstract class Shape {
 		this.fillOpacity = fillOpacity;
 		this.strokeOpacity = strokeOpacity;
 		this.doc = doc;    
+		this.style = style;
+		this.transform = transform;
 	}
 	public abstract Element paint();
 }

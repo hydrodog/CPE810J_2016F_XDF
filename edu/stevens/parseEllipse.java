@@ -1,26 +1,29 @@
-package edu.stevens;
+package edu.stevens.XDF._2dgraphics;
 /*
  * extract attribute of ellipse with regex
  */
 import java.util.regex.*;
 
 public class parseEllipse extends parseSVG {
-	private String cx="0",cy="0",fillOpacity="1",opacity = "1",strokeOpacity="1",rx="0",ry="0",fill="black",stroke="none",strokeWidth = "0";
+	private String cx="0",cy="0",rx="0",ry="0";
 	public parseEllipse(String Line){
 		super(Line);
 	}
+	public parseEllipse(String Line,String stroke,String fill,String strokeWidth,String opacity ,String fillOpacity,String strokeOpacity,String transform,String style){
+		super(Line,stroke,fill,strokeWidth,opacity,fillOpacity,strokeOpacity,transform,style);
+	}
 	public void parse(){
-		Pattern p1 = Pattern.compile("[Ss][Tt][Rr][Oo][Kk][Ee]: *([A-Za-z]+) *[;\"]|[Ss][Tt][Rr][Oo][Kk][Ee]: *([Rr][Gg][Bb]\\( *[0-9]* *, *[0-9]* *, *[0-9]* *\\))");
-		Pattern p2 = Pattern.compile("[Ff][Ii][Ll][Ll] *: *([Rr][Gg][Bb]\\( *[0-9]* *, *[0-9]* *, *[0-9]* *\\))|[Ff][Ii][Ll][Ll]: *([A-Za-z]+) *[;\"]");
-		Pattern p3 = Pattern.compile("[Ss][Tt][Rr][Oo][Kk][Ee]-[Ww][Ii][Dd][Tt][Hh]: *([0-9]*\\.?[0-9]*)");
-		Pattern p4 = Pattern.compile("cx *= *\"([0-9]*\\.?[0-9]*)\"");
-		Pattern p5 = Pattern.compile("cy *= *\"([0-9]*\\.?[0-9]*)\"");
-		Pattern p6 = Pattern.compile("[^-][Oo][Pp][Aa][Cc][Ii][Tt][Yy] *: *([0-9]*\\.?[0-9]*)");
-		Pattern p7 = Pattern.compile("[Ff][Ii][Ll][Ll]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy]: *([0-9]*\\.?[0-9]*)");
-		Pattern p8 = Pattern.compile("[Ss][Tt][Rr][Oo][Kk][Ee]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy]: *([0-9]*\\.?[0-9]*)");
-		Pattern p9 = Pattern.compile("rx *= *\"([0-9]*\\.?[0-9]*)\"");
-		Pattern p10 = Pattern.compile("ry *= *\"([0-9]*\\.?[0-9]*)\"");
-		
+		Pattern p1 = Pattern.compile("\\s[Ss][Tt][Rr][Oo][Kk][Ee] *= *\"([^\"<>]*)\"");
+		Pattern p2 = Pattern.compile("\\s[Ff][Ii][Ll][Ll] *= *\"([^\"<>]*)\"");
+		Pattern p3 = Pattern.compile("\\s[Ss][Tt][Rr][Oo][Kk][Ee]-[Ww][Ii][Dd][Tt][Hh] *= *\"([^\"<>]*)\"");
+		Pattern p4 = Pattern.compile("\\scx *= *\"([^\"<>]*)\"");
+		Pattern p5 = Pattern.compile("\\scy *= *\"([^\"<>]*)\"");
+		Pattern p6 = Pattern.compile("\\s[^\\-][Oo][Pp][Aa][Cc][Ii][Tt][Yy] *= *\"([^\"<>]*)\"");
+		Pattern p7 = Pattern.compile("\\s[Ff][Ii][Ll][Ll]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy] *= *\"([^\"<>]*)\"");
+		Pattern p8 = Pattern.compile("\\s[Ss][Tt][Rr][Oo][Kk][Ee]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy] *= *\"([^\"<>]*)\"");
+		Pattern p9 = Pattern.compile("\\srx *= *\"([^\"<>]*)\"");
+		Pattern p10 = Pattern.compile("\\sry *= *\"([^\"<>]*)\"");
+		Pattern p11 = Pattern.compile("\\sstyle *= *\"([^\"<>]*)\"");
 		Matcher m1 = p1.matcher(Line);
 		Matcher m2 = p2.matcher(Line);
 		Matcher m3 = p3.matcher(Line);
@@ -31,22 +34,11 @@ public class parseEllipse extends parseSVG {
 		Matcher m8 = p8.matcher(Line);
 		Matcher m9 = p9.matcher(Line);
 		Matcher m10 = p10.matcher(Line);
-		if(m1.find()){
-			if(m1.group(1)!=null&&m1.group(2)!=null)
-				stroke = "black";
-			else if(m1.group(1)!=null)
-				stroke = m1.group(1);
-			else if(m1.group(2)!=null)
-				stroke = m1.group(2);
-		}
-		if(m2.find()){
-			if(m2.group(1)!=null&&m2.group(2)!=null)
-				fill = "black";
-			else if(m2.group(1)!=null)
-				fill = m2.group(1);
-			else if(m2.group(2)!=null)
-				fill = m2.group(2);
-		}
+		Matcher m11 = p11.matcher(Line);
+		if(m1.find())
+			stroke = m1.group(1);
+		if(m2.find())
+			fill = m2.group(1);
 		if(m3.find())
 			strokeWidth = m3.group(1);
 		if(m4.find())
@@ -63,6 +55,8 @@ public class parseEllipse extends parseSVG {
 			rx = m9.group(1);
 		if(m10.find())
 			ry = m10.group(1);
+		if(m11.find())
+			style = m11.group(1);
 	}
 	public String getCx(){
 		return cx;
@@ -94,7 +88,13 @@ public class parseEllipse extends parseSVG {
 	public String getStrokeWidth(){
 		return strokeWidth;
 	}
+	public String getStyle(){
+		return style;
+	}
+	public String getTransform(){
+		return transform;
+	}
 	public String toString(){
-		return cx+" "+cy+" "+opacity+" "+fillOpacity+" "+strokeOpacity+" "+rx+" "+ry+" "+fill+" "+stroke+" "+strokeWidth+" ";
+		return style+" "+cx+" "+cy+" "+opacity+" "+fillOpacity+" "+strokeOpacity+" "+rx+" "+ry+" "+fill+" "+stroke+" "+strokeWidth+" ";
 	}
 }

@@ -1,4 +1,4 @@
-package edu.stevens;
+package edu.stevens.XDF._2dgraphics;
 
 /*
  * @author:
@@ -7,9 +7,9 @@ package edu.stevens;
 import org.w3c.dom.Element;
 import org.w3c.dom.svg.SVGDocument;
 public class Polygon {
-	private String points,stroke,strokeWidth,color,fillRule,fillOpacity,strokeOpacity,opacity;
+	private String points,stroke,strokeWidth,color,fillRule,fillOpacity,strokeOpacity,opacity,style,transform;
 	private SVGDocument doc;
-	public Polygon(String points,String color,String stroke, String strokeWidth,String strokeOpacity,String fillRule,String fillOpacity,String opacity,SVGDocument doc){
+	public Polygon(String points,String color,String stroke, String strokeWidth,String strokeOpacity,String fillRule,String fillOpacity,String opacity,String style,String transform,SVGDocument doc){
 		this.points = points;
 		this.color = color;
 		this.stroke = stroke;
@@ -19,6 +19,8 @@ public class Polygon {
 		this.fillOpacity = fillOpacity;
 		this.strokeOpacity = strokeOpacity;
 		this.doc = doc;
+		this.style = style;
+		this.transform = transform;
 	}	
 	public Element paint() {
 		// Create the polygon
@@ -31,6 +33,8 @@ public class Polygon {
 		polygon.setAttributeNS(null, "fill-opacity", fillOpacity);
 		polygon.setAttributeNS(null, "stroke-opacity", strokeOpacity);
 		polygon.setAttributeNS(null, "opacity", opacity);
+		polygon.setAttributeNS(null, "style", style);
+		polygon.setAttributeNS(null, "transform", transform);
 		return polygon;	
 	}
 }

@@ -1,4 +1,4 @@
-package edu.stevens;
+package edu.stevens.XDF._2dgraphics;
 
 /*
  * @author:
@@ -7,9 +7,9 @@ package edu.stevens;
 import org.w3c.dom.Element;
 import org.w3c.dom.svg.SVGDocument;
 public class Line {
-	private String x,y,stroke,LastX,LastY,strokeWidth;
+	private String x,y,stroke,LastX,LastY,strokeWidth,style,transform;
 	private SVGDocument doc;
-	public Line(String x,String y,String LastX, String LastY,String stroke,String strokeWidth, SVGDocument doc){
+	public Line(String x,String y,String LastX, String LastY,String stroke,String strokeWidth,String style,String transform, SVGDocument doc){
 		this.x = x;
 		this.y = y;
 		this.stroke = stroke;
@@ -17,6 +17,8 @@ public class Line {
 		this.LastY = LastY;
 		this.strokeWidth = strokeWidth;
 		this.doc = doc;
+		this.style = style;
+		this.transform = transform;
     }
 	
     public Element paint() {
@@ -28,6 +30,8 @@ public class Line {
 		line.setAttributeNS(null, "y2", LastY);
 		line.setAttributeNS(null, "stroke", stroke);
 		line.setAttributeNS(null, "stroke-width", strokeWidth);
+		line.setAttributeNS(null, "style", style);
+		line.setAttributeNS(null, "transform", transform);
 		return line;
 	}
 }

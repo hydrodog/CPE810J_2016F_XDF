@@ -1,23 +1,27 @@
-package edu.stevens;
+package edu.stevens.XDF._2dgraphics;
 /*
  * extract attribute of path with regex
  */
 import java.util.regex.*;
 
 public class parsePoly extends parseSVG{
-	private String points="none",stroke="black",fill="black",strokeWidth="0",fillOpacity="1",strokeOpacity="1",opacity="1",fillRule = "nonzero";
+	private String points="none",fillRule = "nonzero";
 	public parsePoly(String Line){
 		super(Line);
 	}
+	public parsePoly(String Line,String stroke,String fill,String strokeWidth,String opacity ,String fillOpacity,String strokeOpacity,String transform,String style){
+		super(Line,stroke,fill,strokeWidth,opacity,fillOpacity,strokeOpacity,transform,style);	
+	}
 	public void parse(){
-		Pattern p1 = Pattern.compile("points *= *\"([0-9\\.\\s,]*)\"");
-		Pattern p2 = Pattern.compile("[Ff][Ii][Ll][Ll] *: *([Rr][Gg][Bb]\\( *[0-9]* *, *[0-9]* *, *[0-9]* *\\))|[Ff][Ii][Ll][Ll]: *([A-Za-z]+) *[;\"]");
-		Pattern p3 = Pattern.compile("[Ss][Tt][Rr][Oo][Kk][Ee]-[Ww][Ii][Dd][Tt][Hh]: *([0-9]*\\.?[0-9]*)");
-		Pattern p5 = Pattern.compile("[^-][Oo][Pp][Aa][Cc][Ii][Tt][Yy] *: *([0-9]*\\.?[0-9]*)");
-		Pattern p6 = Pattern.compile("[Ff][Ii][Ll][Ll]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy]: *([0-9]*\\.?[0-9]*)");
-		Pattern p7 = Pattern.compile("[Ss][Tt][Rr][Oo][Kk][Ee]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy]: *([0-9]*\\.?[0-9]*)");
-		Pattern p4 = Pattern.compile("[Ss][Tt][Rr][Oo][Kk][Ee]: *([A-Za-z]+) *[;\"]|[Ss][Tt][Rr][Oo][Kk][Ee]: *([Rr][Gg][Bb]\\( *[0-9]* *, *[0-9]* *, *[0-9]* *\\))");
-		Pattern p8 = Pattern.compile("[Ff][Ii][Ll][Ll]-[Rr][Uu][Ll][Ee]: *([A-Za-z]+) *[;\"]");
+		Pattern p1 = Pattern.compile("\\spoints *= *\"([^\"<>]*)\"");
+		Pattern p2 = Pattern.compile("\\s[Ff][Ii][Ll][Ll] *= *\"([^\"<>]*)\"");
+		Pattern p3 = Pattern.compile("\\s[Ss][Tt][Rr][Oo][Kk][Ee]-[Ww][Ii][Dd][Tt][Hh] *= *\"([^\"<>]*)\"");
+		Pattern p5 = Pattern.compile("\\s[^-][Oo][Pp][Aa][Cc][Ii][Tt][Yy] *= *\"([^\"<>]*)\"");
+		Pattern p6 = Pattern.compile("\\s[Ff][Ii][Ll][Ll]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy] *= *\"([^\"<>]*)\"");
+		Pattern p7 = Pattern.compile("\\s[Ss][Tt][Rr][Oo][Kk][Ee]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy] *= *\"([^\"<>]*)\"");
+		Pattern p4 = Pattern.compile("\\s[Ss][Tt][Rr][Oo][Kk][Ee] *= *\"([^\"<>]*)\"");
+		Pattern p8 = Pattern.compile("\\s[Ff][Ii][Ll][Ll]-[Rr][Uu][Ll][Ee] *= *\"([^\"<>]*)\"");
+		Pattern p9 = Pattern.compile("\\sstyle *= *\"([^\"<>]*)\"");
 		Matcher m1 = p1.matcher(Line);
 		Matcher m2 = p2.matcher(Line);
 		Matcher m3 = p3.matcher(Line);
@@ -26,26 +30,15 @@ public class parsePoly extends parseSVG{
 		Matcher m6 = p6.matcher(Line);
 		Matcher m7 = p7.matcher(Line);
 		Matcher m8 = p8.matcher(Line);
+		Matcher m9 = p9.matcher(Line);
 		if(m1.find())
 			points = m1.group(1);
-		if(m2.find()){
-			if(m2.group(1)!=null&&m2.group(2)!=null)
-				fill = "black";
-			else if(m2.group(1)!=null)
-				fill = m2.group(1);
-			else if(m2.group(2)!=null)
-				fill = m2.group(2);
-		}
+		if(m2.find())
+			fill = m2.group(1);
 		if(m3.find())
 			strokeWidth = m3.group(1);
-		if(m4.find()){
-			if(m4.group(1)!=null&&m4.group(2)!=null)
-				stroke = "black";
-			else if(m4.group(1)!=null)
-				stroke = m4.group(1);
-			else if(m4.group(2)!=null)
-				stroke = m4.group(2);
-		}
+		if(m4.find())
+			stroke = m4.group(1);
 		if(m5.find())
 			opacity = m5.group(1);
 		if(m6.find())
@@ -54,6 +47,8 @@ public class parsePoly extends parseSVG{
 			strokeOpacity = m7.group(1);
 		if(m8.find())
 			fillRule = m8.group(1);
+		if(m9.find())
+			style = m9.group(1);
 	}
 	public String getPoints(){
 		return points;
@@ -79,7 +74,13 @@ public class parsePoly extends parseSVG{
 	public String getFillRule(){
 		return fillRule;
 	}
+	public String getStyle(){
+		return style;
+	}
+	public String getTransform(){
+		return transform;
+	}
 	public String toString(){ 
-		return "impoly"+" "+points+" "+stroke+" "+fill+" "+strokeWidth+" "+fillOpacity+" "+strokeOpacity+" "+opacity+" "+fillRule;
+		return "impoly"+" "+style+" "+points+" "+stroke+" "+fill+" "+strokeWidth+" "+fillOpacity+" "+strokeOpacity+" "+opacity+" "+fillRule;
 	}
 }

@@ -1,4 +1,4 @@
-package edu.stevens;
+package edu.stevens.XDF._2dgraphics;
 
 /*
  * @author:
@@ -8,8 +8,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.svg.SVGDocument;
 public class Circle extends Shape{
 	private String r;
-	public Circle(String cx,String cy,String r, String color, String stroke, String strokeWidth, String strokeOpacity, String fillOpacity, String opacity,  SVGDocument doc){
-		super(cx,cy,color,stroke,strokeWidth,opacity,strokeOpacity,fillOpacity,doc);
+	public Circle(String cx,String cy,String r, String color, String stroke, String strokeWidth, String strokeOpacity, String fillOpacity, String opacity,String style,String transform ,SVGDocument doc){
+		super(cx,cy,color,stroke,strokeWidth,opacity,strokeOpacity,fillOpacity,style,transform,doc);
 		this.r = r;
 	}	
 	public Element paint() {
@@ -24,6 +24,8 @@ public class Circle extends Shape{
 		circle.setAttributeNS(null, "fill-opacity", fillOpacity);
 		circle.setAttributeNS(null, "stroke-opacity", strokeOpacity);
 		circle.setAttributeNS(null, "opacity", opacity);
+		circle.setAttributeNS(null, "style", style);
+		circle.setAttributeNS(null, "transform", transform);
 		return circle;	
 	}
 }

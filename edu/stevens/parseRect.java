@@ -1,13 +1,16 @@
-package edu.stevens;
+package edu.stevens.XDF._2dgraphics;
 /*
  * extract attributes of rectangle with regex
  */
 import java.util.regex.*;
 
 public class parseRect extends parseSVG{
-	private String x="0",y="0",opacity="1",width="0",height="0",fillOpacity="1",strokeOpacity="1",rx="0",ry="0",fill="black",stroke="none",strokeWidth = "0";
+	private String x="0",y="0",width="0",height="0",rx="0",ry="0";
 	public parseRect(String Line){
 		super(Line);
+	}
+	public parseRect(String Line,String stroke,String fill,String strokeWidth,String opacity ,String fillOpacity,String strokeOpacity,String transform,String style){
+		super(Line,stroke,fill,strokeWidth,opacity,fillOpacity,strokeOpacity,transform,style);	
 	}
 	public String getX(){
 		return x;
@@ -45,19 +48,26 @@ public class parseRect extends parseSVG{
 	public String getStrokewidth(){
 		return strokeWidth;
 	}
+	public String getStyle(){
+		return style;
+	}
+	public String getTransform(){
+		return transform;
+	}
 	public void parse(){
-		Pattern p1 = Pattern.compile("width *= *\"([0-9]*\\.?[0-9]*)\"");
-		Pattern p2 = Pattern.compile("[Ff][Ii][Ll][Ll] *: *([Rr][Gg][Bb]\\( *[0-9]* *, *[0-9]* *, *[0-9]* *\\))|[Ff][Ii][Ll][Ll]: *([A-Za-z]+) *[;\"]");
-		Pattern p3 = Pattern.compile("[Ss][Tt][Rr][Oo][Kk][Ee]-[Ww][Ii][Dd][Tt][Hh]: *([0-9]*\\.?[0-9]*)");
-		Pattern p4 = Pattern.compile("x *= *\"([0-9]*\\.?[0-9]*)\"");
-		Pattern p5 = Pattern.compile("y *= *\"([0-9]*\\.?[0-9]*)\"");
-		Pattern p6 = Pattern.compile("[^-][Oo][Pp][Aa][Cc][Ii][Tt][Yy] *: *([0-9]*\\.?[0-9]*)");
-		Pattern p7 = Pattern.compile("[Ff][Ii][Ll][Ll]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy]: *([0-9]*\\.?[0-9]*)");
-		Pattern p8 = Pattern.compile("[Ss][Tt][Rr][Oo][Kk][Ee]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy]: *([0-9]*\\.?[0-9]*)");
-		Pattern p9 = Pattern.compile("rx *= *\"([0-9]*\\.?[0-9]*)\"");
-		Pattern p10 = Pattern.compile("ry *= *\"([0-9]*\\.?[0-9]*)\"");
-		Pattern p11 = Pattern.compile("[Ss][Tt][Rr][Oo][Kk][Ee]: *([A-Za-z]+) *[;\"]|[Ss][Tt][Rr][Oo][Kk][Ee]: *([Rr][Gg][Bb]\\( *[0-9]* *, *[0-9]* *, *[0-9]* *\\))");
-		Pattern p12 = Pattern.compile("height *= *\"([0-9]*\\.?[0-9]*)\"");
+		Pattern p1 = Pattern.compile("\\swidth *= *\"([^\"<>]*)\"");
+		Pattern p2 = Pattern.compile("\\s[Ff][Ii][Ll][Ll] *= *\"([^\"<>]*)\"");
+		Pattern p3 = Pattern.compile("\\s[Ss][Tt][Rr][Oo][Kk][Ee]-[Ww][Ii][Dd][Tt][Hh] *= *\"([^\"<>]*)\"");
+		Pattern p4 = Pattern.compile("\\sx *= *\"([^\"<>]*)\"");
+		Pattern p5 = Pattern.compile("\\sy *= *\"([^\"<>]*)\"");
+		Pattern p6 = Pattern.compile("\\s[^\\-][Oo][Pp][Aa][Cc][Ii][Tt][Yy] *= *\"([^\"<>]*)\"");
+		Pattern p7 = Pattern.compile("\\s[Ff][Ii][Ll][Ll]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy] *= *\"([^\"<>]*)\"");
+		Pattern p8 = Pattern.compile("\\s[Ss][Tt][Rr][Oo][Kk][Ee]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy] *= *\"([^\"<>]*)\"");
+		Pattern p9 = Pattern.compile("\\srx *= *\"([^\"<>]*)\"");
+		Pattern p10 = Pattern.compile("\\sry *= *\"([^\"<>]*)\"");
+		Pattern p11 = Pattern.compile("\\s[Ss][Tt][Rr][Oo][Kk][Ee] *= *\"([^\"<>]*)\"");
+		Pattern p12 = Pattern.compile("\\sheight *= *\"([^\"<>]*)\"");
+		Pattern p13 = Pattern.compile("\\sstyle *= *\"([^\"<>]*)\"");
 		Matcher m1 = p1.matcher(Line);
 		Matcher m2 = p2.matcher(Line);
 		Matcher m3 = p3.matcher(Line);
@@ -70,15 +80,11 @@ public class parseRect extends parseSVG{
 		Matcher m10 = p10.matcher(Line);
 		Matcher m11 = p11.matcher(Line);
 		Matcher m12 = p12.matcher(Line);
+		Matcher m13 = p13.matcher(Line);
 		if(m1.find())
 			width = m1.group(1);
 		if(m2.find()){
-			if(m2.group(1)!=null&&m2.group(2)!=null)
-				fill = "black";
-			else if(m2.group(1)!=null)
-				fill = m2.group(1);
-			else if(m2.group(2)!=null)
-				fill = m2.group(2);
+			fill = m2.group(1);
 		}
 		if(m3.find())
 			strokeWidth = m3.group(1);
@@ -96,18 +102,14 @@ public class parseRect extends parseSVG{
 			rx = m9.group(1);
 		if(m10.find())
 			ry = m10.group(1);
-		if(m11.find()){
-			if(m11.group(1)!=null&&m11.group(2)!=null)
-				stroke = "black";
-			else if(m11.group(1)!=null)
-				stroke = m11.group(1);
-			else if(m11.group(2)!=null)
-				stroke = m11.group(2);
-		}
+		if(m11.find())
+		    stroke = m11.group(1);
 		if(m12.find())
 			height = m12.group(1);
+		if(m13.find())
+			style = m13.group(1);
 	}
 	public String toString(){
-		return x+" "+y+" "+opacity+" "+width+" "+height+" "+fillOpacity+" "+strokeOpacity+" "+rx+" "+ry+" "+fill+" "+stroke+" "+strokeWidth+" ";
+		return style+" "+x+" "+y+" "+opacity+" "+width+" "+height+" "+fillOpacity+" "+strokeOpacity+" "+rx+" "+ry+" "+fill+" "+stroke+" "+strokeWidth+" ";
 	}
 }

@@ -4,23 +4,19 @@ package edu.stevens.XDF._2dgraphics;
  */
 import java.util.regex.*;
 
-public class parsePath extends parseSVG{
-	private String d="none";
-	public parsePath(String Line){
+public class parseG extends parseSVG{
+	public parseG(String Line){
 		super(Line);
 	}
-	public parsePath(String Line,String stroke,String fill,String strokeWidth,String opacity ,String fillOpacity,String strokeOpacity,String transform,String style){
-		super(Line,stroke,fill,strokeWidth,opacity,fillOpacity,strokeOpacity,transform,style);	
-	}
 	public void parse(){
-		Pattern p1 = Pattern.compile("\\sd *= *\"([^\"<>]*)\"");
+		Pattern p1 = Pattern.compile("\\s[Tt][Rr][Aa][Nn][Ss][fF][Oo][Rr][Mm] *= *\"([^\"<>]*)\"");
 		Pattern p2 = Pattern.compile("\\s[Ff][Ii][Ll][Ll] *= *\"([^\"<>]*)\"");
 		Pattern p3 = Pattern.compile("\\s[Ss][Tt][Rr][Oo][Kk][Ee]-[Ww][Ii][Dd][Tt][Hh] *= *\"([^\"<>]*)\"");
 		Pattern p4 = Pattern.compile("\\s[Ss][Tt][Rr][Oo][Kk][Ee] *= *\"([^\"<>]*)\"");
 		Pattern p5 = Pattern.compile("\\s[Oo][Pp][Aa][Cc][Ii][Tt][Yy] *= *\"([^\"<>]*)\"");
 		Pattern p6 = Pattern.compile("\\s[Ff][Ii][Ll][Ll]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy] *= *\"([^\"<>]*)\"");
-		Pattern p7 = Pattern.compile("\\s[Ss][Tt][Rr][Oo][Kk][Ee]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy] *= *\"([^\"<>]*)\"");
-		Pattern p8 = Pattern.compile("\\sstyle *= *\"([^\"<>]*)\"");
+		Pattern p7 = Pattern.compile("\\s[Ss][Tt][Rr][Oo][Kk][Ee]-[Oo][Pp][Aa][Cc][Ii][Tt][Yy] *= *\"([0-9]*\\.?[0-9]*)");
+		Pattern p8 = Pattern.compile("\\s[Ss][Tt][Yy][Ll][Ee] *= *\"([^\"<>]*)\"");
 		Matcher m1 = p1.matcher(Line);
 		Matcher m2 = p2.matcher(Line);
 		Matcher m3 = p3.matcher(Line);
@@ -30,7 +26,7 @@ public class parsePath extends parseSVG{
 		Matcher m7 = p7.matcher(Line);
 		Matcher m8 = p8.matcher(Line);
 		if(m1.find())
-			d = m1.group(1);
+			transform = m1.group(1);
 		if(m2.find())
 			fill = m2.group(1);
 		if(m3.find())
@@ -46,8 +42,8 @@ public class parsePath extends parseSVG{
 		if(m8.find())
 			style = m8.group(1);
 	}
-	public String getD(){
-		return d;
+	public String getTransform(){
+		return transform;
 	}
 	public String getStroke(){
 		return stroke;
@@ -67,13 +63,10 @@ public class parsePath extends parseSVG{
 	public String getStrokeOpacity(){
 		return strokeOpacity;
 	}
-	public String getStyle(){
-		return style;
-	}
-	public String getTransform(){
-		return transform;
-	}
+    public String getStyle(){
+    	return style;
+    }
 	public String toString(){
-		return d+stroke+fill+strokeWidth+fillOpacity+strokeOpacity+opacity;
+		return transform+stroke+fill;
 	}
 }

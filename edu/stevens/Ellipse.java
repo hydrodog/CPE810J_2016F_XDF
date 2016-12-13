@@ -1,4 +1,4 @@
-package edu.stevens;
+package edu.stevens.XDF._2dgraphics;
 
 /*
  * @author:
@@ -8,8 +8,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.svg.SVGDocument;
 public class Ellipse extends Shape{
 	private String rx,ry;
-	public Ellipse(String cx,String cy,String rx,String ry,String color,String stroke, String strokeWidth,String fillOpacity,String strokeOpacity,String opacity,SVGDocument doc){
-		super(cx,cy,color,stroke,strokeWidth,opacity,strokeOpacity,fillOpacity,doc);
+	public Ellipse(String cx,String cy,String rx,String ry,String color,String stroke, String strokeWidth,String fillOpacity,String strokeOpacity,String opacity,String style,String transform,SVGDocument doc){
+		super(cx,cy,color,stroke,strokeWidth,opacity,strokeOpacity,fillOpacity,style,transform,doc);
 		this.rx = rx;
 		this.ry = ry;
 	}	
@@ -26,6 +26,9 @@ public class Ellipse extends Shape{
 		ellipse.setAttributeNS(null, "fill-opacity", fillOpacity);
 		ellipse.setAttributeNS(null, "opacity", opacity);
 		ellipse.setAttributeNS(null, "fill", color);
+		ellipse.setAttributeNS(null, "style",style);
+		ellipse.setAttributeNS(null, "transform",transform);
+
 		return ellipse;	
 	}
 }
