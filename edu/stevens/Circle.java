@@ -1,7 +1,7 @@
 package edu.stevens.XDF._2dgraphics;
 
 /*
- * @author:
+ * @author:Jiahui Zhang
  * Draw SVG circle
  */
 import org.w3c.dom.Element;

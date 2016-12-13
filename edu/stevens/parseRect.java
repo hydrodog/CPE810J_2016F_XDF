@@ -1,5 +1,6 @@
 package edu.stevens.XDF._2dgraphics;
 /*
+ * @author:Bonan Chen
  * extract attributes of rectangle with regex
  */
 import java.util.regex.*;

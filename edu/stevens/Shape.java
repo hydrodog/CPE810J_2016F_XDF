@@ -1,6 +1,6 @@
 package edu.stevens.XDF._2dgraphics;
 /*
- * @author:
+ * @author:Jiahui Zhang
  * Create more shapes(such as circle, line, rectangle...)
  * TODO: create linear class, text class...
  */

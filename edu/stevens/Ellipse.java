@@ -1,7 +1,7 @@
 package edu.stevens.XDF._2dgraphics;
 
 /*
- * @author:
+ * @author:Jiahui Zhang
  * Draw SVG ellipse
  */
 import org.w3c.dom.Element;

@@ -1,7 +1,7 @@
 package edu.stevens.XDF._2dgraphics;
 
 /*
- * @author:
+ * @author:Yujie Ren
  * Draw SVG path
  */
 import org.w3c.dom.Element;

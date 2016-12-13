@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 package edu.stevens.XDF._2dgraphics;
 
+=======
+package edu.stevens;
+/*
+ * @author:Bonan Chen
+ */
+>>>>>>> 5c6844d7e2fb9f35d82f0c35d945b469fbbce633
 public abstract class parseSVG {
 	protected String Line,transform="",stroke="none",fill="black",strokeWidth="0",opacity="1",fillOpacity="1",strokeOpacity="1",style = "none";
 	public parseSVG(String Line){
