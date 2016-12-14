@@ -1,5 +1,6 @@
+
 /**
- * @author: Lei Tang， Sihan Wang
+ * @author: Lei Tang， Sihan Wang, Jingting Zhang
  * 
  * add Menu to realize basic functions CREATE, OPEN, SAVE, EXIT. 
  * add Button to realize the basic functions above. 
@@ -9,7 +10,7 @@
 
 
 
-package edu.stevens;
+ package edu.stevens;
  import java.awt.*;
  import java.awt.event.*;
  import java.awt.datatransfer.*;
@@ -794,19 +795,8 @@ class Button6_actionAdapter implements ActionListener {
 		
 		//undo function begin
 		else if(e.getSource()==editMenu_Undo || e.getSource()==popupMenu_Undo)
-		{	/*editArea.requestFocus();
-			if(undo.canUndo())
-			{	try
-				{	undo.undo();
-				}
-				catch (CannotUndoException ex)
-				{	System.out.println("Unable to undo:" + ex);
-					//ex.printStackTrace();
-				}
-			}
-			if(!undo.canUndo())
-				{	editMenu_Undo.setEnabled(false);
-				}*/undo();
+		{	
+		undo();
 		}//finish undo function
 		
 		//cut function
@@ -1211,14 +1201,17 @@ class Button6_actionAdapter implements ActionListener {
 	}
 	
 	//setup single page or double page of xpdf
+	private boolean single = true;
 	public void setpage(){
-		if(PageSetup.SingleOrNot() == true){
+		if(PageSetup.SingleOrNot() == true && single==false){
 			StringBuilder text = new StringBuilder();
 			text.append(oldValue1);
 			text.append("\r\n");
 			text.append(oldValue2);
-			if(text.equals(" ")){
+			if(oldValue1.equals("")&&oldValue2.equals("")){
 				editArea.setText("");
+			}else if(oldValue1.equals("")){
+				editArea.setText(oldValue2);
 			}else{
 				editArea.setText(text.toString());
 			}
@@ -1227,29 +1220,37 @@ class Button6_actionAdapter implements ActionListener {
 			this.validate();
 			this.repaint();
 			System.out.println("SinglePage");
-		}else{
-			String []s = oldValue.split("\\r?\\n");
-			if(s.length > 32){
-				StringBuilder text1 = new StringBuilder();
-				StringBuilder text2 = new StringBuilder();
-				for(int i = 0; i < s.length/2;i++){
-					text1.append(s[i]).append("\r\n");
-					text2.append(s[i + s.length/2]).append("\r\n");
-				}
-				editArea1.setText(text1.toString());
-				editArea2.setText(text2.toString());
+			single=true;
+		}else if(PageSetup.SingleOrNot() == false && single==true){
+			if(oldValue.equals("")){
+				editArea1.setText("");
+				editArea2.setText("");
 			}else{
-				StringBuilder text1 = new StringBuilder();
-				for(int i = 0; i < s.length;i++){
-					text1.append(s[i]).append("\r\n");
+				String []s = oldValue.split("\\r?\\n");
+				if(s.length > 32){
+					StringBuilder text1 = new StringBuilder();
+					StringBuilder text2 = new StringBuilder();
+					for(int i = 0; i < s.length/2;i++){
+						text1.append(s[i]).append("\r\n");
+						text2.append(s[i + s.length/2]).append("\r\n");
+					}
+					editArea1.setText(text1.toString());
+					editArea2.setText(text2.toString());
+				}else{
+					StringBuilder text1 = new StringBuilder();
+					for(int i = 0; i < s.length;i++){
+						text1.append(s[i]).append("\r\n");
+					}
+					editArea1.setText(text1.toString());
+					editArea2.setText("");
 				}
-				editArea1.setText(text1.toString());
 			}
 			this.remove(singlePane);
 			this.add(doublePanel, BorderLayout.CENTER);
 			this.validate();		
 			this.repaint();
 			System.out.println("DoublePage");
+			single = false; 
 		}
 	}
 	
