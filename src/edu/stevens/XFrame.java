@@ -29,7 +29,7 @@ package edu.stevens;
 //define the external features of XDF(window/frame/UI)
 public class XFrame extends JFrame implements ActionListener,DocumentListener
 {	//define menu bar
-	JMenu fileMenu,editMenu,formatMenu,viewMenu,helpMenu,pageMenu;
+	JMenu fileMenu,editMenu,formatMenu,viewMenu,helpMenu,pageMenu,setMenu;
 	//Right click item 
 	JPopupMenu popupMenu;
 	JMenuItem popupMenu_Undo,popupMenu_Cut,popupMenu_Copy,popupMenu_Paste,popupMenu_Delete,popupMenu_SelectAll;
@@ -44,6 +44,8 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 	JCheckBoxMenuItem viewMenu_Status;
 	//item of HELP
 	JMenuItem helpMenu_HelpTopics,helpMenu_AboutXFrame;
+	//item of SET	
+	JMenuItem C1,C2,C3,C4,C5,C6,I1,I2,I3,I4,I5,I6;
 	//item of PAGE
 	JMenuItem pageMenu_pageSetUp;
 	//text area
@@ -203,7 +205,7 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		helpMenu_AboutXFrame = new JMenuItem("ABOUT"); 
 		helpMenu_AboutXFrame.addActionListener(this);
 		
-<<<<<<< HEAD
+
 		/****************************************/
 		//Create a set menu and menu item and register the event listener
 		setMenu = new JMenu("SETTINGS");
@@ -248,13 +250,13 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		I6.addActionListener(this);	
 		/*****************************************************/
 		
-=======
+
 		//Create a Page menu
 		pageMenu =new JMenu("PAGE");
 		pageMenu_pageSetUp=new JMenuItem("PAGE SET");
 		pageMenu_pageSetUp.addActionListener(this);
 
->>>>>>> refs/remotes/origin/Frame
+
 		//Add the "file" menu and menu item to the menu bar 
 		menuBar.add(fileMenu); 
 		fileMenu.add(fileMenu_New); 
@@ -301,7 +303,6 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		helpMenu.add(helpMenu_HelpTopics);
 		helpMenu.addSeparator();
 		helpMenu.add(helpMenu_AboutXFrame);
-<<<<<<< HEAD
 		
 		/****************************************************/
 		//Add the "set" menu and menu item to the menu bar
@@ -323,9 +324,8 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		setMenu.addSeparator();
 		setMenu.add(setMenu_Image);
 		/***************************************/		
-=======
-				
->>>>>>> refs/remotes/origin/Frame
+
+
 		//Add menu bar to window 				
 		this.setJMenuBar(menuBar);
 		
