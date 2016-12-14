@@ -254,6 +254,7 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 
 		//Create a Page menu
 		pageMenu =new JMenu("PAGE");
+		pageMenu.setMnemonic('p');//shortcut key
 		pageMenu_pageSetUp=new JMenuItem("PAGE SET");
 		pageMenu_pageSetUp.addActionListener(this);
 
@@ -299,12 +300,6 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		menuBar.add(pageMenu); 
 		pageMenu.add(pageMenu_pageSetUp); 
 		
-		//Add the "help" menu and menu item to the menu bar
-		menuBar.add(helpMenu);
-		helpMenu.add(helpMenu_HelpTopics);
-		helpMenu.addSeparator();
-		helpMenu.add(helpMenu_AboutXFrame);
-		
 		/****************************************************/
 		//Add the "set" menu and menu item to the menu bar
 		menuBar.add(setMenu);
@@ -324,7 +319,14 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		setMenu.add(setMenu_Color);
 		setMenu.addSeparator();
 		setMenu.add(setMenu_Image);
-		/***************************************/		
+		/***************************************/	
+		//Add the "help" menu and menu item to the menu bar
+		menuBar.add(helpMenu);
+		helpMenu.add(helpMenu_HelpTopics);
+		helpMenu.addSeparator();
+		helpMenu.add(helpMenu_AboutXFrame);
+		
+			
 
 
 		//Add menu bar to window 				
@@ -469,7 +471,7 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 	    jButton5.setToolTipText("undo");
 	    jButton5.setText("");
 	    jButton5.addActionListener(new Button5_actionAdapter(this));
-	    jButton6.setToolTipText("undo");
+	    jButton6.setToolTipText("page set");
 	    jButton6.setText("");
 	    jButton6.addActionListener(new Button6_actionAdapter(this));
 	    
