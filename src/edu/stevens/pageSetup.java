@@ -1,4 +1,4 @@
-package edu.stevens.xpdf.xframe;
+package edu.stevens;
 /*
 @Author SihanWang
 Create an interface that user can setup page style;
@@ -11,10 +11,8 @@ import java.io.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 
-
 public class pageSetup extends JFrame {
 	private Boolean b;
-	private String t;
 	public Container k;
 	private final Border border = BorderFactory.createEmptyBorder(100, 100, 500, 100);
 	public pageSetup() {
@@ -23,21 +21,23 @@ public class pageSetup extends JFrame {
 		Container ContentPane = getContentPane();
         setContentPane(ContentPane);
         setLocation(200, 50);  
-      
-        
+        b = true;
         JLabel labelSinglePage = new JLabel();  
         JLabel labelDoublePage = new JLabel();  
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        labelSinglePage.setIcon(new ImageIcon("/image/SinglePage.jpg"));
-        labelDoublePage.setIcon(new ImageIcon("/image/DoublePage.jpg"));
+        ImageIcon Icons = new ImageIcon(pageSetup.class.getResource("SinglePage.png"));
+	    ImageIcon Icond = new ImageIcon(pageSetup.class.getResource("DoublePage.png"));
+	    Icons.setImage(Icons.getImage().getScaledInstance(this.getWidth()/2,this.getHeight()/2,Image.SCALE_DEFAULT));
+	    Icond.setImage(Icond.getImage().getScaledInstance(this.getWidth()/2,this.getHeight()/2,Image.SCALE_DEFAULT));
+	    labelSinglePage.setIcon(Icons);
+        labelDoublePage.setIcon(Icond);
 
-        // 把标签的大小位置设置为图片刚好填充整个面板  
-        labelSinglePage.setBounds(0, 0, this.getWidth()/2, this.getHeight()/2);  
-        labelDoublePage.setBounds(0, 0, this.getWidth()/2, this.getHeight()/2);  
+        labelSinglePage.setBounds(0, 0, this.getWidth()/4, this.getHeight()/4);  
+        labelDoublePage.setBounds(0, 0, this.getWidth()/4, this.getHeight()/4);  
 	
         JPanel ContentPanelSingle = new JPanel(new GridBagLayout());
         ContentPanelSingle.setBorder(border);
-        ContentPanelSingle.add(labelSinglePage);     
+        ContentPanelSingle.add(labelSinglePage);   
         
         JPanel ContentPanelDouble = new JPanel(new GridBagLayout());
         ContentPanelDouble.setBorder(border);
@@ -52,26 +52,49 @@ public class pageSetup extends JFrame {
 		ControlPanel.setLayout(new GridLayout(1,2));
 		JButton singlep = new JButton("singlePage");
 		JButton doublep = new JButton("doublePage");
+		singlep.setPreferredSize(new Dimension(300,100));
+		doublep.setPreferredSize(new Dimension(300,100));
+		Font font = new Font("Default",Font.PLAIN,16);
+		singlep.setFont(font);
+		doublep.setFont(font);
 		ControlPanel.add(singlep);
 		ControlPanel.add(doublep);
 		ContentPane.add(ControlPanel, BorderLayout.SOUTH);
 		ContentPane.add(ContentPanel, BorderLayout.NORTH);
 		singlep.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-		//		pageSetupSingle(k, t) ;
+				int choose=JOptionPane.showConfirmDialog(doublep,"Setup Page to SinglePage Style?","hint",JOptionPane.OK_CANCEL_OPTION);
+				if(choose == JOptionPane.OK_OPTION){
+					b = true;
+					setVisible(false);
+				}
 			}
 		});
 		doublep.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-		//		pageSetupDouble(k, t) ;
+				int choose=JOptionPane.showConfirmDialog(doublep,"Setup Page to DoublePage Style? ","hint",JOptionPane.OK_CANCEL_OPTION);
+				if(choose == JOptionPane.OK_OPTION){
+					b = false;
+					setVisible(false);
+				}
 			}
 		});
 		addWindowListener(new MyWindowListener());
 		setVisible(true);
 	}
-	public static void main(String[] args) throws Exception{
-		pageSetup p = new pageSetup();
+	public boolean SingleOrNot(){
+		return b;
 	}
+	
+	class MyWindowListener extends WindowAdapter{
+		public void windowClosing(WindowEvent e) {
+			setDefaultCloseOperation(HIDE_ON_CLOSE);		
+		}
+	}
+	
+//	public static void main(String[] args) throws Exception{
+//		pageSetup p = new pageSetup();
+//	}
 	
 	//to setup single page in the panel can be linked
 	//TODO:String t and it`s performed style should be provided by TEXTGruop
@@ -98,9 +121,5 @@ public class pageSetup extends JFrame {
 	//}
 }
 */
-class MyWindowListener extends WindowAdapter{
-	public void windowClosing(WindowEvent e) {
-		System.exit(0);
-	}
-}
+
 }

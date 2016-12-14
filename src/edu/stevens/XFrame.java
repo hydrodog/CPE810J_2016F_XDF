@@ -1,5 +1,5 @@
 /**
- * @author: Lei Tang, Jingting Zhang
+ * @author: Lei Tang， Sihan Wang
  * 
  * add Menu to realize basic functions CREATE, OPEN, SAVE, EXIT. 
  * add Button to realize the basic functions above. 
@@ -29,12 +29,12 @@ package edu.stevens;
 //define the external features of XDF(window/frame/UI)
 public class XFrame extends JFrame implements ActionListener,DocumentListener
 {	//define menu bar
-	JMenu fileMenu,editMenu,formatMenu,viewMenu,helpMenu,setMenu;
+	JMenu fileMenu,editMenu,formatMenu,viewMenu,helpMenu,pageMenu;
 	//Right click item 
 	JPopupMenu popupMenu;
 	JMenuItem popupMenu_Undo,popupMenu_Cut,popupMenu_Copy,popupMenu_Paste,popupMenu_Delete,popupMenu_SelectAll;
 	//items of FILE
-	JMenuItem fileMenu_New,fileMenu_Open,fileMenu_Save,fileMenu_SaveAs,fileMenu_PageSetUp,fileMenu_Print,fileMenu_Exit;
+	JMenuItem fileMenu_New,fileMenu_Open,fileMenu_Save,fileMenu_SaveAs,fileMenu_Print,fileMenu_Exit;
 	//items of EDIT
 	JMenuItem editMenu_Undo,editMenu_Cut,editMenu_Copy,editMenu_Paste,editMenu_Delete,editMenu_Find,editMenu_FindNext,editMenu_Replace,editMenu_GoTo,editMenu_SelectAll,editMenu_TimeDate;
 	//items of FORMAT
@@ -44,12 +44,18 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 	JCheckBoxMenuItem viewMenu_Status;
 	//item of HELP
 	JMenuItem helpMenu_HelpTopics,helpMenu_AboutXFrame;
-	//item of SET	
-	JMenuItem C1,C2,C3,C4,C5,C6,I1,I2,I3,I4,I5,I6;
+	//item of PAGE
+	JMenuItem pageMenu_pageSetUp;
 	//text area
-	JTextArea editArea;
+	JTextArea editArea, editArea1, editArea2;
+	//JPanel to contain the textarea in double page option
+	JPanel doublePanel;
+	//Pane to contain the textarea in single page option
+	JScrollPane singlePane;
 	//status label
 	JLabel statusLabel;
+	//default Pagesetup
+	public pageSetup PageSetup;
 	//clipboard
 	Toolkit toolkit=Toolkit.getDefaultToolkit();
 	Clipboard clipBoard=toolkit.getSystemClipboard();
@@ -57,7 +63,7 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 	protected UndoManager undo=new UndoManager();
 	protected UndoableEditListener undoHandler=new UndoHandler();
 	//other things
-	String oldValue;//store the original content of the edit area for comparing text changes 
+	String oldValue,oldValue1,oldValue2;//store the original content of the edit area for comparing text changes 
 	boolean isNewFile=true;//Whether the new file (not saved) 
 	File currentFile;//Current file name 
 	//Constructor start 
@@ -94,9 +100,7 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 
 		fileMenu_SaveAs=new JMenuItem("SAVE AS");
 		fileMenu_SaveAs.addActionListener(this);
-
-		fileMenu_PageSetUp=new JMenuItem("PAGE SET");
-		fileMenu_PageSetUp.addActionListener(this);
+		
 
 		fileMenu_Print=new JMenuItem("PRINT");
 		fileMenu_Print.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK)); 
@@ -199,6 +203,7 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		helpMenu_AboutXFrame = new JMenuItem("ABOUT"); 
 		helpMenu_AboutXFrame.addActionListener(this);
 		
+<<<<<<< HEAD
 		/****************************************/
 		//Create a set menu and menu item and register the event listener
 		setMenu = new JMenu("SETTINGS");
@@ -243,6 +248,13 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		I6.addActionListener(this);	
 		/*****************************************************/
 		
+=======
+		//Create a Page menu
+		pageMenu =new JMenu("PAGE");
+		pageMenu_pageSetUp=new JMenuItem("PAGE SET");
+		pageMenu_pageSetUp.addActionListener(this);
+
+>>>>>>> refs/remotes/origin/Frame
 		//Add the "file" menu and menu item to the menu bar 
 		menuBar.add(fileMenu); 
 		fileMenu.add(fileMenu_New); 
@@ -250,7 +262,6 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		fileMenu.add(fileMenu_Save); 
 		fileMenu.add(fileMenu_SaveAs); 
 		fileMenu.addSeparator();		//gap line
-		fileMenu.add(fileMenu_PageSetUp); 
 		fileMenu.add(fileMenu_Print); 
 		fileMenu.addSeparator();		//gap line
 		fileMenu.add(fileMenu_Exit); 
@@ -281,11 +292,16 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		menuBar.add(viewMenu); 
 		viewMenu.add(viewMenu_Status);
 
+		//Add the "page" menu and menu item to the menu bar
+		menuBar.add(pageMenu); 
+		pageMenu.add(pageMenu_pageSetUp); 
+		
 		//Add the "help" menu and menu item to the menu bar
 		menuBar.add(helpMenu);
 		helpMenu.add(helpMenu_HelpTopics);
 		helpMenu.addSeparator();
 		helpMenu.add(helpMenu_AboutXFrame);
+<<<<<<< HEAD
 		
 		/****************************************************/
 		//Add the "set" menu and menu item to the menu bar
@@ -307,17 +323,43 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		setMenu.addSeparator();
 		setMenu.add(setMenu_Image);
 		/***************************************/		
+=======
+				
+>>>>>>> refs/remotes/origin/Frame
 		//Add menu bar to window 				
 		this.setJMenuBar(menuBar);
-
-		//Create a text edit area and add a scroll bar
+		
+		//set single pane to contain single page
 		editArea=new JTextArea(20,50);
-		JScrollPane scroller=new JScrollPane(editArea);
-		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		this.add(scroller,BorderLayout.CENTER);//
+		singlePane=new JScrollPane(editArea);	
+		singlePane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		this.add(singlePane, BorderLayout.CENTER);
 		editArea.setWrapStyleWord(true);//set linewrap
 		editArea.setLineWrap(true);//true for wrap
 		oldValue=editArea.getText();//get the contents of the original text editing area
+	
+		//set doublePanel to contain double Page
+		editArea1=new JTextArea(20,25);
+		JScrollPane scroller1=new JScrollPane(editArea1);	
+		scroller1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		editArea1.setWrapStyleWord(true);//set linewrap
+		editArea1.setLineWrap(true);//true for wrap
+		oldValue1=editArea1.getText();//get the contents of the original text editing area
+	
+		editArea2=new JTextArea(20,25);
+		JScrollPane scroller2=new JScrollPane(editArea2);	
+		scroller2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		doublePanel = new JPanel();
+		doublePanel.setLayout(new GridLayout(1,2));
+		doublePanel.add(scroller1);
+		doublePanel.add(scroller2);
+		editArea2.setWrapStyleWord(true);//set linewrap
+		editArea2.setLineWrap(true);//true for wrap
+		oldValue2=editArea2.getText();//get the contents of the original text editing area
+
+		//default pageSetup
+		PageSetup = new pageSetup();
+		PageSetup.setVisible(false);
 
 		//Edit area registered event listener (related to undo operation) 
 		editArea.getDocument().addUndoableEditListener(undoHandler);
@@ -381,12 +423,14 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		JButton jButton3 = new JButton();
 		JButton jButton4 = new JButton();
 		JButton jButton5 = new JButton();
+		JButton jButton6 = new JButton();
 		
 		ImageIcon imageIcon1;
 		ImageIcon imageIcon2;
 		ImageIcon imageIcon3;
 		ImageIcon imageIcon4;
 		ImageIcon imageIcon5;
+		ImageIcon imageIcon6;
 		  
 		
 		this.add(jToolBar1, BorderLayout.NORTH);
@@ -396,13 +440,16 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 	    jToolBar1.add(jButton3, null);
 	    jToolBar1.add(jButton4, null);
 	    jToolBar1.add(jButton5, null);
+	    jToolBar1.add(jButton6, null);
 		
 		imageIcon1 = new ImageIcon(XFrame.class.getResource("new.png"));
 	    imageIcon2 = new ImageIcon(XFrame.class.getResource("open.png"));
 	    imageIcon3 = new ImageIcon(XFrame.class.getResource("save.png"));
 	    imageIcon4 = new ImageIcon(XFrame.class.getResource("saveAs.png"));
 	    imageIcon5 = new ImageIcon(XFrame.class.getResource("undo.png"));
-		 
+	    imageIcon6 = new ImageIcon(XFrame.class.getResource("SinglePage.png"));
+	    imageIcon6.setImage(imageIcon6.getImage().getScaledInstance(imageIcon5.getImage().getWidth(jButton5),imageIcon5.getImage().getHeight(jButton5),Image.SCALE_DEFAULT));
+	    
 	    jButton1.setToolTipText("new file");
 	    jButton1.setIcon(null);
 	    jButton1.setSelectedIcon(null);
@@ -421,12 +468,17 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 	    jButton5.setToolTipText("undo");
 	    jButton5.setText("");
 	    jButton5.addActionListener(new Button5_actionAdapter(this));
+	    jButton6.setToolTipText("undo");
+	    jButton6.setText("");
+	    jButton6.addActionListener(new Button6_actionAdapter(this));
 	    
 	    jButton1.setIcon(imageIcon1);
 	    jButton2.setIcon(imageIcon2);
 	    jButton3.setIcon(imageIcon3);
 	    jButton4.setIcon(imageIcon4);
 	    jButton5.setIcon(imageIcon5);
+	    jButton6.setIcon(imageIcon6);
+
 		
 		//Set the location, size, and visibility of the window on the screen. 
 		this.setLocation(100,50);//window size
@@ -436,14 +488,47 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		//Add the listener window 
 		addWindowListener(new WindowAdapter()
 		{	public void windowClosing(WindowEvent e)
-			{	exitWindowChoose();
+			{
+				exitWindowChoose();
 			}
 		});
+		
+		//Add the mouselistener to change pageset
+		this.addMouseListener(new MouseListener() {
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				setpage();
+			}
 
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		
+		});
+		
 		checkMenuItemEnabled();
 		editArea.requestFocus();
-		
-		
+	
 	}//end of constructor
 	
 class Button1_actionAdapter implements ActionListener {
@@ -505,6 +590,18 @@ class Button5_actionAdapter implements ActionListener {
 	    adaptee.jButton5_actionPerformed(e);
 	  }
 	}
+
+class Button6_actionAdapter implements ActionListener {
+	  XFrame adaptee;
+
+	  Button6_actionAdapter(XFrame adaptee) {
+	    this.adaptee = adaptee;
+	  }
+
+	  public void actionPerformed(ActionEvent e) {
+	    adaptee.jButton6_actionPerformed(e);
+	  }
+	}
 	
 	void jButton1_actionPerformed(ActionEvent e) {
 	    newFile();
@@ -526,6 +623,9 @@ class Button5_actionAdapter implements ActionListener {
 	    undo();
 	  }
 		
+	void jButton6_actionPerformed(ActionEvent e) {
+	    pagesetup();
+	  }
 	
 	//Set menu item availability: cut, copy, paste, delete function 
 	public void checkMenuItemEnabled()
@@ -625,7 +725,8 @@ class Button5_actionAdapter implements ActionListener {
 					}
 				}
 				System.exit(0);
-			
+				//if(isSave)System.exit(0);
+				//else return;
 			}
 			else if(exitChoose==JOptionPane.NO_OPTION)
 			{	System.exit(0);
@@ -669,9 +770,9 @@ class Button5_actionAdapter implements ActionListener {
 		}
 		
 		//page setup
-		else if(e.getSource()==fileMenu_PageSetUp)
+		else if(e.getSource()==pageMenu_pageSetUp)
 		{	editArea.requestFocus();
-			JOptionPane.showMessageDialog(this,"Sorry, this feature is not yet implemented! ","hint",JOptionPane.WARNING_MESSAGE);
+			pagesetup();
 		}//finish page setup
 		
 		//print function begin
@@ -693,8 +794,19 @@ class Button5_actionAdapter implements ActionListener {
 		
 		//undo function begin
 		else if(e.getSource()==editMenu_Undo || e.getSource()==popupMenu_Undo)
-		{	
-			undo();
+		{	/*editArea.requestFocus();
+			if(undo.canUndo())
+			{	try
+				{	undo.undo();
+				}
+				catch (CannotUndoException ex)
+				{	System.out.println("Unable to undo:" + ex);
+					//ex.printStackTrace();
+				}
+			}
+			if(!undo.canUndo())
+				{	editMenu_Undo.setEnabled(false);
+				}*/undo();
 		}//finish undo function
 		
 		//cut function
@@ -766,7 +878,8 @@ class Button5_actionAdapter implements ActionListener {
 				//time and date
 				else if(e.getSource()==editMenu_TimeDate)
 				{	editArea.requestFocus();
-					
+					//SimpleDateFormat currentDateTime=new SimpleDateFormat("HH:mmyyyy-MM-dd");
+					//editArea.insert(currentDateTime.format(new Date()),editArea.getCaretPosition());
 					Calendar rightNow=Calendar.getInstance();
 					Date date=rightNow.getTime();
 					editArea.insert(date.toString(),editArea.getCaretPosition());
@@ -1087,6 +1200,58 @@ class Button5_actionAdapter implements ActionListener {
 			}				
 		}
 	}//finish saveas function
+	
+	//when click the button call pagesetup frame
+	public void pagesetup(){	
+		oldValue = editArea.getText();
+		oldValue1 = editArea1.getText();
+		oldValue2 = editArea2.getText();
+		PageSetup.setVisible(true);
+		this.setpage();
+	}
+	
+	//setup single page or double page of xpdf
+	public void setpage(){
+		if(PageSetup.SingleOrNot() == true){
+			StringBuilder text = new StringBuilder();
+			text.append(oldValue1);
+			text.append("\r\n");
+			text.append(oldValue2);
+			if(text.equals(" ")){
+				editArea.setText("");
+			}else{
+				editArea.setText(text.toString());
+			}
+			this.remove(doublePanel);
+			this.add(singlePane, BorderLayout.CENTER);;
+			this.validate();
+			this.repaint();
+			System.out.println("SinglePage");
+		}else{
+			String []s = oldValue.split("\\r?\\n");
+			if(s.length > 32){
+				StringBuilder text1 = new StringBuilder();
+				StringBuilder text2 = new StringBuilder();
+				for(int i = 0; i < s.length/2;i++){
+					text1.append(s[i]).append("\r\n");
+					text2.append(s[i + s.length/2]).append("\r\n");
+				}
+				editArea1.setText(text1.toString());
+				editArea2.setText(text2.toString());
+			}else{
+				StringBuilder text1 = new StringBuilder();
+				for(int i = 0; i < s.length;i++){
+					text1.append(s[i]).append("\r\n");
+				}
+				editArea1.setText(text1.toString());
+			}
+			this.remove(singlePane);
+			this.add(doublePanel, BorderLayout.CENTER);
+			this.validate();		
+			this.repaint();
+			System.out.println("DoublePage");
+		}
+	}
 	
 	//undo function begin
 	public void undo()
