@@ -12,17 +12,19 @@
 package edu.stevens;
  import java.awt.*;
  import java.awt.event.*;
- import java.text.*;
+ import java.awt.datatransfer.*;
+ import javax.swing.*;
+ import javax.swing.undo.*;
+ import javax.swing.event.*;
  import java.util.*;
  import java.io.*;
- import javax.swing.undo.*;
-
-
-import javax.swing.border.*;
- import javax.swing.*;
- import javax.swing.text.*;
- import javax.swing.event.*;
- import java.awt.datatransfer.*;
+ 
+// import java.text.*;
+// import javax.swing.border.*;
+// import javax.swing.text.*;
+ 
+ 
+ 
 
 //define the external features of XDF(window/frame/UI)
 public class XFrame extends JFrame implements ActionListener,DocumentListener
@@ -106,6 +108,7 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		//Create Edit menu and menu item and register the event listener 
 		editMenu=new JMenu("EDIT");
 		editMenu.setMnemonic('E');//shortcut key
+		
 		//When selecting the edit menu, set the availability of cut, copy, paste, delete and other functions 
 		editMenu.addMenuListener(new MenuListener()
 		{	public void menuCanceled(MenuEvent e)//Call to cancel the menu 
@@ -196,8 +199,11 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		helpMenu_AboutXFrame = new JMenuItem("ABOUT"); 
 		helpMenu_AboutXFrame.addActionListener(this);
 		
+		/****************************************/
 		//Create a set menu and menu item and register the event listener
 		setMenu = new JMenu("SETTINGS");
+		setMenu.setMnemonic('s');//shortcut key
+		
 		JMenu setMenu_Color = new JMenu("BGCOLOR");
 		JMenu setMenu_Image = new JMenu("BGIMAGE");
 		setMenu_Color.addActionListener(this);
@@ -235,7 +241,8 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		I5.addActionListener(this);
 		I6 = new JMenuItem("Classic6",new ImageIcon("images/6.jpg"));
 		I6.addActionListener(this);	
-
+		/*****************************************************/
+		
 		//Add the "file" menu and menu item to the menu bar 
 		menuBar.add(fileMenu); 
 		fileMenu.add(fileMenu_New); 
@@ -280,6 +287,7 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		helpMenu.addSeparator();
 		helpMenu.add(helpMenu_AboutXFrame);
 		
+		/****************************************************/
 		//Add the "set" menu and menu item to the menu bar
 		menuBar.add(setMenu);
 		setMenu_Color.add(C1);
@@ -298,7 +306,7 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		setMenu.add(setMenu_Color);
 		setMenu.addSeparator();
 		setMenu.add(setMenu_Image);
-				
+		/***************************************/		
 		//Add menu bar to window 				
 		this.setJMenuBar(menuBar);
 
@@ -421,9 +429,10 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 	    jButton5.setIcon(imageIcon5);
 		
 		//Set the location, size, and visibility of the window on the screen. 
-		this.setLocation(200,50);
-		this.setSize(1050,650);
+		this.setLocation(100,50);//window size
+		this.setSize(1000,600);
 		this.setVisible(true);
+		
 		//Add the listener window 
 		addWindowListener(new WindowAdapter()
 		{	public void windowClosing(WindowEvent e)
@@ -673,7 +682,7 @@ class Button5_actionAdapter implements ActionListener {
 		
 		//exit function begin
 		else if(e.getSource()==fileMenu_Exit)
-		{	int exitChoose=JOptionPane.showConfirmDialog(this,"Are you exit? ( shuts down )","exit alert",JOptionPane.OK_CANCEL_OPTION);
+		{	int exitChoose=JOptionPane.showConfirmDialog(this,"Are you sure? ( shuts down )","exit alert",JOptionPane.OK_CANCEL_OPTION);
 			if(exitChoose==JOptionPane.OK_OPTION)
 			{	System.exit(0);
 			}
