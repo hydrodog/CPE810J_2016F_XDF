@@ -1,22 +1,13 @@
-import java.io.File;
-import java.io.FileInputStream;
-
-import javax.print.Doc;
-import javax.print.DocFlavor;
-import javax.print.DocPrintJob;
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
-import javax.print.ServiceUI;
-import javax.print.SimpleDoc;
-import javax.print.attribute.DocAttributeSet;
-import javax.print.attribute.HashDocAttributeSet;
-import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.*;
+import javax.print.attribute.*;
 import javax.swing.JFileChooser;
 
+import java.io.*;
+
 public class printcode {
-	  public static void main(String[] args) {  
 	        JFileChooser fileChooser = new JFileChooser(); // 创建打印作业  
 	        int state = fileChooser.showOpenDialog(null);  
+	        {
 	        if (state == JFileChooser.APPROVE_OPTION) {  
 	            File file = fileChooser.getSelectedFile(); // 获取选择的文件  
 	            // 构建打印请求属性集  
@@ -30,8 +21,9 @@ public class printcode {
 	            PrintService defaultService = PrintServiceLookup  
 	                    .lookupDefaultPrintService();  
 	            // 显示打印对话框  
-	            PrintService service = ServiceUI.printDialog(null, 200, 200,  
+	            PrintService service = ServiceUI.printDialog(null, 800, 800,  
 	                    printService, defaultService, flavor, pras);  
+	           // System.out.print(service.getSupportedAttributeCategories());
 	            if (service != null) {  
 	                try {  
 	                    DocPrintJob job = service.createPrintJob(); // 创建打印作业  
@@ -44,9 +36,9 @@ public class printcode {
 	                }  
 	            }  
 	        }  
-	    }  
-
+   }
 }
+
 
   
   
