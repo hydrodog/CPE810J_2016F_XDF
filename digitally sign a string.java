@@ -45,7 +45,26 @@ public class digitalsignature {
 		 * Other persons can use public key to verify the digital signature 
 		 * if succeed, it means the information is sent by the user.
 		 */
-						 
+		    try {  
+	            ObjectInputStream in = new ObjectInputStream(new FileInputStream("mypubkey.dat"));  
+	            PublicKey pubkey = (PublicKey) in.readObject();  
+	            in.close();  
+	        //    System.out.println(pubkey.getFormat());  
+	            in = new ObjectInputStream(new FileInputStream("myinfo.dat"));  
+	            String info = (String) in.readObject();  
+	            byte[] signed = (byte[]) in.readObject();  
+	            in.close();  
+	            Signature signetcheck = Signature.getInstance("DSA");  
+	            signetcheck.initVerify(pubkey);  
+	            signetcheck.update(info.getBytes());  
+	            if (signetcheck.verify(signed)) {  
+	                System.out.println("info=" + info);  
+	                System.out.println("Signature is normal");  
+	            } else  
+	                System.out.println("Signature is abnormal");  
+	        } catch (Exception e) {  
+	            e.printStackTrace();  
+	        }  				 
 		
 	}
 }
