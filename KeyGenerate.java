@@ -15,7 +15,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.security.Signature;
-public class digitalSignature {
+public class KeyGenerate {
 	public boolean generatekey() {        //generate the public key and private key
 		try {
 			KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance("DSA");
