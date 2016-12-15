@@ -2,8 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Ashutosh Gajankush/Downloads/pdfbox-app-2.0.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ashutosh Gajankush/Downloads/pdfbox-tools-2.0.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/commons-codec-1.10.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/pdfbox-app-2.0.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/pdfbox-tools-2.0.3.jar"/>
