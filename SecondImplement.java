@@ -36,11 +36,11 @@ public class font extends JPanel {
  
 
 private static ClassLoader loader;  
- private JList style;               
- private JList font;               
- private JList size;                
- private JList color;                
- private JColorChooser colorChooser; 
+ private JList style;               //style
+ private JList font;                //font
+ private JList size;                //size
+ private JList color;              //color
+ private JColorChooser colorChooser;   
  private JDialog colorDialog;       
  private JScrollPane jsp1;           
  private JScrollPane jsp2;           
@@ -53,11 +53,9 @@ private static ClassLoader loader;
  private JTextField jtf5;            
  private JLabel jLabel1;            
  private JLabel jLabel2;             
- private JLabel jLabel3;            
- //private JLabel jLabel4;           
+ private JLabel jLabel3;                    
  private JLabel jLabel4;             
- private JLabel jLabel5;             
- //private JComboBox direction;        
+ private JLabel jLabel5;                  
  private JPanel jPanel2;            
  private JButton jButton;          
  
@@ -71,27 +69,27 @@ private static ClassLoader loader;
   
   loader = this.getClass().getClassLoader();
   
-  jLabel1 = new JLabel("(F):");
+  jLabel1 = new JLabel("(F):");                                  // jlabel of the type of font                       
   jLabel1.setBounds(20, 15, 80, 17);
   this.add(jLabel1);
   
-  jtf1 = new JTextField("Fixedsys");
+  jtf1 = new JTextField("Fixedsys");                                    //add textfield of fixedsys to jlabel1
   jtf1.setBounds(20, 32, 150, 18);
   this.add(jtf1);
   
-  style = new JList(getFontStyle());
+  style = new JList(getFontStyle());                                    //add the type or the style of the font                                                      
   style.addListSelectionListener(new ListSelectionListener() {
    public void valueChanged(ListSelectionEvent e) {
     jtf1.setText(style.getSelectedValue().toString());
     jLabel5.setFont(new Font(jtf1.getText(), getCharFont(jtf2.getText()), Integer.parseInt(jtf3.getText())));
    }
   });
-  jsp1 = new JScrollPane(style);
+  jsp1 = new JScrollPane(style);                                           // add the scrollpane to add the style of the font                              
   jsp1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
   jsp1.setBounds(20, 50, 150, 140);
   this.add(jsp1);
   
-  jLabel2 = new JLabel("(Y):");
+  jLabel2 = new JLabel("(Y):");                                                          //font
   jLabel2.setBounds(180, 15, 80, 17);
   this.add(jLabel2);
   
@@ -185,21 +183,74 @@ private static ClassLoader loader;
   File file = new File("");
 	File outfile = new File("");
 	
-	
-  jButton = new JButton("input");
-  jButton.addActionListener(new ActionListener() {
+JButton b1= new JButton("creat");                                                                     //button1: creat the signature
+  b1.addActionListener(new ActionListener() {
    public void actionPerformed(ActionEvent e) {
-	   
-    if(jtf5.getText().equals("")) {
-     return ;
-    }
-    jLabel5.setText("<html>"+jtf5.getText()); 
-     
-   }
-   
+	   Object source=e.getSource();
+		String areatext=jtf5.getText();
+		if(source==b1){
+			try {  
+		         ObjectInputStream in = new ObjectInputStream(new FileInputStream("myprikey.dat"));  
+		         PrivateKey myprikey = (PrivateKey) in.readObject();  
+		         in.close();  
+			         
+		         // use private key to create signature
+		         Signature signat = Signature.getInstance("DSA");  
+		         signat.initSign(myprikey);  
+		         signat.update(areatext.getBytes());  
+		         // the created digital signature  
+		         byte[] signed = signat.sign(); 
+
+		         
+		         // saving my signature information and digital signature in the same file "myinfo.dat"
+		         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("myinfo.dat"));  
+		         out.writeObject(areatext);  
+		         out.writeObject(signed);  
+		         out.close();  
+		  
+		         
+		         System.out.println("successfully creating signature and saving in file ");  
+		     } catch (java.lang.Exception e1) {  
+		         e1.printStackTrace();  
+		         System.out.println("failed to create signature and save info in file");  
+		     }  
+		} 
+	   }
+   });
+  JButton b2=new JButton("Verify");                                                                                                                                      //bbutton2:verify the signature and print
+  b2.addActionListener(new ActionListener(){
+	 public void actionPerformed(ActionEvent e){
+		 Object source=e.getSource();
+			String areatext=jtf5.getText();
+			if(source==b2){
+				 try {  
+			            ObjectInputStream in = new ObjectInputStream(new FileInputStream("mypubkey.dat"));  
+			            PublicKey pubkey = (PublicKey) in.readObject();  
+			            in.close();  
+			        //    System.out.println(pubkey.getFormat());  
+			            in = new ObjectInputStream(new FileInputStream("myinfo.dat"));  
+			            String info = (String) in.readObject();  
+			            byte[] signed = (byte[]) in.readObject();  
+			            in.close();  
+			            Signature signetcheck = Signature.getInstance("DSA");  
+			            signetcheck.initVerify(pubkey);  
+			            signetcheck.update(info.getBytes());  
+			            if (signetcheck.verify(signed)) {  
+			            	jLabel5.setText("<html>"+jtf5.getText()); 
+			                System.out.println("Signature is normal");  
+			            } else  
+			                System.out.println("Signature is abnormal");  
+			        } catch (Exception e2) {  
+			            e2.printStackTrace();  
+			        }  
+				 
+			}
+		}
   });
-  jButton.setBounds(270, 330, 80, 20);
-  this.add(jButton);
+  b1.setBounds(270, 330, 80, 20);
+  b2.setBounds(230,350,80,20);
+  this.add(b1);
+  this.add(b2);
  }
  
  
@@ -217,7 +268,7 @@ private static ClassLoader loader;
  
  public String[] getCharFont() {
   
-  String[] font = {"plain", "bold", "italic", "else"};
+  String[] font = {"plain", "bold", "italic", "else"};                                                                                                  //select different font
   return font;
  }
  
@@ -248,7 +299,7 @@ private static ClassLoader loader;
  }
  
    
- public String[] getColor() {
+ public String[] getColor() {                                                                                                    // select   color  
   
   String[] color = {"black", "red", "blue", "yellow", "green", "user-defined"};
   return color;
