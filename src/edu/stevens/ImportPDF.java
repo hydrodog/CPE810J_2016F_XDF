@@ -2,7 +2,7 @@ package edu.stevens;
 /*
  * @author: Ashutosh Gajankush 
  * Before running this file make sure you have the PDFBox library included in you project.
- * Got to Readme file for more Information.
+ * Go to Readme file for more Information.
 */
 
 
@@ -30,18 +30,20 @@ public class ImportPDF {
     public ImportPDF() {
         
     }
-   public String ToText() throws IOException{ // THis method returns a String.
+   public String ToText(){ // THis method returns a String.
 	   
        this.pdfStripper = null;
        this.pdDoc = null;
        this.cosDoc = null;
        
        file = new File("file.pdf");
+       try{
        parser = new PDFParser(new RandomAccessFile(file,"r"));// Opening the file for reading.
        
        parser.parse();
+       
        cosDoc = parser.getDocument(); // Get the document.
-       pdfStripper = new PDFTextStripper(); 
+       pdfStripper = new PDFTextStripper();
        pdDoc = new PDDocument(cosDoc);
        int n = pdDoc.getNumberOfPages();
        System.out.println(n);
@@ -52,6 +54,10 @@ public class ImportPDF {
        // pdfStripper.setEndPage(pdDoc.getNumberOfPages());
        
        Text = pdfStripper.getText(pdDoc); // Extracting Text and converting into a string.
+} catch(IOException e){
+    	   
+       }
+
        return Text;
    }
 
