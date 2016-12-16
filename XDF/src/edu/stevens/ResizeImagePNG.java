@@ -3,14 +3,12 @@
  * This is the class to resize the Image by proportion and save the new image
  * also supports JPEG image. 
  */
-
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
  
-
  // This class is to resize an PNG image.
 
 public class ResizeImage {
