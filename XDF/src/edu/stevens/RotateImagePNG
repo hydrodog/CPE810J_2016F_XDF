@@ -14,7 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 //This class is to rotate a PNG image
+
 public class RotateImage{
+
 //Rotate image by 90 degree
 	 private static BufferedImage Rotate(BufferedImage image)
 	    {
