@@ -1,6 +1,5 @@
 # CPE810J_2016F_XDF_DigitalSignature
-The group is working on digital signature.
-
+The group is working on digital signature.The demo is the DSA/src/DSATest.java.
 The project included:
 
 1.generate the public key and private key.
