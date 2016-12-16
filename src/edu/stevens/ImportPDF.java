@@ -2,7 +2,7 @@ package edu.stevens;
 /*
  * @author: Ashutosh Gajankush 
  * Before running this file make sure you have the PDFBox library included in you project.
- * Go to Readme file for more Information.
+ * Go to Read me file for more Information.
 */
 
 
