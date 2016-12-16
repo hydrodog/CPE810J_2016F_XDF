@@ -1,7 +1,7 @@
 # CPE810J_2016F_XDF_DigitalSignature
 The group is working on digital signature.
 
-The task included:
+The project included:
 
 1.generate the public key and private key.
 
