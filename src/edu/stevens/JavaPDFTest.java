@@ -13,10 +13,10 @@ public class JavaPDFTest {
        //pdfManager.setFilePath("C:\\Users\\Ashutosh Gajankush\\Desktop\\file.pdf"); //Setting the file path.
        System.out.print("Text in the file:- ");
        System.out.println(pdfManager.ToText()); // Calling the toText method of the ImportPDF class.
-       
+       /*
        FontExtraction font = new FontExtraction();
        System.out.println("Font of the text in the File:- ");
        font.getFont();
-    
+    */
 }    
 }
