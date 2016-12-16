@@ -1,37 +1,44 @@
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
 import javax.swing.*;
+ 
 
-/**
- * This class is to load an PNG Image from a file
- */
-
-public class LoadImage {
-          
-    BufferedImage img;
-    private String filename;
-
+ //This class is how to load a PNG Image 
+ 
+public class LoadImage extends Component {
+           
+    BufferedImage image;
+ 
     public void paint(Graphics g) {
-        g.drawImage(img, 0, 0, null);
+        g.drawImage(image, 0, 0, null);
     }
-
+    
+  //read PNG image from external file
     public LoadImage() {
        try {
-           img = ImageIO.read(new File(filename));
+           image = ImageIO.read(new File("123.png"));
        } catch (IOException e) {
-    	   System.out.println("this is not a image");//print this if not load an image
+    	   System.out.println("Can not load image.");
        }
-
+ 
     }
-
-    public Dimension getSize() {
-        if (img == null) {
-             return new Dimension(100,100);
+ //get preferred size 
+    public Dimension getPreferredSize() {
+        if (image == null) {
+             return new Dimension(0,200);
         } else {
-           return new Dimension(img.getWidth(null), img.getHeight(null));//draw the image with its heights and width
+           return new Dimension(image.getWidth(null), image.getHeight(null));
        }
     }
-
+ 
+ //test class
+    public static void main(String[] args) {
+ 
+        JFrame f = new JFrame("123");         
+        f.add(new LoadImage());
+        f.pack();
+        f.setVisible(true);
+    }
+}
