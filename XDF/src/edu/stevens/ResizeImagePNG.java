@@ -2,7 +2,6 @@
  * @author Yingnan Zhang
  * This is the class to resize the Image by proportion and save the new image
  * also supports JPEG image. 
- 
  */
 
 import java.awt.Graphics2D;
