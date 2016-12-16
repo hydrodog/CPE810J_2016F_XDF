@@ -22,13 +22,14 @@ public class Ellipse extends Shape {
 		try {
 	         BufferedWriter out = new BufferedWriter(new FileWriter
 	         ("printfile.ps",true));
-	         out.write("newpath\n"+
-	        		   x + y + x1 + y1 + x3 + y3 + " curve %the up part of the ellipse \n" +
-	        		   x + y + x2 + y2 + x3 + y3 + " curve %the bottom part of the ellipse \n" +
+	         out.write(strokeWidth + " setlinewidth %set the line's strokewide\n" +
+	        		   "newpath\n"+
+	        		   x + " " + y + " moveto \n"+
+	        		   x + " " + y + " " + x1 + " " + y1 + " " + x3 + " " + y3 + " curveto %the up part of the ellipse \n" +
+	        		   x3  + " " +  y3  + " " +  x2  + " " +  y2  + " " +  x  + " " +  y + " curveto %the bottom part of the ellipse \n" +
 	        		   "closepath \n"+
 	        		   color + "  setrgbcolor %set the color of the rect \n"+
 	        		   "fill\n" +
-	        		   strokeWidth + " setlinewidth %set the line's strokewide\n" +
 	        		   "stroke \n");
 	         out.close();
 	      }

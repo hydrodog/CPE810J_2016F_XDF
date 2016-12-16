@@ -16,11 +16,11 @@ public class Circle extends Shape{
 		 try {
 	         BufferedWriter out = new BufferedWriter(new FileWriter
 	         ("printfile.ps",true));
-	         out.write("newpath\n" +
-	        		   x + " " + y + " " + r + " 0 360 arc close\n" +
+	         out.write(strokeWidth + " setlinewidth %set the line's strokewide\n" +
+	        		   "newpath\n" +
+	        		   x + " " + y + " " + r + " 0 360 arc closepath\n" +
 	        		   color + "  setrgbcolor %set the color of the rect \n"+
 	        		   "fill\n" +
-	        		   strokeWidth + " setlinewidth %set the line's strokewide\n" +
 	        		   color + "  setrgbcolor %set the color of the line \n"+
 	        		   "stroke \n");
 	         out.close();

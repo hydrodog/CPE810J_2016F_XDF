@@ -18,16 +18,17 @@ public class Rect extends Shape {
 		try {
 	         BufferedWriter out = new BufferedWriter(new FileWriter
 	         ("printfile.ps",true));
-	         out.write("newpath\n"+
+	         out.write(strokeWidth + " setlinewidth %set the line's strokewide\n" +
+	        		   "newpath\n"+
 	        		   x + " " + y +" moveto %put the start point \n" +
-	        		   LastX + " " + y +" rlineto %construct the line\n" +
-	        		   LastX + " " + LastY + " rlineto %construct the line\n" +
-	        		   x + " " + LastY + " rlineto %construct the line\n" +
+	        		   LastX + " " + y +" lineto %construct the line\n" +
+	        		   LastX + " " + LastY + " lineto %construct the line\n" +
+	        		   x + " " + LastY + " lineto %construct the line\n" +
+	        		   x + " " + y + " lineto \n"+
 	        		   "closepath \n"+
 	        		   color + "  setrgbcolor %set the color of the rect \n"+
 	        		   "fill\n" +
 	        		   lineColor + "  setrgbcolor %set the color of the rect \n"+
-	        		   strokeWidth + " setlinewidth %set the line's strokewide\n" +
 	        		   "stroke \n");
 	         out.close();
 	      }
