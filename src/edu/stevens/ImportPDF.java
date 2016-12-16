@@ -36,7 +36,7 @@ public class ImportPDF {
        this.pdDoc = null;
        this.cosDoc = null;
        
-       file = new File("file.pdf");
+       file = new File("src\\edu\\stevens\\file.pdf");
        try{
        parser = new PDFParser(new RandomAccessFile(file,"r"));// Opening the file for reading.
        
