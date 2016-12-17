@@ -59,10 +59,8 @@ private static ClassLoader loader;
  private JLabel jLabel1;            
  private JLabel jLabel2;             
  private JLabel jLabel3;            
- //private JLabel jLabel4;           
  private JLabel jLabel4;             
- private JLabel jLabel5;             
- //private JComboBox direction;        
+ private JLabel jLabel5;                    
  private JPanel jPanel2;            
  private JButton jButton;          
  
@@ -194,11 +192,7 @@ private static ClassLoader loader;
   JButton b1= new JButton("creat");
   b1.addActionListener(new ActionListener() {
    public void actionPerformed(ActionEvent e) {
-	   
-   // if(jtf5.getText().equals("")) {
-    // return ;
-    //}
-    //jLabel5.setText("<html>"+jtf5.getText()); 
+    
 	   Object source=e.getSource();
 		String areatext=jtf5.getText();
 		if(source==b1){
@@ -246,7 +240,6 @@ private static ClassLoader loader;
 			            ObjectInputStream in = new ObjectInputStream(new FileInputStream("mypubkey.dat"));  
 			            PublicKey pubkey = (PublicKey) in.readObject();  
 			            in.close();  
-			        //    System.out.println(pubkey.getFormat());  
 			            in = new ObjectInputStream(new FileInputStream("myinfo.dat"));  
 			            String info = (String) in.readObject();  
 			            byte[] signed = (byte[]) in.readObject();  
