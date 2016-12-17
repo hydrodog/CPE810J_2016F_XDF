@@ -10,11 +10,13 @@
 
 
 
- package edu.stevens;
+package edu.stevens;
  import java.awt.*;
  import java.awt.event.*;
  import java.awt.datatransfer.*;
  import javax.swing.*;
+ import javax.swing.UIManager;
+ import javax.swing.plaf.FontUIResource;
  import javax.swing.undo.*;
  import javax.swing.event.*;
  import java.util.*;
@@ -29,7 +31,8 @@
 
 //define the external features of XDF(window/frame/UI)
 public class XFrame extends JFrame implements ActionListener,DocumentListener
-{	//define menu bar
+{
+	//define menu bar
 	JMenu fileMenu,editMenu,formatMenu,viewMenu,helpMenu,pageMenu,setMenu;
 	//Right click item 
 	JPopupMenu popupMenu;
@@ -46,7 +49,7 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 	//item of HELP
 	JMenuItem helpMenu_HelpTopics,helpMenu_AboutXFrame;
 	//item of SET	
-	JMenuItem C1,C2,C3,C4,C5,C6,I1,I2,I3,I4,I5,I6;
+	JMenuItem C1,C2,C3,C4,C7,I1,I2,I3,I4;
 	//item of PAGE
 	JMenuItem pageMenu_pageSetUp;
 	//text area
@@ -74,7 +77,7 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 	{	
 		super("eXtreme Document Format");
 		//Change system default font 
-		Font font = new Font("Dialog", Font.PLAIN, 14);
+		Font font = new Font("Dialog",Font.BOLD,14);
 		java.util.Enumeration keys = UIManager.getDefaults().keys();
 		while (keys.hasMoreElements()) {
 			Object key = keys.nextElement();
@@ -85,6 +88,7 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		}
 		//Create menu bar 
 		JMenuBar menuBar=new JMenuBar();
+	
 		//Create the file menu and menu items and register the event listener
 		fileMenu=new JMenu("FILE");
 		fileMenu.setMnemonic('F');//shortcut keys 
@@ -209,52 +213,44 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 
 		/****************************************/
 		//Create a set menu and menu item and register the event listener
+		ChangeColorAction action = new ChangeColorAction();
+		ChangeFontAction action1 = new ChangeFontAction();
 		setMenu = new JMenu("SETTINGS");
 		setMenu.setMnemonic('s');//shortcut key
 		
 		JMenu setMenu_Color = new JMenu("BGCOLOR");
-		JMenu setMenu_Image = new JMenu("BGIMAGE");
+		JMenu setMenu_Font = new JMenu("MENUFONT");
 		setMenu_Color.addActionListener(this);
-		setMenu_Image.addActionListener(this);
+		setMenu_Font.addActionListener(this);
 		
 		C1 = new JMenuItem("Candy Pink");
 		C1.setBackground(Color.pink);
-		C1.addActionListener(this);//Haven't finished yet,tbc
-		C2 = new JMenuItem("Sunny Orange");
-		C2.setBackground(Color.getHSBColor(200,155,64));
-		C2.addActionListener(this);
-		C3 = new JMenuItem("Lemon Yellow");
-		C3.setBackground(Color.getHSBColor(244,121,131));
-		C3.addActionListener(this);
-		C4 = new JMenuItem("Grass Green");
-		C4.setBackground(Color.getHSBColor(238,238,238));
-		C4.addActionListener(this);
-		C5 = new JMenuItem("Tambac Brown");
-		C5.setBackground(Color.getHSBColor(243,249,241));
-		C5.addActionListener(this);
-		C6 = new JMenuItem("Silver Gary");
-		C6.setBackground(Color.getHSBColor(202,86,99));
-		C6.addActionListener(this);
+		C1.addActionListener(action);//Haven't finished yet,tbc
+		C2 = new JMenuItem("Grass Green");
+		C2.setBackground(Color.getHSBColor(238,238,238));
+		C2.addActionListener(action);
+		C3 = new JMenuItem("Fairy Blue");
+		C3.setBackground(Color.getHSBColor(91,91,91));
+		C3.addActionListener(action);
+		C4 = new JMenuItem("Default");
+		C4.setBackground(Color.getHSBColor(202,86,99));
+		C4.addActionListener(action);
 		
 		//Haven't finished yet,tbc
-		I1 = new JMenuItem("Classic1",new ImageIcon("images/1.jpg"));
-		I1.addActionListener(this);
-		I2 = new JMenuItem("Classic2",new ImageIcon("images/2.jpg"));
-		I2.addActionListener(this);
-		I3 = new JMenuItem("Classic3",new ImageIcon("images/3.jpg"));
-		I3.addActionListener(this);
-		I4 = new JMenuItem("Classic4",new ImageIcon("images/4.jpg"));
-		I4.addActionListener(this);
-		I5 = new JMenuItem("Classic5",new ImageIcon("images/5.jpg"));
-		I5.addActionListener(this);
-		I6 = new JMenuItem("Classic6",new ImageIcon("images/6.jpg"));
-		I6.addActionListener(this);	
+		I1 = new JMenuItem("BOLD");
+		I1.addActionListener(action1);
+		I2 = new JMenuItem("ITALIC");
+		I2.addActionListener(action1);
+		I3 = new JMenuItem("ROMAN_BASELINE");
+		I3.addActionListener(action1);
+		I4 = new JMenuItem("DEFAULT");
+		I4.addActionListener(action1);
 		/*****************************************************/
 		
 
 		//Create a Page menu
 		pageMenu =new JMenu("PAGE");
-		pageMenu.setMnemonic('p');//shortcut key
+		pageMenu.setBackground(Color.white);
 		pageMenu_pageSetUp=new JMenuItem("PAGE SET");
 		pageMenu_pageSetUp.addActionListener(this);
 
@@ -300,34 +296,28 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		menuBar.add(pageMenu); 
 		pageMenu.add(pageMenu_pageSetUp); 
 		
-		/****************************************************/
 		//Add the "set" menu and menu item to the menu bar
 		menuBar.add(setMenu);
 		setMenu_Color.add(C1);
 		setMenu_Color.add(C2);
 		setMenu_Color.add(C3);
 		setMenu_Color.add(C4);
-		setMenu_Color.add(C5);
-		setMenu_Color.add(C6);
-		setMenu_Image.add(I1);
-		setMenu_Image.add(I2);
-		setMenu_Image.add(I3);
-		setMenu_Image.add(I4);
-		setMenu_Image.add(I5);
-		setMenu_Image.add(I6);
+		setMenu_Font.add(I1);
+		setMenu_Font.add(I2);
+		setMenu_Font.add(I3);
+		setMenu_Font.add(I4);
 		
 		setMenu.add(setMenu_Color);
 		setMenu.addSeparator();
-		setMenu.add(setMenu_Image);
-		/***************************************/	
+		setMenu.add(setMenu_Font);
+		
 		//Add the "help" menu and menu item to the menu bar
 		menuBar.add(helpMenu);
 		helpMenu.add(helpMenu_HelpTopics);
 		helpMenu.addSeparator();
 		helpMenu.add(helpMenu_AboutXFrame);
 		
-			
-
+		/***************************************/		
 
 		//Add menu bar to window 				
 		this.setJMenuBar(menuBar);
@@ -533,7 +523,67 @@ public class XFrame extends JFrame implements ActionListener,DocumentListener
 		editArea.requestFocus();
 	
 	}//end of constructor
-	
+
+class ChangeColorAction implements ActionListener{
+	public void actionPerformed(ActionEvent e){
+		if(e.getSource()==C1){
+			getContentPane().setBackground(Color.pink);
+			editArea.setBackground(Color.getHSBColor(200,120,64));
+			editArea1.setBackground(Color.getHSBColor(200,120,64));
+			editArea2.setBackground(Color.getHSBColor(200,120,64));
+			setVisible(true);
+			repaint();
+		}
+		else if(e.getSource()==C2){
+			getContentPane().setBackground(Color.getHSBColor(238,238,238));
+			editArea.setBackground(Color.getHSBColor(270,270,270));
+			editArea1.setBackground(Color.getHSBColor(270,270,270));
+			editArea2.setBackground(Color.getHSBColor(270,270,270));
+			setVisible(true);
+			repaint();
+		}
+		else if(e.getSource()==C3){
+			getContentPane().setBackground(Color.getHSBColor(355,355,355));
+			editArea.setBackground(Color.getHSBColor(91,91,91));
+			editArea1.setBackground(Color.getHSBColor(91,91,91));
+			editArea2.setBackground(Color.getHSBColor(91,91,91));
+			setVisible(true);
+			repaint();
+		}
+		else if(e.getSource()==C4){
+			getContentPane().setBackground(Color.white);
+			editArea.setBackground(Color.white);
+			editArea1.setBackground(Color.white);
+			editArea2.setBackground(Color.white);
+			setVisible(true);
+			repaint();
+		}
+	}
+}
+
+//NOT FINISHED YET
+class ChangeFontAction implements ActionListener{
+	public void actionPerformed(ActionEvent e){
+		if(e.getSource()==I1){
+			setFont(new FontUIResource("Dialog", Font.BOLD, 20));
+			setVisible(true);
+		}
+		if(e.getSource()==I2){
+			setFont(new FontUIResource("Dialog", Font.PLAIN, 20));
+			setVisible(true);
+		}
+		if(e.getSource()==I3){
+			setFont(new FontUIResource("Dialog", Font.ITALIC, 20));
+			setVisible(true);
+		}
+		if(e.getSource()==I4){
+			setFont(new FontUIResource("Dialog", Font.ROMAN_BASELINE, 20));
+			setVisible(true);
+		}
+	}
+}
+
+
 class Button1_actionAdapter implements ActionListener {
 	  XFrame adaptee;
 
@@ -593,6 +643,7 @@ class Button5_actionAdapter implements ActionListener {
 	    adaptee.jButton5_actionPerformed(e);
 	  }
 	}
+
 
 class Button6_actionAdapter implements ActionListener {
 	  XFrame adaptee;
@@ -797,8 +848,19 @@ class Button6_actionAdapter implements ActionListener {
 		
 		//undo function begin
 		else if(e.getSource()==editMenu_Undo || e.getSource()==popupMenu_Undo)
-		{	
-		undo();
+		{	/*editArea.requestFocus();
+			if(undo.canUndo())
+			{	try
+				{	undo.undo();
+				}
+				catch (CannotUndoException ex)
+				{	System.out.println("Unable to undo:" + ex);
+					//ex.printStackTrace();
+				}
+			}
+			if(!undo.canUndo())
+				{	editMenu_Undo.setEnabled(false);
+				}*/undo();
 		}//finish undo function
 		
 		//cut function
@@ -914,8 +976,8 @@ class Button6_actionAdapter implements ActionListener {
 				{	editArea.requestFocus();
 					JOptionPane.showMessageDialog(this,
 						"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n"+
-						" Author: XFrame team "+
-						" Version: 1.0                          \n"+
+						" Author: XFrame team \n"+
+						" Lei Tang, Jingting Zhang, Sihan Wang, Chintan Patel, Jingyu Tan\n"+
 						" Release time: 2016 fall                            \n"+
 						" Description: basic functions and framework                \n"+
 						" Development cycle : one month \n"+
@@ -1192,7 +1254,7 @@ class Button6_actionAdapter implements ActionListener {
 			}				
 		}
 	}//finish saveas function
-	
+
 	//when click the button call pagesetup frame
 	public void pagesetup(){	
 		oldValue = editArea.getText();
