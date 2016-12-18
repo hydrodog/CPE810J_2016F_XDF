@@ -9,28 +9,28 @@ import javax.swing.JFileChooser;
 import java.io.*;
 
 public class printcode {
-	        JFileChooser fileChooser = new JFileChooser(); // 创建打印作业  
+	        JFileChooser fileChooser = new JFileChooser(); // create print job  
 	        int state = fileChooser.showOpenDialog(null);  
 	        {
 	        if (state == JFileChooser.APPROVE_OPTION) {  
-	            File file = fileChooser.getSelectedFile(); // 获取选择的文件  
-	            // 构建打印请求属性集  
+	            File file = fileChooser.getSelectedFile(); // choose file 
+	            //Builds a set of print request properties  
 	            HashPrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();  
-	            // 设置打印格式，因为未确定类型，所以选择autosense  
+	            //Set the print format, because the type is not determined, so select autosense  
 	            DocFlavor flavor = DocFlavor.INPUT_STREAM.AUTOSENSE;  
-	            // 查找所有的可用的打印服务  
+	            // Find all the available print services 
 	            PrintService[] printService = PrintServiceLookup.lookupPrintServices(flavor, pras);  
-	            // 定位默认的打印服务  
+	            // Locates the default print service  
 	            PrintService defaultService = PrintServiceLookup  
 	                    .lookupDefaultPrintService();  
-	            // 显示打印对话框  
+	            //The Print dialog box is displayed
 	            PrintService service = ServiceUI.printDialog(null, 800, 800,  
 	                    printService, defaultService, flavor, pras);  
 	           // System.out.print(service.getSupportedAttributeCategories());
 	            if (service != null) {  
 	                try {  
-	                    DocPrintJob job = service.createPrintJob(); // 创建打印作业  
-	                    FileInputStream fis = new FileInputStream(file); // 构造待打印的文件流  
+	                    DocPrintJob job = service.createPrintJob(); //Create a print job 
+	                    FileInputStream fis = new FileInputStream(file); // Constructs a stream of files to be printed 
 	                    DocAttributeSet das = new HashDocAttributeSet();  
 	                    Doc doc = new SimpleDoc(fis, flavor, das);  
 	                    job.print(doc, pras);  
