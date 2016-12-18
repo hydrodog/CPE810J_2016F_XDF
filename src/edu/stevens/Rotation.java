@@ -20,7 +20,7 @@ public class Rotation extends InteractorAdapter {
 	public Rotation(CompoundShape cs){
 		this.cs = cs;
 	}
-	protected boolean isDoubleClick(InputEvent ie) {
+	protected boolean isRotate(InputEvent ie) {
 		if (ie instanceof MouseEvent) {
             MouseEvent me = (MouseEvent) ie;
             if(me.getID() == MouseEvent.MOUSE_PRESSED){
@@ -35,7 +35,7 @@ public class Rotation extends InteractorAdapter {
     }
     //start rotate
     public boolean startInteraction(InputEvent ie) {
-        return isDoubleClick(ie);
+        return isRotate(ie);
     }
     //end rotate
     public boolean endInteraction() {
