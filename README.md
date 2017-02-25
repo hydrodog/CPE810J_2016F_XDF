@@ -1,4 +1,3 @@
-##Please do not delete or edit code in this branch if you are not the member of Frame Team. Please!
 #XDF: FRAME Team
 Author: Lei Tang, Jingting Zhang, Sihan Wang, Chintan Patel, Jinyu Tan
 
