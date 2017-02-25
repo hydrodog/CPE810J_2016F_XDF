@@ -15,8 +15,7 @@ package edu.stevens;
  import java.awt.event.*;
  import java.awt.datatransfer.*;
  import javax.swing.*;
- import javax.swing.UIManager;
- import javax.swing.plaf.FontUIResource;
+import javax.swing.plaf.FontUIResource;
  import javax.swing.undo.*;
  import javax.swing.event.*;
  import java.util.*;
@@ -792,13 +791,425 @@ class Button6_actionAdapter implements ActionListener {
 	}
 
 	//method of find word
-	public void find(){}
+	public void find(){
+		final JDialog findDialog=new JDialog(this,"Find",false);//false, Allow other windows to be active at the same time
+		Container con=findDialog.getContentPane();//return contentPane object
+		con.setLayout(new FlowLayout(FlowLayout.LEFT));
+		JLabel findContentLabel=new JLabel("Findcontent(N)：");
+		final JTextField findText=new JTextField(15);
+		JButton findNextButton=new JButton("Findnext(F)：");
+		final JCheckBox matchCheckBox=new JCheckBox("Match case(C)");
+		ButtonGroup bGroup=new ButtonGroup();
+		final JRadioButton upButton=new JRadioButton("up(U)");
+		final JRadioButton downButton=new JRadioButton("down(U)");
+		downButton.setSelected(true);
+		bGroup.add(upButton);
+		bGroup.add(downButton);
+		
+		JButton cancel=new JButton("Cancel");
+		//Cancel button event handler
+		cancel.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{	findDialog.dispose();
+			}
+		});
+		//"findnext"ActionListener
+		findNextButton.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{	//"match case(C)"JCheckBox is select or not
+				int k=0,m=0;
+				final String str1,str2,str3,str4,strA,strB;
+				str1=editArea.getText();
+				str2=findText.getText();
+				str3=str1.toUpperCase();
+				str4=str2.toUpperCase();
+				if(matchCheckBox.isSelected())//case sensitive
+				{	strA=str1;
+					strB=str2;
+				}
+				else//all the contents of the selected into uppercase (or lowercase)
+				{	strA=str3;
+					strB=str4;
+				}
+				if(upButton.isSelected())
+				{	
+					if(editArea.getSelectedText()==null)
+						k=strA.lastIndexOf(strB,editArea.getCaretPosition()-1);
+					else
+						k=strA.lastIndexOf(strB, editArea.getCaretPosition()-findText.getText().length()-1);	
+					if(k>-1)
+					{	
+						editArea.setCaretPosition(k);
+						editArea.select(k,k+strB.length());
+					}
+					else
+					{	JOptionPane.showMessageDialog(null,"sorry, find nothing","find",JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				else if(downButton.isSelected())
+				{	if(editArea.getSelectedText()==null)
+						k=strA.indexOf(strB,editArea.getCaretPosition()+1);
+					else
+						k=strA.indexOf(strB, editArea.getCaretPosition()-findText.getText().length()+1);	
+					if(k>-1)
+					{	
+						editArea.setCaretPosition(k);
+						editArea.select(k,k+strB.length());
+					}
+					else
+					{	JOptionPane.showMessageDialog(null,"sorry, find nothing","find",JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+			}
+		});//"findnext" end
+		//create"find" Dialog interface
+		JPanel panel1=new JPanel();
+		JPanel panel2=new JPanel();
+		JPanel panel3=new JPanel();
+		JPanel directionPanel=new JPanel();
+		directionPanel.setBorder(BorderFactory.createTitledBorder("direction"));
+		//set directionPanel Component border;
+		//BorderFactory.createTitledBorder(String title)
+		directionPanel.add(upButton);
+		directionPanel.add(downButton);
+		panel1.setLayout(new GridLayout(2,1));
+		panel1.add(findNextButton);
+		panel1.add(cancel);
+		panel2.add(findContentLabel);
+		panel2.add(findText);
+		panel2.add(panel1);
+		panel3.add(matchCheckBox);
+		panel3.add(directionPanel);
+		con.add(panel2);
+		con.add(panel3);
+		findDialog.setSize(410,180);
+		findDialog.setResizable(false);//Non adjustable size
+		findDialog.setLocation(230,280);
+		findDialog.setVisible(true);
+	}
 	
 	//method of replace word
-	public void replace(){}
+	public void replace() {
+		final JDialog replaceDialog=new JDialog(this,"Replace",false);//false, Allow other windows to be active at the same time
+		Container con=replaceDialog.getContentPane();//return contentPane object
+		con.setLayout(new FlowLayout(FlowLayout.CENTER));
+		JLabel findContentLabel=new JLabel("Findcontent(N)：");
+		final JTextField findText=new JTextField(15);
+		JButton findNextButton=new JButton("Findnext(F):");
+		JLabel replaceLabel=new JLabel("replace as(P)：");
+		final JTextField replaceText=new JTextField(15);
+		JButton replaceButton=new JButton("Replace(R)");
+		JButton replaceAllButton=new JButton("Replace all(A)");
+		JButton cancel=new JButton("Cancel");
+		cancel.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{	replaceDialog.dispose();
+			}
+		});
+		final JCheckBox matchCheckBox=new JCheckBox("Macth case(C)");
+		ButtonGroup bGroup=new ButtonGroup();
+		final JRadioButton upButton=new JRadioButton("up(U)");
+		final JRadioButton downButton=new JRadioButton("down(U)");
+		downButton.setSelected(true);
+		bGroup.add(upButton);
+		bGroup.add(downButton);
+		
+		
+		//"findnext" ActionListener
+		findNextButton.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{	//"matck case(C)", JCheckBox is selected or not
+				int k=0,m=0;
+				final String str1,str2,str3,str4,strA,strB;
+				str1=editArea.getText();
+				str2=findText.getText();
+				str3=str1.toUpperCase();
+				str4=str2.toUpperCase();
+				if(matchCheckBox.isSelected())//case censitive
+				{	strA=str1;
+					strB=str2;
+				}
+				else//Case insensitive, this time all the contents of the selected into uppercase (or lowercase) 
+				{	strA=str3;
+					strB=str4;
+				}
+				if(upButton.isSelected())
+				{	
+					if(editArea.getSelectedText()==null)
+						k=strA.lastIndexOf(strB,editArea.getCaretPosition()-1);
+					else
+						k=strA.lastIndexOf(strB, editArea.getCaretPosition()-findText.getText().length()-1);	
+					if(k>-1)
+					{	
+						editArea.setCaretPosition(k);
+						editArea.select(k,k+strB.length());
+					}
+					else
+					{	JOptionPane.showMessageDialog(null,"sorry, find nothing","find",JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				else if(downButton.isSelected())
+				{	if(editArea.getSelectedText()==null)
+						k=strA.indexOf(strB,editArea.getCaretPosition()+1);
+					else
+						k=strA.indexOf(strB, editArea.getCaretPosition()-findText.getText().length()+1);	
+					if(k>-1)
+					{	
+						editArea.setCaretPosition(k);
+						editArea.select(k,k+strB.length());
+					}
+					else
+					{	JOptionPane.showMessageDialog(null,"sorry, find nothing！","find",JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+			}
+		});//"find next" end
+		
+		//"replace" ActionListener
+		replaceButton.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{	if(replaceText.getText().length()==0 && editArea.getSelectedText()!=null) 
+					editArea.replaceSelection(""); 
+				if(replaceText.getText().length()>0 && editArea.getSelectedText()!=null) 
+					editArea.replaceSelection(replaceText.getText());
+			}
+		});//"replace" end
+		
+		//"replace" ActionListener
+		replaceAllButton.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{	editArea.setCaretPosition(0);	//Place the cursor at the beginning of the editing area
+				int k=0,m=0,replaceCount=0;
+				if(findText.getText().length()==0)
+				{	JOptionPane.showMessageDialog(replaceDialog,"Please fill in the content!","Hint",JOptionPane.WARNING_MESSAGE);
+					findText.requestFocus(true);
+					return;
+				}
+				while(k>-1)
+				{	
+					final String str1,str2,str3,str4,strA,strB;
+					str1=editArea.getText();
+					str2=findText.getText();
+					str3=str1.toUpperCase();
+					str4=str2.toUpperCase();
+					if(matchCheckBox.isSelected())//case match
+					{	strA=str1;
+						strB=str2;
+					}
+					else//Case insensitive, this time all the contents of the selected into uppercase (or lowercase)
+					{	strA=str3;
+						strB=str4;
+					}
+					if(upButton.isSelected())
+					{	//k=strA.lastIndexOf(strB,editArea.getCaretPosition()-1);
+						if(editArea.getSelectedText()==null)
+							k=strA.lastIndexOf(strB,editArea.getCaretPosition()-1);
+						else
+							k=strA.lastIndexOf(strB, editArea.getCaretPosition()-findText.getText().length()-1);	
+						if(k>-1)
+						{	//String strData=strA.subString(k,strB.getText().length()+1);
+							editArea.setCaretPosition(k);
+							editArea.select(k,k+strB.length());
+						}
+						else
+						{	if(replaceCount==0)
+							{	JOptionPane.showMessageDialog(replaceDialog, "sorry, find nothing", "note",JOptionPane.INFORMATION_MESSAGE); 
+							}
+							else
+							{	JOptionPane.showMessageDialog(replaceDialog,"Replacement success"+replaceCount+"matching content!","Replacement success",JOptionPane.INFORMATION_MESSAGE);
+							}
+						}
+					}
+					else if(downButton.isSelected())
+					{	if(editArea.getSelectedText()==null)
+							k=strA.indexOf(strB,editArea.getCaretPosition()+1);
+						else
+							k=strA.indexOf(strB, editArea.getCaretPosition()-findText.getText().length()+1);	
+						if(k>-1)
+						{	
+							editArea.setCaretPosition(k);
+							editArea.select(k,k+strB.length());
+						}
+						else
+						{	if(replaceCount==0)
+							{	JOptionPane.showMessageDialog(replaceDialog, "Sorry, find nothing!", "note",JOptionPane.INFORMATION_MESSAGE); 
+							}
+							else
+							{	JOptionPane.showMessageDialog(replaceDialog,"replacement success"+replaceCount+"matching content!!","replacement success",JOptionPane.INFORMATION_MESSAGE);
+							}
+						}
+					}
+					if(replaceText.getText().length()==0 && editArea.getSelectedText()!= null)
+					{	editArea.replaceSelection("");
+						replaceCount++;
+					} 
+					
+					if(replaceText.getText().length()>0 && editArea.getSelectedText()!= null) 
+					{	editArea.replaceSelection(replaceText.getText()); 
+						replaceCount++;
+					}
+				}//while end
+			}
+		});//"replaceAll" end
+		
+		//create"replace" window
+		JPanel directionPanel=new JPanel();
+		directionPanel.setBorder(BorderFactory.createTitledBorder("direction"));
+		//set directionPanel Component border;
+		
+		directionPanel.add(upButton);
+		directionPanel.add(downButton);
+		JPanel panel1=new JPanel();
+		JPanel panel2=new JPanel();
+		JPanel panel3=new JPanel();
+		JPanel panel4=new JPanel();
+		panel4.setLayout(new GridLayout(2,1));
+		panel1.add(findContentLabel);
+		panel1.add(findText);
+		panel1.add(findNextButton);
+		panel4.add(replaceButton);
+		panel4.add(replaceAllButton);
+		panel2.add(replaceLabel);
+		panel2.add(replaceText);
+		panel2.add(panel4);
+		panel3.add(matchCheckBox);
+		panel3.add(directionPanel);
+		panel3.add(cancel);
+		con.add(panel1);
+		con.add(panel2);
+		con.add(panel3);
+		replaceDialog.setSize(420,220);
+		replaceDialog.setResizable(false);//Non adjustable size
+		replaceDialog.setLocation(230,280);
+		replaceDialog.setVisible(true);
+	}
 
 	//font method
-	public void font(){}
+	public void font(){
+		final JDialog fontDialog=new JDialog(this,"set font",false);
+		Container con=fontDialog.getContentPane();
+		con.setLayout(new FlowLayout(FlowLayout.LEFT));
+		JLabel fontLabel=new JLabel("font(F)：");
+		fontLabel.setPreferredSize(new Dimension(100,20));
+		JLabel styleLabel=new JLabel("style(Y)：");
+		styleLabel.setPreferredSize(new Dimension(100,20));
+		JLabel sizeLabel=new JLabel("size(S)：");
+		sizeLabel.setPreferredSize(new Dimension(100,20));
+		final JLabel sample=new JLabel("Try the sample here!");
+		//sample.setHorizontalAlignment(SwingConstants.CENTER);
+		final JTextField fontText=new JTextField(9);
+		fontText.setPreferredSize(new Dimension(200,20));
+		final JTextField styleText=new JTextField(8);
+		styleText.setPreferredSize(new Dimension(200,20));
+		final int style[]={Font.PLAIN,Font.BOLD,Font.ITALIC,Font.BOLD+Font.ITALIC};
+		final JTextField sizeText=new JTextField(5);
+		sizeText.setPreferredSize(new Dimension(200,20));
+		JButton okButton=new JButton("ok");
+		JButton cancel=new JButton("cancel");
+		cancel.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{	fontDialog.dispose();	
+			}
+		});
+		Font currentFont=editArea.getFont();
+		fontText.setText(currentFont.getFontName());
+		fontText.selectAll();
+		
+		if(currentFont.getStyle()==Font.PLAIN)
+			styleText.setText("Regular");
+		else if(currentFont.getStyle()==Font.BOLD)
+			styleText.setText("Bold");
+		else if(currentFont.getStyle()==Font.ITALIC)
+			styleText.setText("Italic ");
+		else if(currentFont.getStyle()==(Font.BOLD+Font.ITALIC))
+			styleText.setText("Bold Italic");
+		styleText.selectAll();
+		String str=String.valueOf(currentFont.getSize());
+		sizeText.setText(str);
+		sizeText.selectAll();
+		final JList fontList,styleList,sizeList;
+		GraphicsEnvironment ge=GraphicsEnvironment.getLocalGraphicsEnvironment();
+		final String fontName[]=ge.getAvailableFontFamilyNames();
+		fontList=new JList(fontName);
+		fontList.setFixedCellWidth(86);
+		fontList.setFixedCellHeight(20);
+		fontList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		final String fontStyle[]={"Regular","Bold","Italic","Bold Italic"};
+		styleList=new JList(fontStyle);
+		styleList.setFixedCellWidth(86);
+		styleList.setFixedCellHeight(20);
+		styleList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		if(currentFont.getStyle()==Font.PLAIN)
+			styleList.setSelectedIndex(0);
+		else if(currentFont.getStyle()==Font.BOLD)
+			styleList.setSelectedIndex(1);
+		else if(currentFont.getStyle()==Font.ITALIC)
+			styleList.setSelectedIndex(2);
+		else if(currentFont.getStyle()==(Font.BOLD+Font.ITALIC))
+			styleList.setSelectedIndex(3);
+		final String fontSize[]={"8","9","10","11","12","14","16","18","20","22","24","26","28","36","48","72"};
+		sizeList=new JList(fontSize);
+		sizeList.setFixedCellWidth(43);
+		sizeList.setFixedCellHeight(20);
+		sizeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		fontList.addListSelectionListener(new ListSelectionListener()
+		{	public void valueChanged(ListSelectionEvent event)
+			{	fontText.setText(fontName[fontList.getSelectedIndex()]);
+				fontText.selectAll();
+				Font sampleFont1=new Font(fontText.getText(),style[styleList.getSelectedIndex()],Integer.parseInt(sizeText.getText()));
+				sample.setFont(sampleFont1);
+			}
+		});
+		styleList.addListSelectionListener(new ListSelectionListener()
+		{	public void valueChanged(ListSelectionEvent event)
+			{	int s=style[styleList.getSelectedIndex()];
+				styleText.setText(fontStyle[s]);
+				styleText.selectAll();
+				Font sampleFont2=new Font(fontText.getText(),style[styleList.getSelectedIndex()],Integer.parseInt(sizeText.getText()));
+				sample.setFont(sampleFont2);
+			}
+		});
+		sizeList.addListSelectionListener(new ListSelectionListener()
+		{	public void valueChanged(ListSelectionEvent event)
+			{	sizeText.setText(fontSize[sizeList.getSelectedIndex()]);
+				//sizeText.requestFocus();
+				sizeText.selectAll();	
+				Font sampleFont3=new Font(fontText.getText(),style[styleList.getSelectedIndex()],Integer.parseInt(sizeText.getText()));
+				sample.setFont(sampleFont3);
+			}
+		});
+		okButton.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{	Font okFont=new Font(fontText.getText(),style[styleList.getSelectedIndex()],Integer.parseInt(sizeText.getText()));
+				editArea.setFont(okFont);
+				fontDialog.dispose();
+			}
+		});
+		JPanel samplePanel=new JPanel();
+		samplePanel.setBorder(BorderFactory.createTitledBorder("Sample"));
+		//samplePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		samplePanel.add(sample);
+		JPanel panel1=new JPanel();
+		JPanel panel2=new JPanel();
+		JPanel panel3=new JPanel();
+		
+		panel2.add(fontText);
+		panel2.add(styleText);
+		panel2.add(sizeText);
+		panel2.add(okButton);
+		panel3.add(new JScrollPane(fontList));//JList不支持直接滚动，所以要让JList作为JScrollPane的视口视图
+		panel3.add(new JScrollPane(styleList));
+		panel3.add(new JScrollPane(sizeList));
+		panel3.add(cancel);
+		con.add(panel1);
+		con.add(panel2);
+		con.add(panel3);
+		con.add(samplePanel);
+		fontDialog.setSize(350,340);
+		fontDialog.setLocation(200,200);
+		fontDialog.setResizable(false);
+		fontDialog.setVisible(true);
+	}
 	
 	// The action of each button 
 	public void actionPerformed(ActionEvent e)
